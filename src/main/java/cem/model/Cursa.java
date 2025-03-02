@@ -7,9 +7,9 @@ public class Cursa {
   private int horaArribada;
   private int tempsTotal;
   private String asistencia; // me acuerdo que era o String porque hay tres opciones (asistir, no asistir, abandona) o se puede hacer con dos boolean
-  private Dades corredor;
+  private Corredor corredor;
 
-  public Cursa (int dorsal, boolean modalitat, int horaSortida, int horaArribada, int tempsTotal, String asistencia, Dades corredor){
+  public Cursa (int dorsal, boolean modalitat, int horaSortida, int horaArribada, int tempsTotal, String asistencia, Corredor corredor){
       this.dorsal = dorsal;
       this.modalitat = modalitat;
       this.horaSortida = horaSortida;

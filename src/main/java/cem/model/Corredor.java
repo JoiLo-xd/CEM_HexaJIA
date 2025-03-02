@@ -1,6 +1,8 @@
 package cem.model;
 
-public class Dades {
+import java.util.ArrayList;
+
+public class Corredor {
     private String nif;
     private String nom;
     private String cognoms;
@@ -11,8 +13,9 @@ public class Dades {
     private String email;
     private String entitat;
     private boolean federat;
+    private ArrayList<Cursa> curses;
 
-    public Dades (String nif, String nom, String cognoms, String dataNaixement, String sexe, String poblacio, int numTelefon, String email, String entitat, boolean federat){
+    public Corredor(String nif, String nom, String cognoms, String dataNaixement, String sexe, String poblacio, int numTelefon, String email, String entitat, boolean federat){
         this.nif = nif;
         this.nom = nom;
         this.cognoms = cognoms;
@@ -23,7 +26,6 @@ public class Dades {
         this.email = email;
         this.entitat = entitat;
         this.federat = federat;
-
-
+        curses = new ArrayList<>();
     }
 }
