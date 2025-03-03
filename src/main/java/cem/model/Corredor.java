@@ -3,17 +3,17 @@ package cem.model;
 import java.util.ArrayList;
 
 public class Corredor {
-    private String nif;
+    private final String nif;
     private String nom;
     private String cognoms;
-    private String dataNaixement;
+    private final String dataNaixement;
     private String sexe; //pongo String porque me comentasteis que habria tres opciones
     private String poblacio;
     private int numTelefon;
     private String email;
     private String entitat;
     private boolean federat;
-    private ArrayList<Cursa> curses;
+    private ArrayList<Inscripcio> curses;
 
     public Corredor(String nif, String nom, String cognoms, String dataNaixement, String sexe, String poblacio, int numTelefon, String email, String entitat, boolean federat){
         this.nif = nif;
