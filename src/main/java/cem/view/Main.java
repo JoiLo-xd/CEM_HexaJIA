@@ -14,7 +14,15 @@ public class Main {
         do {
             menu();
             option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
-            // No vamos a usar un switch con breaks
+
+            // NOTA IMPORTANTE:
+            // NO me parece buena idea que por ejemplo para que un corredor empiece a correr tengamos que poner la edicion de la maraxa to el rato, ya que no es eficiente, deberia ser que tu estas dentro de una edicion y vas idicando los jugadores
+            // que salen que obv ya se han incirito.
+            // Imaginate que por cada persona que sale tienes que indicar de que año es (la edicion) like si sale l aiscripcion con dorsal 1200120 de la edicion 2021
+                                                                                                        //si sale la incripcion con dorsal 1200121 de la edicion 2021
+                                                                                                        //si sale la incripcion con dorsal 1200122 de la edicion 2021
+            // como que hay un patron comun no? jeje
+
             switch (option) {   //NO
                 case 1 -> {     //dar de alta marxa?
                     darAltaMarxa();
