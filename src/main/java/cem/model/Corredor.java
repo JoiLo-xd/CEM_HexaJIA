@@ -49,7 +49,7 @@ public class Corredor {
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
-    }
+    } //validar sexe
 
     public void setPoblacio(String poblacio) {
         this.poblacio = poblacio;
@@ -57,11 +57,11 @@ public class Corredor {
 
     public void setNumTelefon(int numTelefon) {
         this.numTelefon = numTelefon;
-    }
+    } // Validar numero de telefono
 
     public void setEmail(String email) {
         this.email = email;
-    }
+    } // Validar Email con el @
 
     public void setEntitat(String entitat) {
         this.entitat = entitat;
