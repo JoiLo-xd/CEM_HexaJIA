@@ -51,8 +51,17 @@ public class Main {
 
     }
 
-    public static void darAltaMarxa(){
-        marxes.add(new Marxa(AskDataCEM.askInt("Digues la edició de la cursa", "Aquesta edicio no es valida", 2000))); // minimo del año 2000 yokse, sin excepciones
+
+    public static void darAltaMarxa() {
+        int edicion = AskDataCEM.askInt("Dime la edicion de la cursa: ", "Esta edicion no es valida", 2000);
+        if (marxes.contains(new Marxa(edicion))) {
+            System.out.println("Esta edicion ya estaba registrado.");
+            System.out.println("");
+        } else {
+            Marxa m = new Marxa(edicion);
+            marxes.add(m);
+            System.out.println("");
+        }
     }
 
     private static void menu() {    //menu output

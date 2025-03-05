@@ -11,10 +11,21 @@ public class Marxa {
         corredors = new ArrayList<>();
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        Marxa m = (Marxa) obj;
+        return this.edicio==(m.getEdicio());
+    }
+    
     public void addCorrInsc(Inscripcio insc){
         corredors.add(insc);
     }
 
+    //GETTERS
+    public int getEdicio() {
+        return edicio;
+    }
     public ArrayList<Inscripcio> getCorredors(){
         return new ArrayList<Inscripcio>(corredors);
     }
