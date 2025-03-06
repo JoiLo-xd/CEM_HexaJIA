@@ -29,5 +29,11 @@ public class Marxa {
     public ArrayList<Inscripcio> getCorredors(){
         return new ArrayList<Inscripcio>(corredors);
     }
+
+    @Override
+    public String toString() {
+        String u = "Cursa de la " + edicio + " edició.";
+        return u;
+    }
 }
 
