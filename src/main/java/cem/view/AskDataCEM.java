@@ -3,12 +3,19 @@
  */
 package cem.view;
 
+import cem.enums.Email;
+import cem.enums.Sexe;
+import cem.enums.Telefon;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 /**
  * @author HexaJIA
@@ -62,6 +69,42 @@ public class AskDataCEM {
             }
         }while(!ok);
         return answer;
+    }
+
+    public static LocalDate askFecha(String msg, String formato) {
+        boolean error = false;
+        LocalDate date = null;
+        do {
+            try {
+                String fecha = askString(msg);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
+                date = LocalDate.parse("2005-nov-12", formatter);
+                error = false;
+            }catch (DateTimeParseException e) {
+                System.out.println("Fecha incorrecta.");
+                error = true;
+            }
+        } while (error);
+        return date;
+    }
+
+    public static Sexe askSexe(String msg) {        //en un futuro saldran las opciones osea que no podra poner un valor incorrecto
+        Sexe s = null;
+        try {
+            String sexe = askString(msg).toUpperCase();
+            s = Sexe.valueOf(sexe);
+        }catch (IllegalArgumentException e) {
+            System.out.println("Valor incorrecte.");
+        }
+        return s;
+    }
+
+    public static Telefon askTelf() {       //todo hay que hacer el metodo para verificar que sea correcto
+
+    }
+
+    public static Email askEmail() {        //todo hay que hacer este metood para comprovar el email
+
     }
 
     public static int askInt(String msg) {

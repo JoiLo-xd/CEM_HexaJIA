@@ -1,5 +1,7 @@
 package cem.model;
 
+import cem.enums.Sexe;
+
 import java.util.ArrayList;
 
 public class Corredor {
@@ -7,7 +9,7 @@ public class Corredor {
     private String nom;
     private String cognoms;
     private final String dataNaixement;
-    private String sexe; //pongo String porque me comentasteis que habria tres opciones
+    private Sexe sexe;
     private String poblacio;
     private int numTelefon;
     private String email;
@@ -15,7 +17,7 @@ public class Corredor {
     private boolean federat;
     private ArrayList<Inscripcio> inscripsions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
-    public Corredor(String nif, String nom, String cognoms, String dataNaixement, String sexe, String poblacio, int numTelefon, String email, String entitat, boolean federat){
+    public Corredor(String nif, String nom, String cognoms, String dataNaixement, Sexe sexe, String poblacio, int numTelefon, String email, String entitat, boolean federat){
         this.nif = nif;
         this.nom = nom;
         this.cognoms = cognoms;

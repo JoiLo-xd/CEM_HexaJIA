@@ -1,7 +1,10 @@
 package cem.view;
 
+import cem.enums.Sexe;
+import cem.model.Corredor;
 import cem.model.Marxa;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
@@ -90,8 +93,17 @@ public class Main {
     }
 
     public static void darAltaCorredor() {
-    }
+        String nif = AskDataCEM.askNif("DNI/NIF: ");
+        String nom = AskDataCEM.askString("Nom: ");
+        String cognoms = AskDataCEM.askString("Cognoms: ");
+        LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MMM-YYYY");
+        Sexe sexe = AskDataCEM.askSexe("Sexe: ");
+        String poblacio = AskDataCEM.askString("Població: ");
 
+        String entitat = AskDataCEM.askString("Entitat: ");
+        Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
+        Corredor atleta = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
+    }
 
     public static void darAltaMarxa() {
         int edicion = AskDataCEM.askInt("Digues l'edició de la cursa: ", "Aquesta edició no es valida", 2000);
