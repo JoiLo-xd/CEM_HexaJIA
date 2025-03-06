@@ -112,4 +112,11 @@ public class Corredor {
     public boolean isFederat() {
         return federat;
     }
+
+
+    @Override
+    public String toString() {
+        String esfederat = federat ? "Si Federat" : "No federat";
+        return esfederat;
+    }
 }

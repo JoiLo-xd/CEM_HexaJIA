@@ -99,7 +99,15 @@ public class Main {
         LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MMM-YYYY");
         Sexe sexe = AskDataCEM.askSexe("Sexe: ");
         String poblacio = AskDataCEM.askString("Població: ");
+        String telef = AskDataCEM.askString("Num telèfon. ");
+        int telf = telef.length();
+        while (telf != 9){
+            System.out.println("Número no vàlid.");
+            telef = AskDataCEM.askString("Num telèfon. ");
+            telf = telef.length();
+        }
 
+        // falta el email (cuando me digais algo por el grupo lo hago.
         String entitat = AskDataCEM.askString("Entitat: ");
         Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
         Corredor atleta = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
