@@ -108,12 +108,15 @@ public class Main {
                     break;
                 }
                 case 2 -> {     //Modificar inscripción
+                    //todo hay que preguntar que inscripcion es y preguntar que quiere modificar :)
                     break;
                 }
                 case 3 -> {     //Hora salida inscripción
+                    //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
                     break;
                 }
                 case 4 -> {     //Hora llegada inscripción
+                    //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
                     break;
                 }
                 case 5 -> {     //Mostrar corredores de la marxa
