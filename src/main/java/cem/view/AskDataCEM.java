@@ -24,6 +24,8 @@ import java.time.LocalDate;
 public class AskDataCEM {
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static final String REG_TLF = "^6[0-9]{8}$";
+    private static final String REG_MAIL = ".+@.+\\..+$";
 
     public static String askString(String msg) {
         System.out.print(msg);
@@ -99,11 +101,32 @@ public class AskDataCEM {
         return s;
     }
 
-    public static Telefon askTelf() {       //todo hay que hacer el metodo para verificar que sea correcto
+
+    public static String askTelf() {//todo hay que hacer el metodo para verificar que sea correcto
+
+        String valor;
+        do{
+            valor = askString("Indica el numero de telefon: ");
+            if (valor.matches(REG_TLF)){
+                System.out.println("Aquest numero de telefon no es valid");
+
+            }
+        }while(valor.matches(REG_TLF));
+        return valor;
 
     }
 
-    public static Email askEmail() {        //todo hay que hacer este metood para comprovar el email
+    public static String askEmail() {//todo hay que hacer este metood para comprovar el email
+
+        String valor;
+        do{
+            valor = askString("Indica el mail: ");
+            if (valor.matches(REG_MAIL)){
+                System.out.println("Aquest numero de telefon no es valid");
+
+            }
+        }while(valor.matches(REG_MAIL));
+        return valor;
 
     }
 
