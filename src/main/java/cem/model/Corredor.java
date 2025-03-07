@@ -4,7 +4,6 @@ import cem.enums.Sexe;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Corredor {
     private final String nif;
@@ -17,7 +16,7 @@ public class Corredor {
     private String email;
     private String entitat;
     private boolean federat;
-    private ArrayList<Inscripcio> inscripsions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
+    private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
     public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat){
         this.nif = nif;
@@ -38,12 +37,12 @@ public class Corredor {
 
     //Para añadir cosas a la Arraylist
     public ArrayList<Inscripcio> getInscr(){
-        return new ArrayList<Inscripcio>(inscripsions); //Preguntar si seria otra direccion de memoria
+        return new ArrayList<Inscripcio>(inscripcions); //Preguntar si seria otra direccion de memoria
     }
 
 
     public void addIncrip(Inscripcio inscr){
-        inscripsions.add(inscr);
+        inscripcions.add(inscr);
     }
 
     //GETTERS Y SETTERS VARIADOS, solo hay seters de cosas que se puedan cambiar (si he contado la gente que se cambia de genero)

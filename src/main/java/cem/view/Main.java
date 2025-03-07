@@ -136,7 +136,6 @@ public class Main {
             Sexe sexe = AskDataCEM.askSexe("Sexe: ");
             String poblacio = AskDataCEM.askString("Població: ");
             String telf = AskDataCEM.askTelf();
-
             String email = AskDataCEM.askEmail();
             String entitat = AskDataCEM.askString("Entitat: ");
             Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");

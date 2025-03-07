@@ -3,9 +3,7 @@
  */
 package cem.view;
 
-import cem.enums.Email;
 import cem.enums.Sexe;
-import cem.enums.Telefon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -90,7 +88,7 @@ public class AskDataCEM {
         return date;
     }
 
-    public static Sexe askSexe(String msg) {        //en un futuro saldran las opciones osea que no podra poner un valor incorrecto
+    public static Sexe askSexe(String msg) {
         Sexe s = null;
         try {
             String sexe = askString(msg).toUpperCase();

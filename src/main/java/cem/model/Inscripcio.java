@@ -1,5 +1,7 @@
 package cem.model;
 
+import cem.enums.Asistencia;
+
 public class Inscripcio {
 
     //Las cosas que son Horas en un futuro se tendran que cambiar a java Time.
@@ -8,7 +10,7 @@ public class Inscripcio {
     private Integer horaSortida; //Integer para que pueda ser NULL
     private int horaArribada;
     private int tempsTotal;
-    private String asistencia; // me acuerdo que era o String porque hay tres opciones (asistir, no asistir, abandona, descalificat) o se puede hacer con dos boolean
+    private Asistencia asistencia;
     private final Corredor corredor;
 
     public Inscripcio(int dorsal, boolean modalitat, Corredor corredor) {
@@ -33,7 +35,7 @@ public class Inscripcio {
 
 
     // Este deberia ser con enums pero no sabemos como hacerlo jeje
-    public void setAsistencia(String asistencia) {
+    public void setAsistencia(Asistencia asistencia) {
         this.asistencia = asistencia;
     }
 
@@ -57,7 +59,7 @@ public class Inscripcio {
         return tempsTotal;
     }
 
-    public String getAsistencia() {
+    public Asistencia getAsistencia() {
         return asistencia;
     }
 
