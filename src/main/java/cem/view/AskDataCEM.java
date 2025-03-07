@@ -8,6 +8,7 @@ import cem.enums.Sexe;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -69,6 +70,10 @@ public class AskDataCEM {
             }
         }while(!ok);
         return answer;
+    }
+
+    public static LocalDateTime askTime() {     //devuelve la hora actual, solo habrá que llamar a la funcion una vez para el inicio y otra vez en el final, coge la hora actual en el momento
+        return LocalDateTime.now();
     }
 
     public static LocalDate askFecha(String msg, String formato) {

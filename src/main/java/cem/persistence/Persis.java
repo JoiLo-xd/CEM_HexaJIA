@@ -57,7 +57,7 @@ public class Persis {
 
     public void writerMarxaInFile(Marxa m) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileMarxa, true));
-        writer.write(m.getEdicio() + "-" + m.getCorredors());
+        writer.write(m.getEdicio() + "-" + m.getInscripcionsMarxa());
         writer.newLine();
         writer.close();
     }

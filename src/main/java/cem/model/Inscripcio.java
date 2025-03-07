@@ -1,15 +1,19 @@
 package cem.model;
 
 import cem.enums.Asistencia;
+import cem.view.AskDataCEM;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Inscripcio {
 
     //Las cosas que son Horas en un futuro se tendran que cambiar a java Time.
     private final int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
     private final boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
-    private Integer horaSortida; //Integer para que pueda ser NULL
-    private int horaArribada;
-    private int tempsTotal;
+    private LocalDateTime horaSortida;
+    private LocalDateTime horaArribada;
+    private Duration tempsTotal;
     private Asistencia asistencia;
     private final Corredor corredor;
 
@@ -19,18 +23,19 @@ public class Inscripcio {
         this.corredor = corredor;
     }
 
-    public void setHoraSortida(int horaSortida) {
-        this.horaSortida = horaSortida;
+    public void setHoraSortida() {
+        this.horaSortida = AskDataCEM.askTime();
     }
 
-    public void setHoraArribada(int horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
+    public void setHoraArribada() { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
         if (horaSortida != null) {
-            this.horaArribada = horaArribada;
+            this.horaArribada = AskDataCEM.askTime();
         }
     }
 
-    public void setTempsTotal(int tempsTotal) {
-        this.tempsTotal = tempsTotal;
+    public void setTempsTotal() {
+        if (horaSortida != null && horaArribada != null)
+        this.tempsTotal = Duration.between(horaSortida, horaArribada);
     }
 
 
@@ -47,15 +52,15 @@ public class Inscripcio {
         return modalitat;
     }
 
-    public int getHoraSortida() {
+    public LocalDateTime getHoraSortida() {
         return horaSortida;
     }
 
-    public int getHoraArribada() {
+    public LocalDateTime getHoraArribada() {
         return horaArribada;
     }
 
-    public int getTempsTotal() {
+    public Duration getTempsTotal() {
         return tempsTotal;
     }
 

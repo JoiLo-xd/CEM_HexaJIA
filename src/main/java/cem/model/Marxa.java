@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Marxa {
     private int edicio;
-    private ArrayList<Inscripcio> corredors; //MANIN DIRIA QUE SE GUARDA LA INCRPICION
+    private ArrayList<Inscripcio> inscripcionsMarxa; //MANIN DIRIA QUE SE GUARDA LA INCRPICION
 
     public Marxa(int edicio) {
         this.edicio = edicio;
-        corredors = new ArrayList<>();
+        inscripcionsMarxa = new ArrayList<>();
     }
 
 
@@ -19,15 +19,15 @@ public class Marxa {
     }
     
     public void addCorrInsc(Inscripcio insc){
-        corredors.add(insc);
+        inscripcionsMarxa.add(insc);
     }
 
     //GETTERS
     public int getEdicio() {
         return edicio;
     }
-    public ArrayList<Inscripcio> getCorredors(){
-        return new ArrayList<Inscripcio>(corredors);
+    public ArrayList<Inscripcio> getInscripcionsMarxa(){
+        return new ArrayList<Inscripcio>(inscripcionsMarxa);
     }
 
     @Override

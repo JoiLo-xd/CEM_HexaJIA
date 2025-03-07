@@ -2,6 +2,7 @@ package cem.view;
 
 import cem.enums.Sexe;
 import cem.model.Corredor;
+import cem.model.Inscripcio;
 import cem.model.Marxa;
 
 import java.time.LocalDate;
@@ -54,7 +55,7 @@ public class Main {
                         }
 
                     }else{
-                        System.out.println("No hi han curses disponibles, crea una");
+                        System.out.println("No hi han curses disponibles, crea una.");
                     }
 
                 }
@@ -123,6 +124,13 @@ public class Main {
                 }
             }
         } while (option != 6);
+    }
+
+    public static void crearInscripcion(Marxa escollida) {
+        //int dorsal, bool modalitat, corredor
+        Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+        Corredor corredor = ;       //todo :)
+        escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredor));
     }
 
     public static void darAltaCorredor() {
