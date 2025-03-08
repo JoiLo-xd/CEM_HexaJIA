@@ -2,22 +2,23 @@ package cem.model;
 
 import cem.enums.Sexe;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Corredor {
     private final String nif;
     private String nom;
     private String cognoms;
-    private final String dataNaixement;
+    private LocalDate dataNaixement;
     private Sexe sexe;
     private String poblacio;
-    private int numTelefon;
+    private String numTelefon;
     private String email;
     private String entitat;
     private boolean federat;
-    private ArrayList<Inscripcio> inscripsions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
+    private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
-    public Corredor(String nif, String nom, String cognoms, String dataNaixement, Sexe sexe, String poblacio, int numTelefon, String email, String entitat, boolean federat){
+    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat){
         this.nif = nif;
         this.nom = nom;
         this.cognoms = cognoms;
@@ -30,14 +31,18 @@ public class Corredor {
         this.federat = federat;
     }
 
+    public Corredor(String nif){
+        this.nif = nif;
+    }
+
     //Para añadir cosas a la Arraylist
     public ArrayList<Inscripcio> getInscr(){
-        return new ArrayList<Inscripcio>(inscripsions); //Preguntar si seria otra direccion de memoria
+        return new ArrayList<Inscripcio>(inscripcions); //Preguntar si seria otra direccion de memoria
     }
 
 
     public void addIncrip(Inscripcio inscr){
-        inscripsions.add(inscr);
+        inscripcions.add(inscr);
     }
 
     //GETTERS Y SETTERS VARIADOS, solo hay seters de cosas que se puedan cambiar (si he contado la gente que se cambia de genero)
@@ -49,15 +54,15 @@ public class Corredor {
         this.cognoms = cognoms;
     }
 
-    public void setSexe(String sexe) {
+    public void setSexe(Sexe sexe) {
         this.sexe = sexe;
-    } //validar sexe
+    } //validar sexe //REVISAR
 
     public void setPoblacio(String poblacio) {
         this.poblacio = poblacio;
     }
 
-    public void setNumTelefon(int numTelefon) {
+    public void setNumTelefon(String numTelefon) {
         this.numTelefon = numTelefon;
     } // Validar numero de telefono
 
@@ -85,7 +90,7 @@ public class Corredor {
         return cognoms;
     }
 
-    public String getDataNaixement() {
+    public LocalDate getDataNaixement() {
         return dataNaixement;
     }
 
@@ -93,11 +98,11 @@ public class Corredor {
         return poblacio;
     }
 
-    public String getSexe() {
+    public Sexe getSexe() {
         return sexe;
     }
 
-    public int getNumTelefon() {
+    public String getNumTelefon() {
         return numTelefon;
     }
 
@@ -116,7 +121,15 @@ public class Corredor {
 
     @Override
     public String toString() {
-        String esfederat = federat ? "Si Federat" : "No federat";
+        String esfederat = federat ? "Si Federat" : "No federat"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
         return esfederat;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        Corredor obj = (Corredor) o;
+        if (obj.getNif().equals(getNif())) return true;
+        return false;
+    }
+
 }

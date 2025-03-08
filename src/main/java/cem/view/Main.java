@@ -2,6 +2,7 @@ package cem.view;
 
 import cem.enums.Sexe;
 import cem.model.Corredor;
+import cem.model.Inscripcio;
 import cem.model.Marxa;
 
 import java.time.LocalDate;
@@ -10,12 +11,27 @@ import java.util.ArrayList;
 public class Main {
 
     private static ArrayList<Marxa> marxes;
+    private static ArrayList<Corredor> corredores;
+    private static final String MENUMARXES = "\n<> MENU MARXES <>\n" +
+            "1. Afegir participant\n" +
+            "2. Editar participant\n" +
+            "3. Sortida\n" +
+            "4. Arribada\n" +
+            "5. Corredors de la marxa\n" +
+            "6. Sortir";
+    private static final String MENUINICI = "\n-- MENU PRINCIPAL --\n" +
+            "1. Marxes\n" +
+            "2. Crear Marxa\n" +
+            "3. Alta esportista\n" +
+            "4. Modificar esportista\n" +
+            "5. Mostrar estadístiques\n" +
+            "6. Sortir";
 
     public static void main(String[] args) {
         marxes = new ArrayList<>();
         int option;
         do {
-            menuInicio();
+            System.out.println(MENUINICI);;
             option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
 
             // NOTA IMPORTANTE:
@@ -31,7 +47,17 @@ public class Main {
 
             switch (option) {
                 case 1 -> {     //entrar en marxa
-                    entrarMarxa();
+                    if (!marxes.isEmpty()) {
+                        showMarxes();
+                        int chosen;
+                        if ((chosen = escollidor(marxes.size())) != 0 ){
+                            entrarMarxa(marxes.get(chosen));
+                        }
+
+                    }else{
+                        System.out.println("No hi han curses disponibles, crea una.");
+                    }
+
                 }
                 case 2 -> {     //crear marxa
                     darAltaMarxa();
@@ -56,30 +82,41 @@ public class Main {
 
     }
 
-    private static void entrarMarxa() {
+    public static int escollidor(int num){
+        int chosen = AskDataCEM.askInt("Escull (0) per sortir: ", "Aquest no esta disponible", 0, num);
+        if (chosen > 0){
+            return chosen -1;
+        }else{
+            return 0;
+        }
+    }
+    public static void showMarxes(){
+        int cont = 1;
+        for (Marxa element : marxes){
+            System.out.println(cont +"  " + element.getEdicio());
+        }
+    }
+
+    private static void entrarMarxa(Marxa escollida) {
         int option;
         do {
-            //hay que mostrar las marxas que hay creadas y si no hay ninguna pues decir que no hay ninguna aún creada
-            if (marxes.isEmpty()) {
-                System.out.println("No hi ha cap marxa registrada.");
-            } else {
-                for (int i = 0; i < marxes.size(); i++) {
-                    System.out.println(i);
-                }
-            }
-            menuMarxa();
+
+            System.out.println(MENUMARXES);
             option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
             switch (option) {
                 case 1 -> {     //añadir inscripción
                     break;
                 }
                 case 2 -> {     //Modificar inscripción
+                    //todo hay que preguntar que inscripcion es y preguntar que quiere modificar :)
                     break;
                 }
                 case 3 -> {     //Hora salida inscripción
+                    //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
                     break;
                 }
                 case 4 -> {     //Hora llegada inscripción
+                    //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
                     break;
                 }
                 case 5 -> {     //Mostrar corredores de la marxa
@@ -92,25 +129,29 @@ public class Main {
         } while (option != 6);
     }
 
-    public static void darAltaCorredor() {
-        String nif = AskDataCEM.askNif("DNI/NIF: ");
-        String nom = AskDataCEM.askString("Nom: ");
-        String cognoms = AskDataCEM.askString("Cognoms: ");
-        LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MMM-YYYY");
-        Sexe sexe = AskDataCEM.askSexe("Sexe: ");
-        String poblacio = AskDataCEM.askString("Població: ");
-        String telef = AskDataCEM.askString("Num telèfon. ");
-        int telf = telef.length();
-        while (telf != 9){
-            System.out.println("Número no vàlid.");
-            telef = AskDataCEM.askString("Num telèfon. ");
-            telf = telef.length();
-        }
+    public static void crearInscripcion(Marxa escollida) {
+        //int dorsal, bool modalitat, corredor
+        Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+        Corredor corredor = ;       //todo :)
+        escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredor));
+    }
 
-        // falta el email (cuando me digais algo por el grupo lo hago.
-        String entitat = AskDataCEM.askString("Entitat: ");
-        Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
-        Corredor atleta = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
+    public static void darAltaCorredor() {
+        String nif;
+        if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("DNI/NIF: ")))){
+            System.out.println("Aquesta persona ja esta reistrada");
+        }else {
+            String nom = AskDataCEM.askString("Nom: ");
+            String cognoms = AskDataCEM.askString("Cognoms: ");
+            LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MMM-YYYY");
+            Sexe sexe = AskDataCEM.askSexe("Sexe: ");
+            String poblacio = AskDataCEM.askString("Població: ");
+            String telf = AskDataCEM.askTelf();
+            String email = AskDataCEM.askEmail();
+            String entitat = AskDataCEM.askString("Entitat: ");
+            Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
+            corredores.add(new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat));
+        }
     }
 
     public static void darAltaMarxa() {
@@ -124,24 +165,5 @@ public class Main {
         System.out.println();
     }
 
-    private static void menuInicio() {    //menu Inici output
-        System.out.println("\n-- MENU PRINCIPAL --\n" +
-                "1. Marxes\n" +
-                "2. Crear Marxa\n" +
-                "3. Alta esportista\n" +
-                "4. Modificar esportista\n" +
-                "5. Mostrar estadístiques\n" +
-                "6. Sortir");
-    }
-
-    private static void menuMarxa() {    //menu Marxes output
-        System.out.println("\n<> MENU MARXES <>\n" +
-                "1. Afegir participant\n" +
-                "2. Editar participant\n" +
-                "3. Sortida\n" +
-                "4. Arribada\n" +
-                "5. Corredors de la marxa\n" +
-                "6. Sortir");
-    }
 
 }

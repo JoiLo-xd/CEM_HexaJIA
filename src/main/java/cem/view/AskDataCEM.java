@@ -3,13 +3,12 @@
  */
 package cem.view;
 
-import cem.enums.Email;
 import cem.enums.Sexe;
-import cem.enums.Telefon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -24,6 +23,8 @@ import java.time.LocalDate;
 public class AskDataCEM {
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static final String REG_TLF = "^6[0-9]{8}$";
+    private static final String REG_MAIL = ".+@.+\\..+$";
 
     public static String askString(String msg) {
         System.out.print(msg);
@@ -71,6 +72,10 @@ public class AskDataCEM {
         return answer;
     }
 
+    public static LocalDateTime askTime() {     //devuelve la hora actual, solo habrá que llamar a la funcion una vez para el inicio y otra vez en el final, coge la hora actual en el momento
+        return LocalDateTime.now();
+    }
+
     public static LocalDate askFecha(String msg, String formato) {
         boolean error = false;
         LocalDate date = null;
@@ -88,7 +93,7 @@ public class AskDataCEM {
         return date;
     }
 
-    public static Sexe askSexe(String msg) {        //en un futuro saldran las opciones osea que no podra poner un valor incorrecto
+    public static Sexe askSexe(String msg) {
         Sexe s = null;
         try {
             String sexe = askString(msg).toUpperCase();
@@ -99,11 +104,32 @@ public class AskDataCEM {
         return s;
     }
 
-    public static Telefon askTelf() {       //todo hay que hacer el metodo para verificar que sea correcto
+
+    public static String askTelf() {//todo hay que hacer el metodo para verificar que sea correcto
+
+        String valor;
+        do{
+            valor = askString("Indica el numero de telefon: ");
+            if (valor.matches(REG_TLF)){
+                System.out.println("Aquest numero de telefon no es valid");
+
+            }
+        }while(valor.matches(REG_TLF));
+        return valor;
 
     }
 
-    public static Email askEmail() {        //todo hay que hacer este metood para comprovar el email
+    public static String askEmail() {//todo hay que hacer este metood para comprovar el email
+
+        String valor;
+        do{
+            valor = askString("Indica el mail: ");
+            if (valor.matches(REG_MAIL)){
+                System.out.println("Aquest numero de telefon no es valid");
+
+            }
+        }while(valor.matches(REG_MAIL));
+        return valor;
 
     }
 
