@@ -72,7 +72,7 @@ public class Persis {
             String nom = data[1];
             String cognom = data[2];
             String dataNaixement = data[3];
-            //corredors.add(new Corredor(nif, nom, m2, interuptor));
+            //corredors.add(new Corredor());
             //ESTA SIN ACABAR
         }
     }
