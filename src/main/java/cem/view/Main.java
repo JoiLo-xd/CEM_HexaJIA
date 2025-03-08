@@ -105,7 +105,11 @@ public class Main {
             option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
             switch (option) {
                 case 1 -> {     //añadir inscripción
-                    break;
+                    if (corredores.isEmpty()){
+                        System.out.println("Primer has de crear corredors");
+                    }else {
+                        escollida.addCorrInsc();
+                    }
                 }
                 case 2 -> {     //Modificar inscripción
                     //todo hay que preguntar que inscripcion es y preguntar que quiere modificar :)
@@ -130,10 +134,18 @@ public class Main {
     }
 
     public static void crearInscripcion(Marxa escollida) {
+        String nif;
+        if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))){
+            Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+        }
+
+
         //int dorsal, bool modalitat, corredor
-        Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+
         //pedrir nif    (no lo he puesto porque en el otro me peta)       //todo :)
-        Corredor corredor = convertirAcorredor(nif);
+
+
+
         escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredor));
     }
 

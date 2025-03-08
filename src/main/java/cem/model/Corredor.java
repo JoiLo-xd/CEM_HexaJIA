@@ -35,9 +35,9 @@ public class Corredor {
         this.nif = nif;
     }
 
-    //Para añadir cosas a la Arraylist
+    //Para añadir cosas a la Arraylist // ESTO NO ES LO QUE HACE ESTE CODIGO...
     public ArrayList<Inscripcio> getInscr(){
-        return new ArrayList<Inscripcio>(inscripcions); //Preguntar si seria otra direccion de memoria
+        return new ArrayList<Inscripcio>(inscripcions);
     }
 
 
