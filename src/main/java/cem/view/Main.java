@@ -124,14 +124,15 @@ public class Main {
                     mdfInscrip(escollida);
                 }
                 case 3 -> {     //Hora salida inscripción
-                    //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
+                    horaSortidaInscrip(escollida);
                     break;
                 }
                 case 4 -> {     //Hora llegada inscripción
-                    //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
+                    horaArribadaInscrip(escollida);
                     break;
                 }
                 case 5 -> {     //Mostrar corredores de la marxa
+                    showRunners(escollida);
                     break;
                 }
                 case 6 -> {     //salir
@@ -139,6 +140,50 @@ public class Main {
                 }
             }
         } while (option != 6);
+    }
+
+    public static void showRunners(Marxa escollida) {
+        for (Inscripcio i: escollida.getInscripcionsMarxa()) {
+            System.out.println(i);
+        }
+    }
+
+    public static void horaSortidaInscrip(Marxa escollida) {        //todo revisar
+        if(escollida.getInscripcionsMarxa().isEmpty()){
+            System.out.println("Aquesta marxa no te incscripcion");
+        }else {
+            int choosen;
+            ArrayList<Inscripcio> inscrchoosen = escollida.getInscripcionsMarxa();
+            if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0, inscrchoosen.size())))){
+                if (inscrchoosen.get(inscrchoosen.indexOf(choosen)).getHoraSortida() == null) {
+                    inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraSortida();
+                } else {
+                    boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l?", "digues si o no.", "SI", "NO");
+                    if (i) {
+                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraSortida();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void horaArribadaInscrip(Marxa escollida) {        //todo revisar
+        if(escollida.getInscripcionsMarxa().isEmpty()){
+            System.out.println("Aquesta marxa no te incscripcion");
+        }else {
+            int choosen;
+            ArrayList<Inscripcio> inscrchoosen = escollida.getInscripcionsMarxa();
+            if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0, inscrchoosen.size())))){
+                if (inscrchoosen.get(inscrchoosen.indexOf(choosen)).getHoraArribada() == null) {
+                    inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada();
+                } else {
+                    boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l?", "digues si o no.", "SI", "NO");
+                    if (i) {
+                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada();
+                    }
+                }
+            }
+        }
     }
 
     public static void mdfInscrip(Marxa escollida){
@@ -160,11 +205,10 @@ public class Main {
 
                     }
                     case 2 ->{
-                        //ALEX HAZ ESTO QUE ES CON ENUMS PORFI
                         inscrchoosen.get(inscrchoosen.indexOf(choosen)).setAsistencia(AskDataCEM.askAsistencia("Asistencia del corredor (asistencia - noAsistencia - abandona - desqualificat): ", "Valor incorrecte."));
                     }
                     case 3 -> {
-                        System.out.println("No has modificat cap data");
+                        System.out.println("No s'ha modificat cap data");
                     }
                 }
 
@@ -216,17 +260,6 @@ public class Main {
 
         }
         System.out.println();
-    }
-
-
-    // Esta funcion no se esta usando uwu
-    private static Corredor convertirAcorredor(String n){
-        for (Corredor c : corredores){
-            if (c.getNif().equalsIgnoreCase(n)){
-                return c;
-            }
-
-        } return null;
     }
 
     private static void mdfCorredor(){
