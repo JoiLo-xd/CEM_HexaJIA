@@ -3,6 +3,7 @@
  */
 package cem.view;
 
+import cem.enums.Asistencia;
 import cem.enums.Sexe;
 
 import java.io.BufferedReader;
@@ -74,6 +75,17 @@ public class AskDataCEM {
 
     public static LocalDateTime askTime() {     //devuelve la hora actual, solo habrá que llamar a la funcion una vez para el inicio y otra vez en el final, coge la hora actual en el momento
         return LocalDateTime.now();
+    }
+
+    public static Asistencia askAsistencia(String msg, String errorMsg) {
+        Asistencia a = null;
+        try {
+            String asistencia = askString(msg).toUpperCase();
+            a = Asistencia.valueOf(asistencia);
+        }catch (IllegalArgumentException e) {
+            System.out.println(errorMsg);
+        }
+        return a;
     }
 
     public static LocalDate askFecha(String msg, String formato) {

@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class Inscripcio {
 
-    //Las cosas que son Horas en un futuro se tendran que cambiar a java Time.
     private int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
     private boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
     private LocalDateTime horaSortida;

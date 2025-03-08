@@ -145,10 +145,10 @@ public class Main {
         if(escollida.getInscripcionsMarxa().isEmpty()){
             System.out.println("Aquesta marxa no te incscripcion");
         }else{
-            int chosen;
-            ArrayList<Inscripcio> incrchosen = escollida.getInscripcionsMarxa();
-            if (incrchosen.contains(new Inscripcio(chosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0,
-                    incrchosen.size())))){
+            int choosen;
+            ArrayList<Inscripcio> inscrchoosen = escollida.getInscripcionsMarxa();
+            if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0,
+                    inscrchoosen.size())))){
                 int opcio = AskDataCEM.askInt("Que vols cambiar:\n" +
                         "1. Modalitat\n" +
                         "2. Asistencia\n"+
@@ -156,14 +156,15 @@ public class Main {
 
                 switch (opcio){
                     case 1 ->{
-                        incrchosen.get(incrchosen.indexOf(chosen)).setModalitat(AskDataCEM.askBoolean("Nova modalitat de la cursa que realitza el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta"));
+                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setModalitat(AskDataCEM.askBoolean("Nova modalitat de la cursa que realitza el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta"));
 
                     }
                     case 2 ->{
                         //ALEX HAZ ESTO QUE ES CON ENUMS PORFI
+                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setAsistencia(AskDataCEM.askAsistencia("Asistencia del corredor (asistencia - noAsistencia - abandona - desqualificat): ", "Valor incorrecte."));
                     }
                     case 3 -> {
-                        System.out.println("No has modificat ninguna data");
+                        System.out.println("No has modificat cap data");
                     }
                 }
 
