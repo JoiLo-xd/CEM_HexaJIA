@@ -5,22 +5,31 @@ import cem.view.AskDataCEM;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Inscripcio {
 
     //Las cosas que son Horas en un futuro se tendran que cambiar a java Time.
-    private final int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
-    private final boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
+    private int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
+    private boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
     private LocalDateTime horaSortida;
     private LocalDateTime horaArribada;
     private Duration tempsTotal;
     private Asistencia asistencia;
-    private final Corredor corredor;
+    private Corredor corredor;
 
     public Inscripcio(int dorsal, boolean modalitat, Corredor corredor) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.corredor = corredor;
+    }
+
+    public Inscripcio(int dorsal){
+        this.dorsal = dorsal;
+    }
+
+    public void setModalitat(boolean modalitat) {
+        this.modalitat = modalitat;
     }
 
     public void setHoraSortida() {
@@ -70,5 +79,12 @@ public class Inscripcio {
 
     public Corredor getCorredor() {
         return corredor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Inscripcio ins = (Inscripcio) o;
+
+        return ins.getDorsal() == getDorsal();
     }
 }

@@ -27,6 +27,18 @@ public class Main {
             "5. Mostrar estadístiques\n" +
             "6. Sortir";
 
+    private static final String MENUMODCORR = "\n-- MODIFICAR CORREDOR --\n"+
+            "Quina dada vols modificar:" +
+            "1. Nom" +
+            "2. Cognoms" +
+            "3. Sexe" +
+            "4. Població" +
+            "5. Numero Telefon" +
+            "6. Mail" +
+            "7. Entitat" +
+            "8. Federat" +
+            "9. Cancelar";
+
     public static void main(String[] args) {
         marxes = new ArrayList<>();
         int option;
@@ -68,7 +80,7 @@ public class Main {
                     break;
                 }
                 case 4 -> {     //Modificar corredor
-                    break;
+                    mdfCorredor();
                 }
                 case 5 -> {     //mostrar stats
                     break;
@@ -105,15 +117,11 @@ public class Main {
             option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
             switch (option) {
                 case 1 -> {     //añadir inscripción
-                    if (corredores.isEmpty()){
-                        System.out.println("Primer has de crear corredors");
-                    }else {
-                        escollida.addCorrInsc();
-                    }
+                    crearInscripcion(escollida);
                 }
                 case 2 -> {     //Modificar inscripción
                     //todo hay que preguntar que inscripcion es y preguntar que quiere modificar :)
-                    break;
+                    mdfInscrip(escollida);
                 }
                 case 3 -> {     //Hora salida inscripción
                     //todo hay que preguntar que inscripcion es y solo llamar a la funcion de askTime en AskDataCEM
@@ -133,20 +141,51 @@ public class Main {
         } while (option != 6);
     }
 
-    public static void crearInscripcion(Marxa escollida) {
-        String nif;
-        if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))){
-            Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+    public static void mdfInscrip(Marxa escollida){
+        if(escollida.getInscripcionsMarxa().isEmpty()){
+            System.out.println("Aquesta marxa no te incscripcion");
+        }else{
+            int chosen;
+            ArrayList<Inscripcio> incrchosen = escollida.getInscripcionsMarxa();
+            if (incrchosen.contains(new Inscripcio(chosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0,
+                    incrchosen.size())))){
+                int opcio = AskDataCEM.askInt("Que vols cambiar:\n" +
+                        "1. Modalitat\n" +
+                        "2. Asistencia\n"+
+                        "3. Cancelar\n","posa una opció valida",1,3);
+
+                switch (opcio){
+                    case 1 ->{
+                        incrchosen.get(incrchosen.indexOf(chosen)).setModalitat(AskDataCEM.askBoolean("Nova modalitat de la cursa que realitza el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta"));
+
+                    }
+                    case 2 ->{
+                        //ALEX HAZ ESTO QUE ES CON ENUMS PORFI
+                    }
+                    case 3 -> {
+                        System.out.println("No has modificat ninguna data");
+                    }
+                }
+
+            };
+
         }
 
+    }
 
-        //int dorsal, bool modalitat, corredor
-
-        //pedrir nif    (no lo he puesto porque en el otro me peta)       //todo :)
-
-
-
-        escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredor));
+    public static void crearInscripcion(Marxa escollida) {
+        String nif;
+        if (corredores.isEmpty()){
+            System.out.println("No hi han corredors per inscribir, crea algun");
+        }else {
+            //Preguntar si es mejor asi o con la funcion
+            if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
+                Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+                escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size(), modalitat, corredores.get(corredores.indexOf(nif))));
+            } else {
+                System.out.println("No hi han corredors amb aquest nif");
+            }
+        }
     }
 
     public static void darAltaCorredor() {
@@ -159,8 +198,8 @@ public class Main {
             LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MMM-YYYY");
             Sexe sexe = AskDataCEM.askSexe("Sexe: ");
             String poblacio = AskDataCEM.askString("Població: ");
-            String telf = AskDataCEM.askTelf();
-            String email = AskDataCEM.askEmail();
+            String telf = AskDataCEM.askTelf("Telefon: ");
+            String email = AskDataCEM.askEmail("Mail: ");
             String entitat = AskDataCEM.askString("Entitat: ");
             Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
             corredores.add(new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat));
@@ -179,13 +218,59 @@ public class Main {
     }
 
 
-
+    // Esta funcion no se esta usando uwu
     private static Corredor convertirAcorredor(String n){
         for (Corredor c : corredores){
             if (c.getNif().equalsIgnoreCase(n)){
                 return c;
             }
+
         } return null;
+    }
+
+    private static void mdfCorredor(){
+        if (corredores.isEmpty()){
+            System.out.println("No hi han corredors per inscribir, crea algun");
+        }else{
+            String nif;
+            if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
+                Corredor runner = corredores.get(corredores.indexOf(nif));
+                System.out.println(MENUMODCORR);
+                int option  = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 9);
+                switch (option){
+                    case 1 -> {
+                        runner.setNom(AskDataCEM.askString("Indica el nou nom del corredor: "));
+                    }
+                    case 2 -> {
+                        runner.setCognoms(AskDataCEM.askString("Indica el nou cognom del corredor: "));
+                    }
+                    case 3 -> {
+                        runner.setSexe(AskDataCEM.askSexe("Indica el nou 'sexe' del corredor: "));
+                    }
+                    case 4 -> {
+                        runner.setPoblacio(AskDataCEM.askString("Indica la nova població del corredor: "));
+                    }
+                    case 5 -> {
+                        runner.setNumTelefon(AskDataCEM.askTelf("Indica el nou telefon del corredor: "));
+                    }
+                    case 6 -> {
+                        runner.setEmail(AskDataCEM.askEmail("Indica el nou Email del corredor: "));
+                    }
+                    case 7 -> {
+                        runner.setEntitat(AskDataCEM.askString("Indica la nova entitat del corredor: "));
+                    }
+                    case 8 -> {
+                        runner.setFederat(AskDataCEM.askBoolean("Indica si ets federat:\n1. Federat\n2. No federat\n", "Aquesta opcio no esta disponible", "1","2"));
+                    }
+                    case 9 -> {
+                        System.out.println("No has modificat ninguna data");
+                    }
+
+                }
+            }else{
+                System.out.println("Aquest corredor no existeix");
+            }
+        }
     }
 
 }

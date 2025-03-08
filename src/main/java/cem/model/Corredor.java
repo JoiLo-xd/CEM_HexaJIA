@@ -68,7 +68,7 @@ public class Corredor {
 
     public void setEmail(String email) {
         this.email = email;
-    } // Validar Email con el @
+    }
 
     public void setEntitat(String entitat) {
         this.entitat = entitat;

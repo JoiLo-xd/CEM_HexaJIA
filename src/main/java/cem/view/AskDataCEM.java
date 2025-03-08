@@ -105,11 +105,11 @@ public class AskDataCEM {
     }
 
 
-    public static String askTelf() {//todo hay que hacer el metodo para verificar que sea correcto
+    public static String askTelf(String str) {//todo hay que hacer el metodo para verificar que sea correcto
 
         String valor;
         do{
-            valor = askString("Indica el numero de telefon: ");
+            valor = askString(str);
             if (valor.matches(REG_TLF)){
                 System.out.println("Aquest numero de telefon no es valid");
 
@@ -119,11 +119,11 @@ public class AskDataCEM {
 
     }
 
-    public static String askEmail() {//todo hay que hacer este metood para comprovar el email
+    public static String askEmail(String str) {//todo hay que hacer este metood para comprovar el email
 
         String valor;
         do{
-            valor = askString("Indica el mail: ");
+            valor = askString(str);
             if (valor.matches(REG_MAIL)){
                 System.out.println("Aquest numero de telefon no es valid");
 
