@@ -132,7 +132,8 @@ public class Main {
     public static void crearInscripcion(Marxa escollida) {
         //int dorsal, bool modalitat, corredor
         Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
-        Corredor corredor = ;       //todo :)
+        //pedrir nif    (no lo he puesto porque en el otro me peta)       //todo :)
+        Corredor corredor = convertirAcorredor(nif);
         escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredor));
     }
 
@@ -165,5 +166,14 @@ public class Main {
         System.out.println();
     }
 
+
+
+    private static Corredor convertirAcorredor(String n){
+        for (Corredor c : corredores){
+            if (c.getNif().equalsIgnoreCase(n)){
+                return c;
+            }
+        } return null;
+    }
 
 }

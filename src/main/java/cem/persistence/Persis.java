@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import cem.model.Corredor;
 import cem.model.Marxa;
+import java.time.LocalDate;
+import cem.enums.Sexe;
+
 
 
 public class Persis {
@@ -49,15 +52,15 @@ public class Persis {
 
     public void writerCorredorInFile(Corredor c) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileCorredor, true));
-        writer.write(c.getNif() + "-" + c.getNom() + "-" + c.getCognoms() + "-" + c.getDataNaixement() + "-" + c.getPoblacio() + "-" + c.getSexe() +
-                "-" + c.getNumTelefon() + "-" + c.getEmail() + "-" + c.getEntitat() + c.isFederat());
+        writer.write(c.getNif() + "/" + c.getNom() + "/" + c.getCognoms() + "/" + c.getDataNaixement() + "/" + c.getPoblacio() + "/" + c.getSexe() +
+                "/" + c.getNumTelefon() + "/" + c.getEmail() + "/" + c.getEntitat() + c.isFederat());
         writer.newLine();
         writer.close();
     }
 
     public void writerMarxaInFile(Marxa m) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileMarxa, true));
-        writer.write(m.getEdicio() + "-" + m.getInscripcionsMarxa());
+        writer.write(m.getEdicio() + "/" + m.getInscripcionsMarxa());
         writer.newLine();
         writer.close();
     }
@@ -67,13 +70,33 @@ public class Persis {
         BufferedReader reader = new BufferedReader(new FileReader(pathFileCorredor));
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] data = line.split("-");
+            String[] data = line.split("/");
             String nif = data[0];
             String nom = data[1];
             String cognom = data[2];
-            String dataNaixement = data[3];
-            //corredors.add(new Corredor());
-            //ESTA SIN ACABAR
+            LocalDate dataNaixement = LocalDate.parse(data[3]); // lo he mirado en internet
+            Sexe sexe = Sexe.valueOf(data[4]); // lo he mirado en internet
+            String poblacio = data[5];
+            String telf = data[6];
+            String email = data[7];
+            String entitat = data[8];
+            Boolean federat = Boolean.parseBoolean(data[9]);
+            corredors.add(new Corredor(nif, nom, cognom, dataNaixement, sexe, poblacio, telf, email, entitat, federat));
         }
+        return corredors;
     }
+    public ArrayList<Marxa> readMarxa() throws IOException {
+        ArrayList<Marxa> marxas = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(pathFileMarxa));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split("/");
+            int edicion = Integer.parseInt(data[0]);
+            marxas.add(new Marxa(edicion));
+            // no se tengo que añadir ahi e larrayList de inscripciones
+        }
+        return marxas;
+    }
+
+}
 

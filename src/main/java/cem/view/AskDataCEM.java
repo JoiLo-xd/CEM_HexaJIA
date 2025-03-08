@@ -231,6 +231,20 @@ public class AskDataCEM {
         return answer;
     }
 
+    public String askNifUnaVez() {
+        String nif = "";
+        boolean correcto = false;
+        while (!correcto) { //correcto == false
+            nif = askString("NIF del propietari de la casa: ").toUpperCase();
+            correcto = validateNif(nif);
+            if (!correcto) {
+                System.out.println("Debes poner un nif");
+            }
+        }
+        return nif;
+
+    }
+
     private static boolean validateNif(String nif) {    //comprovación de nif, tien una formula para saver si es real o no
         Pattern REGEXP = Pattern.compile("[0-9]{8}[A-Z]");
         String DIGITO_CONTROL = "TRWAGMYFPDXBNJZSQVHLCKE";
