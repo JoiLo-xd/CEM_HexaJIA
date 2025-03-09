@@ -49,6 +49,7 @@ public class Main {
         corredores = new ArrayList<>();
         persis = new Persis();
         marxes = persis.readMarxa();
+        corredores = persis.readCorredor();
         int option;
         do {
             System.out.println(MENUINICI);;
