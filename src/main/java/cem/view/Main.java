@@ -5,13 +5,18 @@ import cem.model.Corredor;
 import cem.model.Inscripcio;
 import cem.model.Marxa;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import cem.persistence.Persis;
 
 public class Main {
 
     private static ArrayList<Marxa> marxes;
     private static ArrayList<Corredor> corredores;
+    private static Persis persis;
+
     private static final String MENUMARXES = "\n<> MENU MARXES <>\n" +
             "1. Afegir participant\n" +
             "2. Editar participant\n" +
@@ -39,8 +44,10 @@ public class Main {
             "8. Federat" +
             "9. Cancelar";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         marxes = new ArrayList<>();
+        persis = new Persis();
+        marxes = persis.readMarxa();
         int option;
         do {
             System.out.println(MENUINICI);;
@@ -227,13 +234,17 @@ public class Main {
             if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
                 Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
                 escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size(), modalitat, corredores.get(corredores.indexOf(nif))));
+                //persis.writerInscripcioInFile(escollida);
             } else {
                 System.out.println("No hi han corredors amb aquest nif");
             }
         }
     }
 
-    public static void darAltaCorredor() {
+    public static void darAltaCorredor() throws IOException {
+        if (corredores == null) {
+            corredores = new ArrayList<>();
+        }
         String nif;
         if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("DNI/NIF: ")))){
             System.out.println("Aquesta persona ja esta reistrada");
@@ -247,17 +258,19 @@ public class Main {
             String email = AskDataCEM.askEmail("Mail: ");
             String entitat = AskDataCEM.askString("Entitat: ");
             Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
-            corredores.add(new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat));
-        }
+            Corredor c = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
+            corredores.add(c);
+            persis.writerCorredorInFile(c);        }
     }
 
-    public static void darAltaMarxa() {
+    public static void darAltaMarxa() throws IOException {
         int edicion = AskDataCEM.askInt("Digues l'edició de la cursa: ", "Aquesta edició no es valida", 2000);
         if (marxes.contains(new Marxa(edicion))) {
             System.out.println("Aquesta edició ja estava registrada.");
         } else {
-            marxes.add(new Marxa(edicion));
-
+            Marxa m = new Marxa(edicion);
+            marxes.add(m);
+            persis.writerMarxaInFile(m);
         }
         System.out.println();
     }

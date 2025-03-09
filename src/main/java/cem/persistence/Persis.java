@@ -1,5 +1,4 @@
 package cem.persistence;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -7,10 +6,14 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.Duration;
 import cem.model.Corredor;
 import cem.model.Marxa;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import cem.enums.Asistencia;
 import cem.enums.Sexe;
+import cem.model.Inscripcio;
 
 
 
@@ -65,6 +68,13 @@ public class Persis {
         writer.close();
     }
 
+    public void writerInscripcioInFile(Inscripcio i) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, true));
+        writer.write(i.getDorsal() + "/" + i.isModalitat() + "/" + i.getCorredor());
+        writer.newLine();
+        writer.close();
+    }
+
     public ArrayList<Corredor> readCorredor() throws IOException {
         ArrayList<Corredor> corredors = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(pathFileCorredor));
@@ -96,6 +106,20 @@ public class Persis {
             // no se tengo que añadir ahi e larrayList de inscripciones
         }
         return marxas;
+    }
+
+    public ArrayList<Inscripcio> readInscripcio() throws IOException {
+        ArrayList<Inscripcio> inscripcions = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(pathFileMarxa));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split("/");
+            int dorsal = Integer.parseInt(data[0]);
+            boolean modalitat = Boolean.parseBoolean(data[1]);
+            Corredor corredor = new Corredor (data[6]);
+            inscripcions.add(new Inscripcio(dorsal, modalitat, corredor));
+        }
+        return inscripcions;
     }
 
 }
