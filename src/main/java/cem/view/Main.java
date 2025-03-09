@@ -46,6 +46,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         marxes = new ArrayList<>();
+        corredores = new ArrayList<>();
         persis = new Persis();
         marxes = persis.readMarxa();
         int option;
@@ -152,7 +153,7 @@ public class Main {
 
     public static void showRunners(Marxa escollida) {
         if (escollida.getInscripcionsMarxa().isEmpty()) {
-            System.out.println("No hi ha cap inscripció per a aquesta marxa.");
+            System.out.println("No hi ha cap inscripció.");
         } else {
             for (Inscripcio i: escollida.getInscripcionsMarxa()) {
                 System.out.println(i);
