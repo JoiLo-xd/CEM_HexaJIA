@@ -71,10 +71,6 @@ public class AskDataCEM {
         return answer;
     }
 
-    public static LocalDateTime askTime() {     //devuelve la hora actual, solo habrá que llamar a la funcion una vez para el inicio y otra vez en el final, coge la hora actual en el momento
-        return LocalDateTime.now();
-    }
-
     public static Asistencia askAsistencia(String msg, String errorMsg) {
         Asistencia a = null;
         try {

@@ -31,13 +31,13 @@ public class Inscripcio {
         this.modalitat = modalitat;
     }
 
-    public void setHoraSortida() {
-        this.horaSortida = AskDataCEM.askTime();
+    public void setHoraSortida(LocalDateTime horaSortida) {
+        this.horaSortida = horaSortida;
     }
 
-    public void setHoraArribada() { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
+    public void setHoraArribada(LocalDateTime horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
         if (horaSortida != null) {
-            this.horaArribada = AskDataCEM.askTime();
+            this.horaArribada = horaArribada;
         }
     }
 
@@ -89,8 +89,9 @@ public class Inscripcio {
 
     @Override
     public String toString() {
-        String esmodalitat = modalitat ? "Llarga" : "Curta"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
-        return dorsal + " - " + corredor.getNom() + corredor.getCognoms() + " - " + esmodalitat;
+        String esmodalitat = modalitat ? "Llarga" : "Curta";
+        return dorsal + " - " + corredor.getNom() + " " + corredor.getCognoms() + " - " + esmodalitat + " - Sortida: " + String.valueOf(getHoraSortida()) +
+                " - Arribada: " + String.valueOf(getHoraArribada());
     }
 
 
