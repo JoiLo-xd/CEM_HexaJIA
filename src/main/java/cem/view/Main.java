@@ -113,10 +113,11 @@ public class Main {
         int cont = 1;
         for (Marxa element : marxes){
             System.out.println(cont +"  " + element.getEdicio());
+            cont++;
         }
     }
 
-    private static void entrarMarxa(Marxa escollida) {
+    private static void entrarMarxa(Marxa escollida) throws IOException {
         int option;
         do {
 
@@ -150,8 +151,12 @@ public class Main {
     }
 
     public static void showRunners(Marxa escollida) {
-        for (Inscripcio i: escollida.getInscripcionsMarxa()) {
-            System.out.println(i);
+        if (escollida.getInscripcionsMarxa().isEmpty()) {
+            System.out.println("No hi ha cap inscripció per a aquesta marxa.");
+        } else {
+            for (Inscripcio i: escollida.getInscripcionsMarxa()) {
+                System.out.println(i);
+            }
         }
     }
 
@@ -225,7 +230,7 @@ public class Main {
 
     }
 
-    public static void crearInscripcion(Marxa escollida) {
+    public static void crearInscripcion(Marxa escollida) throws IOException {
         String nif;
         if (corredores.isEmpty()){
             System.out.println("No hi han corredors per inscribir, crea algun");
@@ -233,8 +238,9 @@ public class Main {
             //Preguntar si es mejor asi o con la funcion
             if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
                 Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
-                escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size(), modalitat, corredores.get(corredores.indexOf(nif))));
-                //persis.writerInscripcioInFile(noseQueSePoneAqui);
+                Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredores.get(corredores.indexOf(nif)));
+                escollida.addCorrInsc(novaInscr);
+                persis.writerInscripcioInFile(novaInscr);
             } else {
                 System.out.println("No hi han corredors amb aquest nif");
             }
@@ -257,7 +263,7 @@ public class Main {
             String telf = AskDataCEM.askTelf("Telefon: ");
             String email = AskDataCEM.askEmail("Mail: ");
             String entitat = AskDataCEM.askString("Entitat: ");
-            Boolean federat = AskDataCEM.askBoolean("Federat: ", "Valor incorrecte", "Si", "No");
+            Boolean federat = AskDataCEM.askBoolean("Federat (si - no): ", "Valor incorrecte", "Si", "No");
             Corredor c = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
             corredores.add(c);
             persis.writerCorredorInFile(c);        }
