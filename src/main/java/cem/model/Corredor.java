@@ -121,14 +121,14 @@ public class Corredor {
 
     @Override
     public String toString() {
-        String esfederat = federat ? "Si Federat" : "No federat"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
+        String esfederat = federat ? "Si" : "No"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
         return esfederat;
     }
 
     @Override
     public boolean equals(Object o) {
         Corredor obj = (Corredor) o;
-        if (obj.getNif().equals(getNif())) return true;
+        if (obj.getNif().equalsIgnoreCase(getNif())) return true;
         return false;
     }
 

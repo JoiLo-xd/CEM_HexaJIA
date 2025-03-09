@@ -92,6 +92,7 @@ public class Main {
                     mdfCorredor();
                 }
                 case 5 -> {     //mostrar stats
+                    mostrarStats();
                     break;
                 }
                 case 6 -> {     //salir
@@ -233,16 +234,20 @@ public class Main {
     }
 
     public static void crearInscripcion(Marxa escollida) throws IOException {
-        String nif;
-        if (corredores.isEmpty()){
+        if (corredores.isEmpty()) {
             System.out.println("No hi han corredors per inscribir, crea algun");
-        }else {
+        } else {
             //Preguntar si es mejor asi o con la funcion
-            if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
-                Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
-                Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size()+1, modalitat, corredores.get(corredores.indexOf(nif)));
-                escollida.addCorrInsc(novaInscr);
-                persis.writerInscripcioInFile(novaInscr);
+            String nif = AskDataCEM.askNif("Indica el nif del corredor: ");
+            if (corredores.contains(new Corredor(nif))) {
+                int index = corredores.indexOf(new Corredor(nif));
+                if (index >= 0) {
+                    Corredor c = corredores.get(index);
+                    Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+                    Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size() + 1, modalitat, c);
+                    escollida.addCorrInsc(novaInscr);
+                    persis.writerInscripcioInFile(novaInscr);
+                }
             } else {
                 System.out.println("No hi han corredors amb aquest nif");
             }
@@ -283,47 +288,75 @@ public class Main {
         System.out.println();
     }
 
-    private static void mdfCorredor(){
-        if (corredores.isEmpty()){
+    private static void mdfCorredor() throws IOException {
+        if (corredores.isEmpty()) {
             System.out.println("No hi han corredors per inscribir, crea algun");
-        }else{
-            String nif;
-            if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
-                Corredor runner = corredores.get(corredores.indexOf(nif));
-                System.out.println(MENUMODCORR);
-                int option  = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 9);
-                switch (option){
-                    case 1 -> {
-                        runner.setNom(AskDataCEM.askString("Indica el nou nom del corredor: "));
-                    }
-                    case 2 -> {
-                        runner.setCognoms(AskDataCEM.askString("Indica el nou cognom del corredor: "));
-                    }
-                    case 3 -> {
-                        runner.setSexe(AskDataCEM.askSexe("Indica el nou 'sexe' del corredor: "));
-                    }
-                    case 4 -> {
-                        runner.setPoblacio(AskDataCEM.askString("Indica la nova població del corredor: "));
-                    }
-                    case 5 -> {
-                        runner.setNumTelefon(AskDataCEM.askTelf("Indica el nou telefon del corredor: "));
-                    }
-                    case 6 -> {
-                        runner.setEmail(AskDataCEM.askEmail("Indica el nou Email del corredor: "));
-                    }
-                    case 7 -> {
-                        runner.setEntitat(AskDataCEM.askString("Indica la nova entitat del corredor: "));
-                    }
-                    case 8 -> {
-                        runner.setFederat(AskDataCEM.askBoolean("Indica si ets federat:\n1. Federat\n2. No federat\n", "Aquesta opcio no esta disponible", "1","2"));
-                    }
-                    case 9 -> {
-                        System.out.println("No has modificat ninguna data");
+        } else {
+            String nif = AskDataCEM.askNif("Indica el nif del corredor: ");
+            if (corredores.contains(new Corredor(nif))) {
+                //Corredor runner = corredores.get(corredores.indexOf(nif));
+                int index = corredores.indexOf(new Corredor(nif));
+                if (index >= 0) {
+                    Corredor runner = corredores.get(index);
+                    System.out.println(MENUMODCORR);
+                    int option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 9);
+                    switch (option) {
+                        case 1 -> {
+                            runner.setNom(AskDataCEM.askString("Indica el nou nom del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 2 -> {
+                            runner.setCognoms(AskDataCEM.askString("Indica el nou cognom del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+
+                        }
+                        case 3 -> {
+                            runner.setSexe(AskDataCEM.askSexe("Indica el nou 'sexe' del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 4 -> {
+                            runner.setPoblacio(AskDataCEM.askString("Indica la nova població del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 5 -> {
+                            runner.setNumTelefon(AskDataCEM.askTelf("Indica el nou telefon del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 6 -> {
+                            runner.setEmail(AskDataCEM.askEmail("Indica el nou Email del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 7 -> {
+                            runner.setEntitat(AskDataCEM.askString("Indica la nova entitat del corredor: "));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 8 -> {
+                            runner.setFederat(AskDataCEM.askBoolean("Indica si ets federat:\n1. Federat\n2. No federat\n", "Aquesta opcio no esta disponible", "1", "2"));
+                            persis.ReescribirCorredor(corredores);
+                        }
+                        case 9 -> {
+                            System.out.println("No has modificat ninguna data");
+
+                        }
                     }
 
+                } else {
+                    System.out.println("Aquest corredor no existeix");
                 }
-            }else{
-                System.out.println("Aquest corredor no existeix");
+            }
+
+        }
+    }
+    private static void mostrarStats(){
+        if (corredores.isEmpty()){
+            System.out.println("No hi han corredors per inscribir, crea un.");
+        } else {
+            for (Corredor c : corredores){
+                System.out.println("NIF:" + c.getNif() + "    " + c.getNom() + " " + c.getCognoms()
+                        + "   Data naixement:" + c.getDataNaixement() + "   Sexe:" + c.getSexe()
+                        + "    Poblacio:" + c.getPoblacio() + "    NumTelèfon:" + c.getNumTelefon() + "   Email:" + c.getEmail()
+                        + "    Entitat:" + c.getEntitat() + "    Federat:" + c.toString());
+                System.out.println("");
             }
         }
     }

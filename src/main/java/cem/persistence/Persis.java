@@ -55,7 +55,7 @@ public class Persis {
 
     public void writerCorredorInFile(Corredor c) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileCorredor, true));
-        writer.write(c.getNif() + "/" + c.getNom() + "/" + c.getCognoms() + "/" + c.getDataNaixement() + "/" + c.getPoblacio() + "/" + c.getSexe() +
+        writer.write(c.getNif() + "/" + c.getNom() + "/" + c.getCognoms() + "/" + c.getDataNaixement() + "/" + c.getSexe() + "/" + c.getPoblacio() +
                 "/" + c.getNumTelefon() + "/" + c.getEmail() + "/" + c.getEntitat() + "/" + c.isFederat());
         writer.newLine();
         writer.close();
@@ -70,7 +70,7 @@ public class Persis {
 
     public void writerInscripcioInFile(Inscripcio i) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, true));
-        writer.write(i.getDorsal() + "/" + i.isModalitat() + "/" + i.getCorredor());
+        writer.write(i.getDorsal() + "/" + i.isModalitat() + "/" + i.getCorredor().getNom());
         writer.newLine();
         writer.close();
     }

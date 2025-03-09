@@ -87,5 +87,11 @@ public class Inscripcio {
         return ins.getDorsal() == getDorsal();
     }
 
+    @Override
+    public String toString() {
+        String esmodalitat = modalitat ? "Llarga" : "Curta"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
+        return esmodalitat;
+    }
+
 
 }
