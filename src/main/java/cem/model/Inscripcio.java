@@ -86,4 +86,10 @@ public class Inscripcio {
 
         return ins.getDorsal() == getDorsal();
     }
+
+    @Override
+    public String toString() {
+        String modalitatt = modalitat ? "Llarga" : "Curta";
+        return modalitatt;
+    }
 }
