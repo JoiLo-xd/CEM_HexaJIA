@@ -95,7 +95,7 @@ public class AskDataCEM {
             try {
                 String fecha = askString(msg);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
-                date = LocalDate.parse("2005-nov-12", formatter);
+                date = LocalDate.parse(fecha, formatter);
                 error = false;
             }catch (DateTimeParseException e) {
                 System.out.println("Fecha incorrecta.");
@@ -107,12 +107,15 @@ public class AskDataCEM {
 
     public static Sexe askSexe(String msg) {
         Sexe s = null;
-        try {
-            String sexe = askString(msg).toUpperCase();
-            s = Sexe.valueOf(sexe);
-        }catch (IllegalArgumentException e) {
-            System.out.println("Valor incorrecte.");
-        }
+        boolean error = false;
+        do {
+            try {
+                String sexe = askString(msg).toUpperCase();
+                s = Sexe.valueOf(sexe);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Valor incorrecte.");
+            }
+        } while (error);
         return s;
     }
 

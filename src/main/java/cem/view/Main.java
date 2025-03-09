@@ -251,7 +251,7 @@ public class Main {
         }else {
             String nom = AskDataCEM.askString("Nom: ");
             String cognoms = AskDataCEM.askString("Cognoms: ");
-            LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MMM-YYYY");
+            LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MM-yyyy");
             Sexe sexe = AskDataCEM.askSexe("Sexe: ");
             String poblacio = AskDataCEM.askString("Població: ");
             String telf = AskDataCEM.askTelf("Telefon: ");
