@@ -121,8 +121,13 @@ public class Corredor {
 
     @Override
     public String toString() {
-        String esfederat = federat ? "Si" : "No"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
-        return esfederat;
+        String esfederat = federat ? "Si" : "No";
+        String returned = "NIF: " + getNif() + "    " + getNom() + " " + getCognoms() +"\n"
+                + "   Data naixement: " + getDataNaixement() + "   Sexe: " + getSexe() +"\n"
+                + "    Poblacio: " + getPoblacio() + "    NumTelèfon: " + getNumTelefon() + "   Email: " + getEmail() +"\n"
+                + "    Entitat: " + getEntitat() + "    Federat: " + esfederat;
+         // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
+        return returned;
     }
 
     @Override

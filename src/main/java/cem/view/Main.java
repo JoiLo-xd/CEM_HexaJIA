@@ -93,11 +93,11 @@ public class Main {
                 }
                 case 5 -> {     //mostrar stats
                     mostrarStats();
-                    break;
+
                 }
                 case 6 -> {     //salir
                     System.out.println("Fins avia't!!");
-                    break;
+
                 }
             }
         }while (option != 6);
@@ -136,18 +136,18 @@ public class Main {
                 }
                 case 3 -> {     //Hora salida inscripción
                     horaSortidaInscrip(escollida);
-                    break;
+
                 }
                 case 4 -> {     //Hora llegada inscripción
                     horaArribadaInscrip(escollida);
-                    break;
+
                 }
                 case 5 -> {     //Mostrar corredores de la marxa
                     showRunners(escollida);
-                    break;
+
                 }
                 case 6 -> {     //salir
-                    break;
+                    System.out.println("Adeu!!!");;
                 }
             }
         } while (option != 6);
@@ -178,6 +178,9 @@ public class Main {
                         inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraSortida();
                     }
                 }
+            }else{
+                System.out.println("Aquest corredor no existeix");
+
             }
         }
     }
@@ -197,6 +200,9 @@ public class Main {
                         inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada();
                     }
                 }
+            }else{
+                System.out.println("Aquest corredor no existeix");
+
             }
         }
     }
@@ -227,7 +233,9 @@ public class Main {
                     }
                 }
 
-            };
+            }else{
+                System.out.println("Este corredor no esta registrado");
+            }
 
         }
 
@@ -352,11 +360,7 @@ public class Main {
             System.out.println("No hi han corredors per inscribir, crea un.");
         } else {
             for (Corredor c : corredores){
-                System.out.println("NIF:" + c.getNif() + "    " + c.getNom() + " " + c.getCognoms()
-                        + "   Data naixement:" + c.getDataNaixement() + "   Sexe:" + c.getSexe()
-                        + "    Poblacio:" + c.getPoblacio() + "    NumTelèfon:" + c.getNumTelefon() + "   Email:" + c.getEmail()
-                        + "    Entitat:" + c.getEntitat() + "    Federat:" + c.toString());
-                System.out.println("");
+                System.out.println(c +"\n");
             }
         }
     }
