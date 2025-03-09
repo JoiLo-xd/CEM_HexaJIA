@@ -95,7 +95,7 @@ public class Persis {
         }
         return corredors;
     }
-    public ArrayList<Marxa> readMarxa() throws IOException {
+    public ArrayList<Marxa> readMarxa(ArrayList<Corredor> corredores) throws IOException {
         ArrayList<Marxa> marxas = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(pathFileMarxa));
         String line;
@@ -111,9 +111,9 @@ public class Persis {
             int edicio = Integer.parseInt(data[0]);
             int dorsal = Integer.parseInt(data[1]);
             boolean modalitat = Boolean.parseBoolean(data[2]);
-            Corredor corredor = new Corredor (data[3]);
+            Corredor corredor = buscarCorredor(corredores, data[3]);
             Marxa marxa = buscarMarxa(marxas, edicio);
-            if (marxa != null) {
+            if (marxa != null && corredor != null) {
                 marxa.addCorrInsc(new Inscripcio(dorsal, modalitat, corredor));
             }
         }
@@ -125,6 +125,15 @@ public class Persis {
         for (Marxa m : marxas) {
             if (m.getEdicio() == edicion) {
                 return m;
+            }
+        }
+        return null;
+    }
+
+    public static Corredor buscarCorredor(ArrayList<Corredor> corredores, String nif) {
+        for (Corredor c : corredores) {
+            if (c.getNif().equalsIgnoreCase(nif)) {
+                return c;
             }
         }
         return null;
