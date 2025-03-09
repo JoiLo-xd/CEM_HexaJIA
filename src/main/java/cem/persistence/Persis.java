@@ -70,7 +70,7 @@ public class Persis {
 
     public void writerInscripcioInFile(Inscripcio i, int edicio) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, true));
-        writer.write(edicio + "/" + i.getDorsal() + "/" + i.isModalitat() + "/" /*+ i.getHoraSortida() + "/" + i.getHoraArribada() + "/" */+ i.getCorredor().getNif());
+        writer.write(edicio + "/" + i.getDorsal() + "/" + i.isModalitat() + "/" + i.getHoraSortida() + "/" + i.getHoraArribada() + "/" + i.getCorredor().getNif());
         writer.newLine();
         writer.close();
     }
