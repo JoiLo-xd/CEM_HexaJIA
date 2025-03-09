@@ -122,5 +122,13 @@ public class Persis {
         return inscripcions;
     }
 
+
+    public void ReescribirCorredor(ArrayList<Corredor> corredors) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileCorredor, false));
+        for (Corredor c : corredors) {
+            writerCorredorInFile(c);
+        }
+        writer.close();
+    }
 }
 
