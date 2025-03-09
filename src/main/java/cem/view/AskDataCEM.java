@@ -107,11 +107,13 @@ public class AskDataCEM {
         Sexe s = null;
         boolean error = false;
         do {
+            error = false;
             try {
                 String sexe = askString(msg).toUpperCase();
                 s = Sexe.valueOf(sexe);
             } catch (IllegalArgumentException e) {
                 System.out.println("Valor incorrecte.");
+                error = true;
             }
         } while (error);
         return s;
@@ -138,7 +140,7 @@ public class AskDataCEM {
         do{
             valor = askString(str);
             if (!valor.matches(REG_MAIL)){
-                System.out.println("Aquest numero de telefon no es valid");
+                System.out.println("Aquest email no es valid");
 
             }
         }while(!valor.matches(REG_MAIL));

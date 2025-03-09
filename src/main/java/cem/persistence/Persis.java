@@ -56,7 +56,7 @@ public class Persis {
     public void writerCorredorInFile(Corredor c) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileCorredor, true));
         writer.write(c.getNif() + "/" + c.getNom() + "/" + c.getCognoms() + "/" + c.getDataNaixement() + "/" + c.getPoblacio() + "/" + c.getSexe() +
-                "/" + c.getNumTelefon() + "/" + c.getEmail() + "/" + c.getEntitat() + c.isFederat());
+                "/" + c.getNumTelefon() + "/" + c.getEmail() + "/" + c.getEntitat() + "/" + c.isFederat());
         writer.newLine();
         writer.close();
     }
