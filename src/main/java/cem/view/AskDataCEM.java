@@ -33,9 +33,7 @@ public class AskDataCEM {
         try {
             answer = br.readLine();
             while (answer.isEmpty()) {
-                System.out.println();
-                System.out.println("No puedes dejar la respuesta en blanco");
-                System.out.println();
+                System.out.println("\nNo puedes dejar la respuesta en blanco\n");
                 System.out.print(msg);
                 answer = br.readLine();
             }
@@ -112,10 +110,8 @@ public class AskDataCEM {
             try {
                 String sexe = askString(msg).toUpperCase();
                 s = Sexe.valueOf(sexe);
-                error = false;
             } catch (IllegalArgumentException e) {
                 System.out.println("Valor incorrecte.");
-                error = true;
             }
         } while (error);
         return s;
@@ -127,11 +123,11 @@ public class AskDataCEM {
         String valor;
         do{
             valor = askString(str);
-            if (valor.matches(REG_TLF)){
+            if (!valor.matches(REG_TLF)){
                 System.out.println("Aquest numero de telefon no es valid");
 
             }
-        }while(valor.matches(REG_TLF));
+        }while(!valor.matches(REG_TLF));
         return valor;
 
     }
@@ -141,11 +137,11 @@ public class AskDataCEM {
         String valor;
         do{
             valor = askString(str);
-            if (valor.matches(REG_MAIL)){
-                System.out.println("Aquest mail no es valid");
+            if (!valor.matches(REG_MAIL)){
+                System.out.println("Aquest numero de telefon no es valid");
 
             }
-        }while(valor.matches(REG_MAIL));
+        }while(!valor.matches(REG_MAIL));
         return valor;
 
     }
