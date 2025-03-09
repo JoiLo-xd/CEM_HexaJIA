@@ -33,9 +33,7 @@ public class AskDataCEM {
         try {
             answer = br.readLine();
             while (answer.isEmpty()) {
-                System.out.println();
-                System.out.println("No puedes dejar la respuesta en blanco");
-                System.out.println();
+                System.out.println("\nNo puedes dejar la respuesta en blanco\n");
                 System.out.print(msg);
                 answer = br.readLine();
             }
@@ -95,7 +93,7 @@ public class AskDataCEM {
             try {
                 String fecha = askString(msg);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
-                date = LocalDate.parse("2005-nov-12", formatter);
+                date = LocalDate.parse(fecha, formatter);
                 error = false;
             }catch (DateTimeParseException e) {
                 System.out.println("Fecha incorrecta.");
@@ -107,12 +105,15 @@ public class AskDataCEM {
 
     public static Sexe askSexe(String msg) {
         Sexe s = null;
-        try {
-            String sexe = askString(msg).toUpperCase();
-            s = Sexe.valueOf(sexe);
-        }catch (IllegalArgumentException e) {
-            System.out.println("Valor incorrecte.");
-        }
+        boolean error = false;
+        do {
+            try {
+                String sexe = askString(msg).toUpperCase();
+                s = Sexe.valueOf(sexe);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Valor incorrecte.");
+            }
+        } while (error);
         return s;
     }
 
@@ -122,11 +123,11 @@ public class AskDataCEM {
         String valor;
         do{
             valor = askString(str);
-            if (valor.matches(REG_TLF)){
+            if (!valor.matches(REG_TLF)){
                 System.out.println("Aquest numero de telefon no es valid");
 
             }
-        }while(valor.matches(REG_TLF));
+        }while(!valor.matches(REG_TLF));
         return valor;
 
     }
@@ -136,11 +137,11 @@ public class AskDataCEM {
         String valor;
         do{
             valor = askString(str);
-            if (valor.matches(REG_MAIL)){
+            if (!valor.matches(REG_MAIL)){
                 System.out.println("Aquest numero de telefon no es valid");
 
             }
-        }while(valor.matches(REG_MAIL));
+        }while(!valor.matches(REG_MAIL));
         return valor;
 
     }
