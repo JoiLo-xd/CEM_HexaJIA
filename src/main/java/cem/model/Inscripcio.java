@@ -90,7 +90,7 @@ public class Inscripcio {
     @Override
     public String toString() {
         String esmodalitat = modalitat ? "Llarga" : "Curta"; // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
-        return dorsal + " - " + corredor.getNom() + " - " + esmodalitat;
+        return dorsal + " - " + corredor.getNom() + corredor.getCognoms() + " - " + esmodalitat;
     }
 
 
