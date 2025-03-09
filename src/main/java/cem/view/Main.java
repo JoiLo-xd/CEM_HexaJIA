@@ -50,7 +50,7 @@ public class Main {
         corredores = new ArrayList<>();
         persis = new Persis();
         corredores = persis.readCorredor();
-        marxes = persis.readMarxa(corredores);
+        //marxes = persis.readMarxa(corredores);
 
         int option;
         do {

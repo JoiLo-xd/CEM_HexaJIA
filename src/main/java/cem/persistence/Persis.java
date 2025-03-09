@@ -70,7 +70,7 @@ public class Persis {
 
     public void writerInscripcioInFile(Inscripcio i, int edicio) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, true));
-        writer.write(edicio + "/" + i.getDorsal() + "/" + i.isModalitat() + "/" + i.getCorredor().getNif());
+        writer.write(edicio + "/" + i.getDorsal() + "/" + i.isModalitat() + "/" /*+ i.getHoraSortida() + "/" + i.getHoraArribada() + "/" */+ i.getCorredor().getNif());
         writer.newLine();
         writer.close();
     }
@@ -111,6 +111,8 @@ public class Persis {
             int edicio = Integer.parseInt(data[0]);
             int dorsal = Integer.parseInt(data[1]);
             boolean modalitat = Boolean.parseBoolean(data[2]);
+            LocalDate horaSortida = LocalDate.parse(data[3]);
+            LocalDate horaAcabada = LocalDate.parse(data[4]);
             Corredor corredor = buscarCorredor(corredores, data[3]);
             Marxa marxa = buscarMarxa(marxas, edicio);
             if (marxa != null && corredor != null) {
