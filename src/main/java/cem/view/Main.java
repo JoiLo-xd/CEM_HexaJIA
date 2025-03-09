@@ -234,7 +234,7 @@ public class Main {
             if (corredores.contains(new Corredor(nif = AskDataCEM.askNif("Indica el nif del corredor: ")))) {
                 Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
                 escollida.addCorrInsc(new Inscripcio(escollida.getInscripcionsMarxa().size(), modalitat, corredores.get(corredores.indexOf(nif))));
-                //persis.writerInscripcioInFile(escollida);
+                //persis.writerInscripcioInFile(noseQueSePoneAqui);
             } else {
                 System.out.println("No hi han corredors amb aquest nif");
             }
