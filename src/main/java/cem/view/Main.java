@@ -254,7 +254,7 @@ public class Main {
                     Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
                     Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size() + 1, modalitat, c);
                     escollida.addCorrInsc(novaInscr);
-                    persis.writerInscripcioInFile(novaInscr);
+                    persis.writerInscripcioInFile(novaInscr, escollida.getEdicio());
                 }
             } else {
                 System.out.println("No hi han corredors amb aquest nif");

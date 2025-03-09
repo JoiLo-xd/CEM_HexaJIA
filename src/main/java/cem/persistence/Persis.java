@@ -68,9 +68,9 @@ public class Persis {
         writer.close();
     }
 
-    public void writerInscripcioInFile(Inscripcio i) throws IOException {
+    public void writerInscripcioInFile(Inscripcio i, int edicio) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, true));
-        writer.write(i.getDorsal() + "/" + i.isModalitat() + "/" + i.getCorredor().getNom());
+        writer.write(edicio + "/" + i.getDorsal() + "/" + i.isModalitat() + "/" + i.getCorredor().getNif());
         writer.newLine();
         writer.close();
     }
@@ -103,9 +103,31 @@ public class Persis {
             String[] data = line.split("/");
             int edicion = Integer.parseInt(data[0]);
             marxas.add(new Marxa(edicion));
-            // no se tengo que añadir ahi e larrayList de inscripciones
         }
+        reader.close();
+        reader = new BufferedReader(new FileReader(pathFileInscripcio));
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split("/");
+            int edicio = Integer.parseInt(data[0]);
+            int dorsal = Integer.parseInt(data[1]);
+            boolean modalitat = Boolean.parseBoolean(data[2]);
+            Corredor corredor = new Corredor (data[3]);
+            Marxa marxa = buscarMarxa(marxas, edicio);
+            if (marxa != null) {
+                marxa.addCorrInsc(new Inscripcio(dorsal, modalitat, corredor));
+            }
+        }
+        reader.close();
         return marxas;
+    }
+
+    public static Marxa buscarMarxa(ArrayList<Marxa> marxas, int edicion) {
+        for (Marxa m : marxas) {
+            if (m.getEdicio() == edicion) {
+                return m;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Inscripcio> readInscripcio() throws IOException {
@@ -114,9 +136,10 @@ public class Persis {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split("/");
-            int dorsal = Integer.parseInt(data[0]);
-            boolean modalitat = Boolean.parseBoolean(data[1]);
-            Corredor corredor = new Corredor (data[6]);
+            Marxa marxa = new Marxa(Integer.parseInt(data[0]));
+            int dorsal = Integer.parseInt(data[1]);
+            boolean modalitat = Boolean.parseBoolean(data[2]);
+            Corredor corredor = new Corredor (data[3]);
             inscripcions.add(new Inscripcio(dorsal, modalitat, corredor));
         }
         return inscripcions;
