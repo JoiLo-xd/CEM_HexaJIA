@@ -72,7 +72,7 @@ public class Main {
                         showMarxes();
                         int chosen;
                         if ((chosen = escollidor(marxes.size())) != 0 ){
-                            entrarMarxa(marxes.get(chosen));
+                            entrarMarxa(marxes.get(chosen-1));
                         }
 
                     }else{
@@ -107,16 +107,16 @@ public class Main {
     public static int escollidor(int num){
         int chosen = AskDataCEM.askInt("Escull (0) per sortir: ", "Aquest no esta disponible", 0, num);
         if (chosen > 0){
-            return chosen -1;
+            return chosen;
         }else{
             return 0;
         }
     }
     public static void showMarxes(){
-        int cont = 1;
+        int cont = 0;
         for (Marxa element : marxes){
-            System.out.println(cont +"  " + element.getEdicio());
             cont++;
+            System.out.println(cont +"  " + element.getEdicio());
         }
     }
 
