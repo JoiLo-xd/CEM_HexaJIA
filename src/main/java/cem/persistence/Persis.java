@@ -110,7 +110,7 @@ public class Persis {
 
     public ArrayList<Inscripcio> readInscripcio() throws IOException {
         ArrayList<Inscripcio> inscripcions = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(pathFileMarxa));
+        BufferedReader reader = new BufferedReader(new FileReader(pathFileInscripcio));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split("/");
