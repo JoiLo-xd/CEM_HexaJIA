@@ -157,6 +157,7 @@ public class Main {
         if (escollida.getInscripcionsMarxa().isEmpty()) {
             System.out.println("No hi ha cap inscripció.");
         } else {
+            System.out.println("EDICIÓ " + escollida.getEdicio());
             for (Inscripcio i: escollida.getInscripcionsMarxa()) {
                 System.out.println(i);
             }
