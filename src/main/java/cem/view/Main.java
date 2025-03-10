@@ -164,6 +164,7 @@ public class Main {
                     boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l? ", "Digues sí o no.", "SI", "NO");
                     if (i) {
                         inscripcioElegida.setHoraSortida(LocalTime.now());
+                        inscripcioElegida.setHoraArribada(null);
                     }
                 }
                 persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(), escollida.getEdicio());
@@ -207,7 +208,7 @@ public class Main {
     }
 
 
-    public static void mdfInscrip(Marxa escollida){
+    public static void mdfInscrip(Marxa escollida) throws IOException{
         if(escollida.getInscripcionsMarxa().isEmpty()){
             System.out.println("Aquesta marxa no te incscripcion");
         }else{
@@ -228,6 +229,10 @@ public class Main {
                     case 3 -> {
                         System.out.println("No s'ha modificat cap data");
                     }
+
+                }
+                if (opcio !=3){
+                    persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(),escollida.getEdicio());
                 }
             }else{
                 System.out.println("Este corredor no esta registrado");
