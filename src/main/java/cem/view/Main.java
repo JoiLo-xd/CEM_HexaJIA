@@ -231,10 +231,10 @@ public class Main {
                     case 3 -> {
                         System.out.println("No s'ha modificat cap data");
                     }
-
                 }
                 if (opcio !=3){
                     persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(),escollida.getEdicio());
+                    System.out.println("Canvis guardats correctament.");
                 }
             }else{
                 System.out.println("Este corredor no esta registrado");
@@ -257,6 +257,7 @@ public class Main {
                         Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size() + 1, modalitat, c);
                         escollida.addCorrInsc(novaInscr);
                         persis.writerInscripcioInFile(novaInscr, escollida.getEdicio());
+                        System.out.println("Inscripció creada correctament.");
                     }else{
                         System.out.println("Aquest corredor ja esta en la marxa");
                     }
@@ -355,6 +356,8 @@ public class Main {
                 } else {
                     System.out.println("Aquest corredor no existeix");
                 }
+            }else {
+                System.out.println("Aquest corredor no existeix");
             }
         }
     }
