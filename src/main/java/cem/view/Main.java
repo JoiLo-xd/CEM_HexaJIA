@@ -98,6 +98,7 @@ public class Main {
             return 0;
         }
     }
+
     public static void showMarxes(){
         int cont = 0;
         for (Marxa element : marxes){
@@ -199,6 +200,7 @@ public class Main {
                             corredor.setHoraArribada(LocalTime.now());
                         }
                     }
+                    corredor.setTempsTotal();
                     persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(), escollida.getEdicio());
                 }
             } else {

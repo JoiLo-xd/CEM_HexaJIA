@@ -98,7 +98,7 @@ public class Inscripcio {
     public String toString() {
         String esmodalitat = modalitat ? "Llarga" : "Curta";
         return dorsal + " - " + corredor.getNom() + " " + corredor.getCognoms() + " - " + esmodalitat + " - Sortida: " + String.valueOf(getHoraSortida()) +
-                " - Arribada: " + String.valueOf(getHoraArribada());
+                " - Arribada: " + String.valueOf(getHoraArribada()) + " - Duració: " + String.valueOf(getTempsTotal());
     }
 
 }

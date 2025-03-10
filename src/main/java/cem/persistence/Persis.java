@@ -11,7 +11,6 @@ import java.time.Duration;
 import cem.model.Corredor;
 import cem.model.Marxa;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import cem.enums.Asistencia;
 import cem.enums.Sexe;
 import cem.model.Inscripcio;
