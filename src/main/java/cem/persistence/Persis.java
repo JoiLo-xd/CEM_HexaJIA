@@ -1,5 +1,6 @@
 package cem.persistence;
 import java.io.File;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -63,7 +64,8 @@ public class Persis {
 
     public void writerMarxaInFile(Marxa m) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileMarxa, true));
-        writer.write(m.getEdicio() + "/" + m.getInscripcionsMarxa());
+        writer.write((String.valueOf(m.getEdicio()))); //hay que pasarlo a String porque sino lo pilla como caracter unicode ya que es un int, por eso
+                                                        // Lo tenemos que pasar a String, se que se puede con + "" pero me parece un poco feo
         writer.newLine();
         writer.close();
     }
@@ -100,9 +102,7 @@ public class Persis {
         BufferedReader reader = new BufferedReader(new FileReader(pathFileMarxa));
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] data = line.split("/");
-            int edicion = Integer.parseInt(data[0]);
-            marxas.add(new Marxa(edicion));
+            marxas.add(new Marxa(Integer.parseInt(line)));
         }
         reader.close();
         reader = new BufferedReader(new FileReader(pathFileInscripcio));
@@ -111,12 +111,32 @@ public class Persis {
             int edicio = Integer.parseInt(data[0]);
             int dorsal = Integer.parseInt(data[1]);
             boolean modalitat = Boolean.parseBoolean(data[2]);
-            LocalDate horaSortida = LocalDate.parse(data[3]);
-            LocalDate horaAcabada = LocalDate.parse(data[4]);
-            Corredor corredor = buscarCorredor(corredores, data[3]);
+            LocalTime horaSortida = null; //Ya se que cuando se inicializa es null pero sino el IDE se queja
+            if (!data[3].equals("null")) {
+                horaSortida = LocalTime.parse(data[3]);
+            }
+            LocalTime horaAcabada = null;  //Ya se que cuando se inicializa es null pero sino el IDE se queja
+            if (!data[4].equals("null")) {
+                horaAcabada = LocalTime.parse(data[4]);
+            }
+            Corredor corredor = buscarCorredor(corredores, data[5]);
             Marxa marxa = buscarMarxa(marxas, edicio);
+
+            //Codigo comentado = Lo mismo pero con excepciones creo jeje
+            /*
+            Corredor corredor;
+            try {
+                corredor = corredores.get(corredores.indexOf(new Corredor(data[5])));
+            }catch (IndexOutOfBoundsException i){
+                corredor = null;
+            }
+            Marxa marxa;
+            try {
+                marxa = marxas.get(marxas.indexOf(new Marxa(edicio)));
+            }catch (IndexOutOfBoundsException i) {marxa = null;}
+            */
             if (marxa != null && corredor != null) {
-                marxa.addCorrInsc(new Inscripcio(dorsal, modalitat, corredor));
+                marxa.addCorrInsc(new Inscripcio(dorsal, modalitat,horaSortida,horaAcabada, corredor));
             }
         }
         reader.close();
@@ -125,7 +145,7 @@ public class Persis {
 
     public static Marxa buscarMarxa(ArrayList<Marxa> marxas, int edicion) {
         for (Marxa m : marxas) {
-            if (m.getEdicio() == edicion) {
+            if (m.equals(new Marxa(edicion))) {
                 return m;
             }
         }
@@ -134,26 +154,11 @@ public class Persis {
 
     public static Corredor buscarCorredor(ArrayList<Corredor> corredores, String nif) {
         for (Corredor c : corredores) {
-            if (c.getNif().equalsIgnoreCase(nif)) {
+            if (c.equals(new Corredor(nif))) {
                 return c;
             }
         }
         return null;
-    }
-
-    public ArrayList<Inscripcio> readInscripcio() throws IOException {
-        ArrayList<Inscripcio> inscripcions = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(pathFileInscripcio));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] data = line.split("/");
-            Marxa marxa = new Marxa(Integer.parseInt(data[0]));
-            int dorsal = Integer.parseInt(data[1]);
-            boolean modalitat = Boolean.parseBoolean(data[2]);
-            Corredor corredor = new Corredor (data[3]);
-            inscripcions.add(new Inscripcio(dorsal, modalitat, corredor));
-        }
-        return inscripcions;
     }
 
 

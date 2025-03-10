@@ -28,6 +28,14 @@ public class Inscripcio {
         this.dorsal = dorsal;
     }
 
+    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Corredor corredor){
+        this.dorsal = dorsal;
+        this.modalitat = modalitat;
+        this.horaSortida = horaSortida;
+        this.horaArribada = horaArribada;
+        this.corredor = corredor;
+    }
+
     public void setModalitat(boolean modalitat) {
         this.modalitat = modalitat;
     }
@@ -39,7 +47,7 @@ public class Inscripcio {
     public void setHoraArribada(LocalTime horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
         if (horaSortida != null) {
             this.horaArribada = horaArribada;
-        }
+        } // Aqui en un futuro lanzara una excepcion jeje
     }
 
     public void setTempsTotal() {

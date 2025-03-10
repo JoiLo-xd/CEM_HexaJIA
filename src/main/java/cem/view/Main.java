@@ -1,16 +1,12 @@
 package cem.view;
 
 import cem.enums.Sexe;
-import cem.model.Corredor;
-import cem.model.Inscripcio;
-import cem.model.Marxa;
-
+import cem.model.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import cem.persistence.Persis;
 
 public class Main {
@@ -35,75 +31,80 @@ public class Main {
             "6. Sortir";
 
     private static final String MENUMODCORR = "\n-- MODIFICAR CORREDOR --\n"+
-            "Quina dada vols modificar:" +
-            "1. Nom" +
-            "2. Cognoms" +
-            "3. Sexe" +
-            "4. Població" +
-            "5. Numero Telefon" +
-            "6. Mail" +
-            "7. Entitat" +
-            "8. Federat" +
-            "9. Cancelar";
+            "Quina dada vols modificar:\n" +
+            "1. Nom\n" +
+            "2. Cognoms\n" +
+            "3. Sexe\n" +
+            "4. Població\n" +
+            "5. Numero Telefon\n" +
+            "6. Mail\n" +
+            "7. Entitat\n" +
+            "8. Federat\n" +
+            "9. Cancelar\n";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         marxes = new ArrayList<>();
         corredores = new ArrayList<>();
-        persis = new Persis();
-        corredores = persis.readCorredor();
-        marxes = persis.readMarxa(corredores);
+        try {
+            persis = new Persis();
+            corredores = persis.readCorredor();
+            marxes = persis.readMarxa(corredores);
 
-        int option;
-        do {
-            System.out.println(MENUINICI);;
-            option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
+            int option;
+            do {
+                System.out.println(MENUINICI);
+                ;
+                option = AskDataCEM.askInt("Que vols fer?: ", "Posa una opció correcta.", 1, 6);
 
-            // NOTA IMPORTANTE:
-            // NO me parece buena idea que por ejemplo para que un corredor empiece a correr tengamos que poner la edicion
-            // de la maraxa to el rato, ya que no es eficiente, deberia ser que tu estas dentro de una edicion y vas idicando los jugadores
-            // que salen que obv ya se han inscrito.
+                // NOTA IMPORTANTE:
+                // NO me parece buena idea que por ejemplo para que un corredor empiece a correr tengamos que poner la edicion
+                // de la maraxa to el rato, ya que no es eficiente, deberia ser que tu estas dentro de una edicion y vas idicando los jugadores
+                // que salen que obv ya se han inscrito.
 
-            // Imaginate que por cada persona que sale tienes que indicar de que año es (la edicion) like:
-            // si sale la inscripcion con dorsal 1200120 de la edicion 2021
-            // si sale la inscripcion con dorsal 1200121 de la edicion 2021
-            // si sale la inscripcion con dorsal 1200122 de la edicion 2021
-            // como que hay un patron comun no? jeje
+                // Imaginate que por cada persona que sale tienes que indicar de que año es (la edicion) like:
+                // si sale la inscripcion con dorsal 1200120 de la edicion 2021
+                // si sale la inscripcion con dorsal 1200121 de la edicion 2021
+                // si sale la inscripcion con dorsal 1200122 de la edicion 2021
+                // como que hay un patron comun no? jeje
 
-            switch (option) {
-                case 1 -> {     //entrar en marxa
-                    if (!marxes.isEmpty()) {
-                        showMarxes();
-                        int chosen;
-                        if ((chosen = escollidor(marxes.size())) != 0 ){
-                            entrarMarxa(marxes.get(chosen-1));
+                switch (option) {
+                    case 1 -> {     //entrar en marxa
+                        if (!marxes.isEmpty()) {
+                            showMarxes();
+                            int chosen;
+                            if ((chosen = escollidor(marxes.size())) != 0) {
+                                entrarMarxa(marxes.get(chosen - 1));
+                            }
+
+                        } else {
+                            System.out.println("No hi han curses disponibles, crea una.");
                         }
 
-                    }else{
-                        System.out.println("No hi han curses disponibles, crea una.");
                     }
+                    case 2 -> {     //crear marxa
+                        darAltaMarxa();
+                        break;
+                    }
+                    case 3 -> {     //crear corredor
+                        darAltaCorredor();
+                        break;
+                    }
+                    case 4 -> {     //Modificar corredor
+                        mdfCorredor();
+                    }
+                    case 5 -> {     //mostrar stats
+                        mostrarStats();
 
-                }
-                case 2 -> {     //crear marxa
-                    darAltaMarxa();
-                    break;
-                }
-                case 3 -> {     //crear corredor
-                    darAltaCorredor();
-                    break;
-                }
-                case 4 -> {     //Modificar corredor
-                    mdfCorredor();
-                }
-                case 5 -> {     //mostrar stats
-                    mostrarStats();
+                    }
+                    case 6 -> {     //salir
+                        System.out.println("Fins avia't!!");
 
+                    }
                 }
-                case 6 -> {     //salir
-                    System.out.println("Fins avia't!!");
-
-                }
-            }
-        }while (option != 6);
+            } while (option != 6);
+        }catch (IOException e){
+            System.out.println("Hi ha agut un problema fatal, l'error es: " + e.getMessage());
+        }
 
     }
 
@@ -128,14 +129,15 @@ public class Main {
         do {
 
             System.out.println(MENUMARXES);
-            option = AskDataCEM.askInt("Que vols fer?", "Posa una opció correcta.", 1, 6);
+            option = AskDataCEM.askInt("Que vols fer?: ", "Posa una opció correcta.", 1, 6);
             switch (option) {
                 case 1 -> {     //añadir inscripción
                     crearInscripcion(escollida);
+
                 }
                 case 2 -> {     //Modificar inscripción
-                    //todo hay que preguntar que inscripcion es y preguntar que quiere modificar :)
                     mdfInscrip(escollida);
+
                 }
                 case 3 -> {     //Hora salida inscripción
                     horaSortidaInscrip(escollida);
@@ -222,8 +224,7 @@ public class Main {
         }else{
             int choosen;
             ArrayList<Inscripcio> inscrchoosen = escollida.getInscripcionsMarxa();
-            if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0,
-                    inscrchoosen.size())))){
+            if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor: ", "Aquest dorsal no es valid", 0,  inscrchoosen.size())))){
                 int opcio = AskDataCEM.askInt("Que vols cambiar:\n" +
                         "1. Modalitat\n" +
                         "2. Asistencia\n"+
@@ -231,11 +232,11 @@ public class Main {
 
                 switch (opcio){
                     case 1 ->{
-                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setModalitat(AskDataCEM.askBoolean("Nova modalitat de la cursa que realitza el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta"));
+                        inscrchoosen.get(choosen -1).setModalitat(AskDataCEM.askBoolean("Nova modalitat de la cursa que realitza el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta"));
 
                     }
                     case 2 ->{
-                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setAsistencia(AskDataCEM.askAsistencia("Asistencia del corredor (asistencia - noAsistencia - abandona - desqualificat): ", "Valor incorrecte."));
+                        inscrchoosen.get(choosen -1).setAsistencia(AskDataCEM.askAsistencia("Asistencia del corredor (asistencia - noAsistencia - abandona - desqualificat): ", "Valor incorrecte."));
                     }
                     case 3 -> {
                         System.out.println("No s'ha modificat cap data");
@@ -260,15 +261,27 @@ public class Main {
                 int index = corredores.indexOf(new Corredor(nif));
                 if (index >= 0) {
                     Corredor c = corredores.get(index);
-                    Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
-                    Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size() + 1, modalitat, c);
-                    escollida.addCorrInsc(novaInscr);
-                    persis.writerInscripcioInFile(novaInscr, escollida.getEdicio());
+                    if (comprCorredor(escollida,c)) {
+                        Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+                        Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size() + 1, modalitat, c);
+                        escollida.addCorrInsc(novaInscr);
+                        persis.writerInscripcioInFile(novaInscr, escollida.getEdicio());
+                    }else{
+                        System.out.println("Aquest corredor ja esta en la marxa");
+                    }
                 }
             } else {
                 System.out.println("No hi han corredors amb aquest nif");
             }
         }
+    }
+
+    public static boolean comprCorredor(Marxa m, Corredor c){
+        for (Inscripcio i : m.getInscripcionsMarxa()){
+            Corredor r = i.getCorredor();
+            if (r.equals(c)) return false;
+        }
+        return true;
     }
 
     public static void darAltaCorredor() throws IOException {
@@ -281,7 +294,7 @@ public class Main {
         }else {
             String nom = AskDataCEM.askString("Nom: ");
             String cognoms = AskDataCEM.askString("Cognoms: ");
-            LocalDate dataNaix = AskDataCEM.askFecha("Data naixement: ", "dd-MM-yyyy");
+            LocalDate dataNaix = AskDataCEM.askFecha("Data naixement (dia-mes-any): ", "dd-MM-yyyy");
             Sexe sexe = AskDataCEM.askSexe("Sexe (home - dona - altre): ");
             String poblacio = AskDataCEM.askString("Població: ");
             String telf = AskDataCEM.askTelf("Telefon: ");
@@ -320,42 +333,42 @@ public class Main {
                     switch (option) {
                         case 1 -> {
                             runner.setNom(AskDataCEM.askString("Indica el nou nom del corredor: "));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 2 -> {
                             runner.setCognoms(AskDataCEM.askString("Indica el nou cognom del corredor: "));
-                            persis.ReescribirCorredor(corredores);
 
                         }
                         case 3 -> {
                             runner.setSexe(AskDataCEM.askSexe("Indica el nou 'sexe' del corredor: "));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 4 -> {
                             runner.setPoblacio(AskDataCEM.askString("Indica la nova població del corredor: "));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 5 -> {
                             runner.setNumTelefon(AskDataCEM.askTelf("Indica el nou telefon del corredor: "));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 6 -> {
                             runner.setEmail(AskDataCEM.askEmail("Indica el nou Email del corredor: "));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 7 -> {
                             runner.setEntitat(AskDataCEM.askString("Indica la nova entitat del corredor: "));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 8 -> {
                             runner.setFederat(AskDataCEM.askBoolean("Indica si ets federat:\n1. Federat\n2. No federat\n", "Aquesta opcio no esta disponible", "1", "2"));
-                            persis.ReescribirCorredor(corredores);
+
                         }
                         case 9 -> {
                             System.out.println("No has modificat ninguna data");
 
                         }
                     }
+                    if (option != 9) persis.ReescribirCorredor(corredores);
 
                 } else {
                     System.out.println("Aquest corredor no existeix");
