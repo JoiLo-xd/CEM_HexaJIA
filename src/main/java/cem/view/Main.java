@@ -15,14 +15,14 @@ public class Main {
     private static ArrayList<Corredor> corredores;
     private static Persis persis;
 
-    private static final String MENUMARXES = "\n<> MENU MARXES <>\n" +
+    private static final String MENUMARXES = "\n<> MENÚ MARXES <>\n" +
             "1. Afegir participant\n" +
             "2. Editar participant\n" +
             "3. Sortida\n" +
             "4. Arribada\n" +
             "5. Corredors de la marxa\n" +
             "6. Sortir";
-    private static final String MENUINICI = "\n-- MENU PRINCIPAL --\n" +
+    private static final String MENUINICI = "\n-- MENÚ PRINCIPAL --\n" +
             "1. Marxes\n" +
             "2. Crear Marxa\n" +
             "3. Alta esportista\n" +
