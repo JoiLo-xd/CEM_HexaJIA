@@ -8,6 +8,7 @@ import cem.model.Marxa;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import cem.persistence.Persis;
@@ -180,11 +181,11 @@ public class Main {
             }
             if (inscripcioElegida != null) {
                 if (inscripcioElegida.getHoraSortida() == null) {
-                    inscripcioElegida.setHoraSortida(LocalDateTime.now());
+                    inscripcioElegida.setHoraSortida(LocalTime.now());
                 } else {
                     boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l? ", "Digues sí o no.", "SI", "NO");
                     if (i) {
-                        inscripcioElegida.setHoraSortida(LocalDateTime.now());
+                        inscripcioElegida.setHoraSortida(LocalTime.now());
                     }
                 }
             } else {
@@ -201,11 +202,11 @@ public class Main {
             ArrayList<Inscripcio> inscrchoosen = escollida.getInscripcionsMarxa();
             if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0, inscrchoosen.size())))){
                 if (inscrchoosen.get(inscrchoosen.indexOf(choosen)).getHoraArribada() == null) {
-                    inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada(LocalDateTime.now());
+                    inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada(LocalTime.now());
                 } else {
                     boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l?", "digues si o no.", "SI", "NO");
                     if (i) {
-                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada(LocalDateTime.now());
+                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada(LocalTime.now());
                     }
                 }
             }else{

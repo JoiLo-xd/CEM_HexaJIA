@@ -5,14 +5,15 @@ import cem.view.AskDataCEM;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class Inscripcio {
 
     private int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
     private boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
-    private LocalDateTime horaSortida;
-    private LocalDateTime horaArribada;
+    private LocalTime horaSortida;
+    private LocalTime horaArribada;
     private Duration tempsTotal;
     private Asistencia asistencia;
     private Corredor corredor;
@@ -31,11 +32,11 @@ public class Inscripcio {
         this.modalitat = modalitat;
     }
 
-    public void setHoraSortida(LocalDateTime horaSortida) {
+    public void setHoraSortida(LocalTime horaSortida) {
         this.horaSortida = horaSortida;
     }
 
-    public void setHoraArribada(LocalDateTime horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
+    public void setHoraArribada(LocalTime horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
         if (horaSortida != null) {
             this.horaArribada = horaArribada;
         }
@@ -60,11 +61,11 @@ public class Inscripcio {
         return modalitat;
     }
 
-    public LocalDateTime getHoraSortida() {
+    public LocalTime getHoraSortida() {
         return horaSortida;
     }
 
-    public LocalDateTime getHoraArribada() {
+    public LocalTime getHoraArribada() {
         return horaArribada;
     }
 
