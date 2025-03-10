@@ -188,6 +188,7 @@ public class Main {
                     boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l? ", "Digues sí o no.", "SI", "NO");
                     if (i) {
                         inscripcioElegida.setHoraSortida(LocalTime.now());
+                        inscripcioElegida.setHoraArribada(null);
                     }
                 }
                 persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(), escollida.getEdicio());
