@@ -164,5 +164,13 @@ public class Persis {
         }
         writer.close();
     }
+
+    public void ReescribirInsccripcio(ArrayList<Inscripcio> inscripcions, int edicio) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, false));
+        for (Inscripcio i : inscripcions) {
+            writerInscripcioInFile(i, edicio);
+        }
+        writer.close();
+    }
 }
 
