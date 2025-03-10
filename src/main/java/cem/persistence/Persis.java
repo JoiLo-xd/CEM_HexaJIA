@@ -41,12 +41,10 @@ public class Persis {
         File corredor = new File(pathFileCorredor);
         if (!corredor.exists()) {
             corredor.createNewFile();
-
         }
         File marxa = new File(pathFileMarxa);
         if (!marxa.exists()) {
             marxa.createNewFile();
-
         }
         File inscripcio = new File(pathFileInscripcio);
         if (!inscripcio.exists()) {
@@ -121,7 +119,6 @@ public class Persis {
             }
             Corredor corredor = buscarCorredor(corredores, data[5]);
             Marxa marxa = buscarMarxa(marxas, edicio);
-
             //Codigo comentado = Lo mismo pero con excepciones creo jeje
             /*
             Corredor corredor;

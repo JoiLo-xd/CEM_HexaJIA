@@ -117,31 +117,25 @@ public class AskDataCEM {
 
 
     public static String askTelf(String str) {//todo hay que hacer el metodo para verificar que sea correcto
-
         String valor;
         do{
             valor = askString(str);
             if (!valor.matches(REG_TLF)){
                 System.out.println("Aquest numero de telefon no es valid");
-
             }
         }while(!valor.matches(REG_TLF));
         return valor;
-
     }
 
     public static String askEmail(String str) {//todo hay que hacer este metood para comprovar el email
-
         String valor;
         do{
             valor = askString(str);
             if (!valor.matches(REG_MAIL)){
                 System.out.println("Aquest email no es valid");
-
             }
         }while(!valor.matches(REG_MAIL));
         return valor;
-
     }
 
     public static int askInt(String msg) {
@@ -253,7 +247,6 @@ public class AskDataCEM {
             }
         }
         return nif;
-
     }
 
     private static boolean validateNif(String nif) {    //comprovación de nif, tien una formula para saver si es real o no

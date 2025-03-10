@@ -53,20 +53,7 @@ public class Main {
             int option;
             do {
                 System.out.println(MENUINICI);
-                ;
                 option = AskDataCEM.askInt("Que vols fer?: ", "Posa una opció correcta.", 1, 6);
-
-                // NOTA IMPORTANTE:
-                // NO me parece buena idea que por ejemplo para que un corredor empiece a correr tengamos que poner la edicion
-                // de la maraxa to el rato, ya que no es eficiente, deberia ser que tu estas dentro de una edicion y vas idicando los jugadores
-                // que salen que obv ya se han inscrito.
-
-                // Imaginate que por cada persona que sale tienes que indicar de que año es (la edicion) like:
-                // si sale la inscripcion con dorsal 1200120 de la edicion 2021
-                // si sale la inscripcion con dorsal 1200121 de la edicion 2021
-                // si sale la inscripcion con dorsal 1200122 de la edicion 2021
-                // como que hay un patron comun no? jeje
-
                 switch (option) {
                     case 1 -> {     //entrar en marxa
                         if (!marxes.isEmpty()) {
@@ -75,11 +62,9 @@ public class Main {
                             if ((chosen = escollidor(marxes.size())) != 0) {
                                 entrarMarxa(marxes.get(chosen - 1));
                             }
-
                         } else {
                             System.out.println("No hi han curses disponibles, crea una.");
                         }
-
                     }
                     case 2 -> {     //crear marxa
                         darAltaMarxa();
@@ -94,18 +79,15 @@ public class Main {
                     }
                     case 5 -> {     //mostrar stats
                         mostrarStats();
-
                     }
                     case 6 -> {     //salir
                         System.out.println("Fins avia't!!");
-
                     }
                 }
             } while (option != 6);
         }catch (IOException e){
             System.out.println("Hi ha agut un problema fatal, l'error es: " + e.getMessage());
         }
-
     }
 
     public static int escollidor(int num){
@@ -127,29 +109,23 @@ public class Main {
     private static void entrarMarxa(Marxa escollida) throws IOException {
         int option;
         do {
-
             System.out.println(MENUMARXES);
             option = AskDataCEM.askInt("Que vols fer?: ", "Posa una opció correcta.", 1, 6);
             switch (option) {
                 case 1 -> {     //añadir inscripción
                     crearInscripcion(escollida);
-
                 }
                 case 2 -> {     //Modificar inscripción
                     mdfInscrip(escollida);
-
                 }
                 case 3 -> {     //Hora salida inscripción
                     horaSortidaInscrip(escollida);
-
                 }
                 case 4 -> {     //Hora llegada inscripción
                     horaArribadaInscrip(escollida);
-
                 }
                 case 5 -> {     //Mostrar corredores de la marxa
                     showRunners(escollida);
-
                 }
                 case 6 -> {     //salir
                     System.out.println("Adeu!!!");;
@@ -242,11 +218,9 @@ public class Main {
                         "1. Modalitat\n" +
                         "2. Asistencia\n"+
                         "3. Cancelar\n","posa una opció valida",1,3);
-
                 switch (opcio){
                     case 1 ->{
                         inscrchoosen.get(choosen -1).setModalitat(AskDataCEM.askBoolean("Nova modalitat de la cursa que realitza el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta"));
-
                     }
                     case 2 ->{
                         inscrchoosen.get(choosen -1).setAsistencia(AskDataCEM.askAsistencia("Asistencia del corredor (asistencia - noAsistencia - abandona - desqualificat): ", "Valor incorrecte."));
@@ -255,13 +229,10 @@ public class Main {
                         System.out.println("No s'ha modificat cap data");
                     }
                 }
-
             }else{
                 System.out.println("Este corredor no esta registrado");
             }
-
         }
-
     }
 
     public static void crearInscripcion(Marxa escollida) throws IOException {
@@ -316,7 +287,8 @@ public class Main {
             Boolean federat = AskDataCEM.askBoolean("Federat (si - no): ", "Valor incorrecte", "Si", "No");
             Corredor c = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
             corredores.add(c);
-            persis.writerCorredorInFile(c);        }
+            persis.writerCorredorInFile(c);
+        }
     }
 
     public static void darAltaMarxa() throws IOException {
@@ -346,50 +318,40 @@ public class Main {
                     switch (option) {
                         case 1 -> {
                             runner.setNom(AskDataCEM.askString("Indica el nou nom del corredor: "));
-
                         }
                         case 2 -> {
                             runner.setCognoms(AskDataCEM.askString("Indica el nou cognom del corredor: "));
-
                         }
                         case 3 -> {
                             runner.setSexe(AskDataCEM.askSexe("Indica el nou 'sexe' del corredor: "));
-
                         }
                         case 4 -> {
                             runner.setPoblacio(AskDataCEM.askString("Indica la nova població del corredor: "));
-
                         }
                         case 5 -> {
                             runner.setNumTelefon(AskDataCEM.askTelf("Indica el nou telefon del corredor: "));
-
                         }
                         case 6 -> {
                             runner.setEmail(AskDataCEM.askEmail("Indica el nou Email del corredor: "));
-
                         }
                         case 7 -> {
                             runner.setEntitat(AskDataCEM.askString("Indica la nova entitat del corredor: "));
-
                         }
                         case 8 -> {
                             runner.setFederat(AskDataCEM.askBoolean("Indica si ets federat:\n1. Federat\n2. No federat\n", "Aquesta opcio no esta disponible", "1", "2"));
-
                         }
                         case 9 -> {
                             System.out.println("No has modificat ninguna data");
-
                         }
                     }
                     if (option != 9) persis.ReescribirCorredor(corredores);
-
                 } else {
                     System.out.println("Aquest corredor no existeix");
                 }
             }
-
         }
     }
+
     private static void mostrarStats(){
         if (corredores.isEmpty()){
             System.out.println("No hi han corredors per inscribir, crea un.");
@@ -399,5 +361,4 @@ public class Main {
             }
         }
     }
-
 }

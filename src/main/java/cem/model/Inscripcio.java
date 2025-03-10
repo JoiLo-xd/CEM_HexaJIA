@@ -55,7 +55,6 @@ public class Inscripcio {
         this.tempsTotal = Duration.between(horaSortida, horaArribada);
     }
 
-
     // Este deberia ser con enums pero no sabemos como hacerlo jeje
     public void setAsistencia(Asistencia asistencia) {
         this.asistencia = asistencia;
@@ -92,7 +91,6 @@ public class Inscripcio {
     @Override
     public boolean equals(Object o) {
         Inscripcio ins = (Inscripcio) o;
-
         return ins.getDorsal() == getDorsal();
     }
 
@@ -102,6 +100,5 @@ public class Inscripcio {
         return dorsal + " - " + corredor.getNom() + " " + corredor.getCognoms() + " - " + esmodalitat + " - Sortida: " + String.valueOf(getHoraSortida()) +
                 " - Arribada: " + String.valueOf(getHoraArribada());
     }
-
 
 }

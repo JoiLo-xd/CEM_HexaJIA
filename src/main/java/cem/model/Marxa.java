@@ -12,8 +12,6 @@ public class Marxa {
     }
 
 
-
-
     @Override
     public boolean equals(Object obj) {
         Marxa m = (Marxa) obj;
