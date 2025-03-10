@@ -169,7 +169,7 @@ public class Main {
         }
     }
 
-    public static void horaSortidaInscrip(Marxa escollida) {        //todo revisar
+    public static void horaSortidaInscrip(Marxa escollida) throws IOException {
         if (escollida.getInscripcionsMarxa().isEmpty()) {
             System.out.println("Aquesta marxa no té inscripcions");
         } else {
@@ -190,33 +190,46 @@ public class Main {
                         inscripcioElegida.setHoraSortida(LocalTime.now());
                     }
                 }
+                persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(), escollida.getEdicio());
             } else {
                 System.out.println("Aquest corredor no existeix");
             }
         }
     }
 
-    public static void horaArribadaInscrip(Marxa escollida) {        //todo revisar
-        if(escollida.getInscripcionsMarxa().isEmpty()){
-            System.out.println("Aquesta marxa no te incscripcion");
-        }else {
-            int choosen;
+    public static void horaArribadaInscrip(Marxa escollida) throws IOException {
+        if (escollida.getInscripcionsMarxa().isEmpty()) {
+            System.out.println("Aquesta marxa no té inscripcions");
+        } else {
+            int choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no és vàlid", 0, Integer.MAX_VALUE);
             ArrayList<Inscripcio> inscrchoosen = escollida.getInscripcionsMarxa();
-            if (inscrchoosen.contains(new Inscripcio(choosen = AskDataCEM.askInt("Indica el dorsal del corredor", "Aquest dorsal no es valid", 0, inscrchoosen.size())))){
-                if (inscrchoosen.get(inscrchoosen.indexOf(choosen)).getHoraArribada() == null) {
-                    inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada(LocalTime.now());
-                } else {
-                    boolean i = AskDataCEM.askBoolean("Ja hi ha valor per a la sortida, vols sobrescriure'l?", "digues si o no.", "SI", "NO");
-                    if (i) {
-                        inscrchoosen.get(inscrchoosen.indexOf(choosen)).setHoraArribada(LocalTime.now());
-                    }
+            Inscripcio corredor = null;
+            for (Inscripcio inscripcio : inscrchoosen) {
+                if (inscripcio.getDorsal() == choosen) {
+                    corredor = inscripcio;
+                    break;
                 }
-            }else{
+            }
+            if (corredor != null) {
+                if (corredor.getHoraSortida() == null) {
+                    System.out.println("Aquest corredor no té una hora de sortida registrada. No pot arribar sense sortir!");
+                }else {
+                    if (corredor.getHoraArribada() == null) {
+                        corredor.setHoraArribada(LocalTime.now());
+                    } else {
+                        boolean sobrescriure = AskDataCEM.askBoolean("Ja hi ha valor per a l'arribada, vols sobrescriure'l?", "Digues si o no.", "SI", "NO");
+                        if (sobrescriure) {
+                            corredor.setHoraArribada(LocalTime.now());
+                        }
+                    }
+                    persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(), escollida.getEdicio());
+                }
+            } else {
                 System.out.println("Aquest corredor no existeix");
-
             }
         }
     }
+
 
     public static void mdfInscrip(Marxa escollida){
         if(escollida.getInscripcionsMarxa().isEmpty()){
