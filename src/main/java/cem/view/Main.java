@@ -232,7 +232,7 @@ public class Main {
     }
 
 
-    public static void mdfInscrip(Marxa escollida){
+    public static void mdfInscrip(Marxa escollida) throws IOException{
         if(escollida.getInscripcionsMarxa().isEmpty()){
             System.out.println("Aquesta marxa no te incscripcion");
         }else{
@@ -255,6 +255,10 @@ public class Main {
                     case 3 -> {
                         System.out.println("No s'ha modificat cap data");
                     }
+
+                }
+                if (opcio !=3){
+                    persis.ReescribirInsccripcio(escollida.getInscripcionsMarxa(),escollida.getEdicio());
                 }
 
             }else{
