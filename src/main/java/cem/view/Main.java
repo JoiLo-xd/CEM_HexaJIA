@@ -253,7 +253,7 @@ public class Main {
                 if (index >= 0) {
                     Corredor c = corredores.get(index);
                     if (comprCorredor(escollida,c)) {
-                        Boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
+                        boolean modalitat = AskDataCEM.askBoolean("Modalitat de la cursa que fara el corredor (Llarga - Curta):", "Selecciona una opció correcte.", "Llarga", "Curta");
                         Inscripcio novaInscr = new Inscripcio(escollida.getInscripcionsMarxa().size() + 1, modalitat, c);
                         escollida.addCorrInsc(novaInscr);
                         persis.writerInscripcioInFile(novaInscr, escollida.getEdicio());
@@ -292,7 +292,7 @@ public class Main {
             String telf = AskDataCEM.askTelf("Telefon: ");
             String email = AskDataCEM.askEmail("Mail: ");
             String entitat = AskDataCEM.askString("Entitat: ");
-            Boolean federat = AskDataCEM.askBoolean("Federat (si - no): ", "Valor incorrecte", "Si", "No");
+            boolean federat = AskDataCEM.askBoolean("Federat (si - no): ", "Valor incorrecte", "Si", "No");
             Corredor c = new Corredor(nif, nom, cognoms, dataNaix, sexe, poblacio, telf, email, entitat, federat);
             corredores.add(c);
             persis.writerCorredorInFile(c);
