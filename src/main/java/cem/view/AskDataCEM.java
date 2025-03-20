@@ -5,7 +5,6 @@ package cem.view;
 
 import cem.enums.Asistencia;
 import cem.enums.Sexe;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -116,7 +115,7 @@ public class AskDataCEM {
     }
 
 
-    public static String askTelf(String str) {//todo hay que hacer el metodo para verificar que sea correcto
+    public static String askTelf(String str) {
         String valor;
         do{
             valor = askString(str);
@@ -127,7 +126,7 @@ public class AskDataCEM {
         return valor;
     }
 
-    public static String askEmail(String str) {//todo hay que hacer este metood para comprovar el email
+    public static String askEmail(String str) {
         String valor;
         do{
             valor = askString(str);
