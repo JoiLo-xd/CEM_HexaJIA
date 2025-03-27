@@ -9,6 +9,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import cem.persistence.Persis;
 
+import javax.swing.*;
+
 public class Main {
 
     private static ArrayList<Marxa> marxes;
@@ -43,51 +45,78 @@ public class Main {
             "9. Cancelar\n";
 
     public static void main(String[] args){
-        marxes = new ArrayList<>();
-        corredores = new ArrayList<>();
-        try {
-            persis = new Persis();
-            corredores = persis.readCorredor();
-            marxes = persis.readMarxa(corredores);
 
-            int option;
-            do {
-                System.out.println(MENUINICI);
-                option = AskDataCEM.askInt("Que vols fer?: ", "Posa una opció correcta.", 1, 6);
-                switch (option) {
-                    case 1 -> {     //entrar en marxa
-                        if (!marxes.isEmpty()) {
-                            showMarxes();
-                            int chosen;
-                            if ((chosen = escollidor(marxes.size())) != 0) {
-                                entrarMarxa(marxes.get(chosen - 1));
-                            }
-                        } else {
-                            System.out.println("No hi han curses disponibles, crea una.");
-                        }
-                    }
-                    case 2 -> {     //crear marxa
-                        darAltaMarxa();
-                        break;
-                    }
-                    case 3 -> {     //crear corredor
-                        darAltaCorredor();
-                        break;
-                    }
-                    case 4 -> {     //Modificar corredor
-                        mdfCorredor();
-                    }
-                    case 5 -> {     //mostrar stats
-                        mostrarStats();
-                    }
-                    case 6 -> {     //salir
-                        System.out.println("Fins avia't!!");
-                    }
-                }
-            } while (option != 6);
-        }catch (IOException e){
-            System.out.println("Hi ha agut un problema fatal, l'error es: " + e.getMessage());
-        }
+        MenuJForm menu = new MenuJForm();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        marxes = new ArrayList<>();
+//        corredores = new ArrayList<>();
+//        try {
+//            persis = new Persis();
+//            corredores = persis.readCorredor();
+//            marxes = persis.readMarxa(corredores);
+//
+//            int option;
+//            do {
+//                System.out.println(MENUINICI);
+//                option = AskDataCEM.askInt("Que vols fer?: ", "Posa una opció correcta.", 1, 6);
+//                switch (option) {
+//                    case 1 -> {     //entrar en marxa
+//                        if (!marxes.isEmpty()) {
+//                            showMarxes();
+//                            int chosen;
+//                            if ((chosen = escollidor(marxes.size())) != 0) {
+//                                entrarMarxa(marxes.get(chosen - 1));
+//                            }
+//                        } else {
+//                            System.out.println("No hi han curses disponibles, crea una.");
+//                        }
+//                    }
+//                    case 2 -> {     //crear marxa
+//                        darAltaMarxa();
+//                        break;
+//                    }
+//                    case 3 -> {     //crear corredor
+//                        darAltaCorredor();
+//                        break;
+//                    }
+//                    case 4 -> {     //Modificar corredor
+//                        mdfCorredor();
+//                    }
+//                    case 5 -> {     //mostrar stats
+//                        mostrarStats();
+//                    }
+//                    case 6 -> {     //salir
+//                        System.out.println("Fins avia't!!");
+//                    }
+//                }
+//            } while (option != 6);
+//        }catch (IOException e){
+//            System.out.println("Hi ha agut un problema fatal, l'error es: " + e.getMessage());
+//        }
     }
 
     public static int escollidor(int num){
