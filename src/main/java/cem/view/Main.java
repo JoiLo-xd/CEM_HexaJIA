@@ -45,7 +45,6 @@ public class Main {
 //            "9. Cancelar\n";
 
     public static void main(String[] args) {
-
         MenuJForm menu = new MenuJForm();
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);
