@@ -16,9 +16,11 @@ public class MenuJForm extends JFrame {
     private JButton modificarEsportistaButton;
     private JButton mostrarEstadístiquesButton;
 
+    private MarxesDialog marxes;
+
     public MenuJForm(){
         setContentPane(Contentpanel);
-        setResizable(true);
+        setResizable(false);
         setSize(500, 400);
         ExitButton.addActionListener(new ActionListener() {
             @Override
@@ -29,8 +31,10 @@ public class MenuJForm extends JFrame {
         marxesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MarxesDialog marxes = new MarxesDialog();
+                createMarxesDialog();
+                setVisible(false);
                 marxes.setVisible(true);
+                setVisible(true);
             }
         });
 
@@ -59,5 +63,9 @@ public class MenuJForm extends JFrame {
 
             }
         });
+    }
+
+    private void createMarxesDialog() {
+        marxes = new MarxesDialog(this, true);
     }
 }
