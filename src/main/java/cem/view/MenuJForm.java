@@ -1,9 +1,9 @@
 package cem.view;
 
 import cem.view.dialogs.Menu2.*;
+import cem.view.subMenuMarxes.MarxesDialog;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class MenuJForm extends JFrame {
@@ -16,7 +16,7 @@ public class MenuJForm extends JFrame {
     private JButton modificarEsportistaButton;
     private JButton mostrarEstadístiquesButton;
 
-    private MarxesDialog marxes;
+    private ShowMarxes showMarxes;
     private CreateMarxaDialog createMarxaDialog;
     private EditParticipantDialog editParticipantDialog;
     private RegisterParticipantDialog registerParticipantDialog;
@@ -37,7 +37,7 @@ public class MenuJForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 createMarxesDialog();
                 setVisible(false);
-                marxes.setVisible(true);
+                showMarxes.setVisible(true);
                 setVisible(true);
             }
         });
@@ -82,22 +82,22 @@ public class MenuJForm extends JFrame {
     }
 
     private void createMarxesDialog() {
-        marxes = new MarxesDialog(this, true);
+        showMarxes = new ShowMarxes(this, false);
     }
 
     private void createEditParticipantDialog() {
-        editParticipantDialog = new EditParticipantDialog(this, true);
+        editParticipantDialog = new EditParticipantDialog(this, false);
     }
 
     private void createCreateMarxaDialog() {
-        createMarxaDialog = new CreateMarxaDialog(this, true);
+        createMarxaDialog = new CreateMarxaDialog(this, false);
     }
 
     private void createRegisterParticipantDialog() {
-        registerParticipantDialog = new RegisterParticipantDialog(this, true);
+        registerParticipantDialog = new RegisterParticipantDialog(this, false);
     }
 
     private void createWatchStatsDialog() {
-        watchStatsDialog = new WatchStatsDialog(this, true);
+        watchStatsDialog = new WatchStatsDialog(this, false);
     }
 }

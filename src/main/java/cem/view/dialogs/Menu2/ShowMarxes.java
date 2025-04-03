@@ -1,29 +1,31 @@
 package cem.view.dialogs.Menu2;
 
+import cem.model.Marxa;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 
-public class MarxesDialog extends JDialog {
+public class ShowMarxes extends JDialog {
     private JPanel contentPane;
-    private JButton exitButton;
-    private JButton afegirParticipantButton;
-    private JButton editarParticipantButton;
-    private JButton sortidaParticipantButton;
-    private JButton arribadaParticipantButton;
-    private JButton corredorsDeLaMarxaButton;
-    private JPanel marxesBg;
-    private JPanel buttonsBg;
-    private JPanel marxesMenuBg;
+    private JButton buttonOK;
+    private JButton buttonCancel;
+    private JTable marxesTable;
 
-    public MarxesDialog(Frame owner, boolean modal) {
+    public ShowMarxes(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
         setModal(true);
-        setSize(600, 500);
-        setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(buttonOK);
 
-        exitButton.addActionListener(new ActionListener() {
+        buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onOK();
+            }
+        });
+
+        buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -43,8 +45,12 @@ public class MarxesDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
     }
 
+    private void setTableValues() {     //recorrer el hashMap de marxes y crear un table row por cada una
+
+    }
 
     private void onOK() {
         // add your code here

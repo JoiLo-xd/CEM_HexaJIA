@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Marxa {
     private int edicio;
-    private ArrayList<Inscripcio> inscripcionsMarxa; //MANIN DIRIA QUE SE GUARDA LA INCRPICION
+    private ArrayList<Inscripcio> inscripcionsMarxa;
 
     public Marxa(int edicio) {
         this.edicio = edicio;
