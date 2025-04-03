@@ -12,6 +12,7 @@ public class ShowMarxes extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTable marxesTable;
+    private JScrollPane marxesScrollPane;
 
     public ShowMarxes(Frame owner, boolean modal) {
         super(owner, modal);
@@ -48,9 +49,6 @@ public class ShowMarxes extends JDialog {
 
     }
 
-    private void setTableValues() {     //recorrer el hashMap de marxes y crear un table row por cada una
-
-    }
 
     private void onOK() {
         // add your code here
