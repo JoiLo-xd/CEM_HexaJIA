@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ShowMarxes extends JDialog {
     private JPanel contentPane;
@@ -27,6 +26,7 @@ public class ShowMarxes extends JDialog {
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
         controller = Controller.getInstance();
+        listMarxes();
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,7 +58,7 @@ public class ShowMarxes extends JDialog {
     }
 
     private void listMarxes() {
-        marxes = (HashMap<Integer,Marxa>) controller.getMarxas();
+        marxes = (HashMap<Integer,Marxa>) controller.getMarxes();
         DefaultTableModel dtm = (DefaultTableModel) marxesTable.getModel();
         dtm.setColumnIdentifiers(new String[] {"Edició", "Participants"});
         for (Marxa m : marxes.values()){

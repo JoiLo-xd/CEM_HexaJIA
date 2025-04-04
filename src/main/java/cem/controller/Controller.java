@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class Controller {
     private static Controller controller;
-    private Map<Integer, Marxa> marxas;
+    private Map<Integer, Marxa> marxes;
     private Map<String, Corredor> corredores;
 
     private Controller(){
-        this.marxas = new HashMap<Integer, Marxa>();
+        this.marxes = new HashMap<Integer, Marxa>();
         this.corredores = new HashMap<String,Corredor>();
 
     }
@@ -25,8 +25,12 @@ public class Controller {
 
     }
 
-    public Map<Integer,Marxa> getMarxas(){
-        return marxas;
+    public Map<Integer,Marxa> getMarxes(){
+        return marxes;
+    }
+
+    public void addMarxa(Integer i){
+        marxes.put(i, new Marxa(i));
     }
 
 
