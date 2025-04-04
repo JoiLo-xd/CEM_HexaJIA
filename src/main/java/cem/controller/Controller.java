@@ -22,6 +22,12 @@ public class Controller {
             controller = new Controller();
         }
         return controller;
-        }
+
+    }
+
+    public Map<Integer,Marxa> getMarxas(){
+        return marxas;
+    }
+
 
 }
