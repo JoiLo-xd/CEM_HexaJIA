@@ -8,6 +8,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.Duration;
+
+import cem.exceptions.CorredoresException;
 import cem.model.Corredor;
 import cem.model.Marxa;
 import java.time.LocalDate;
@@ -74,7 +76,7 @@ public class Persis {
         writer.close();
     }
 
-    public ArrayList<Corredor> readCorredor() throws IOException {
+    public ArrayList<Corredor> readCorredor() throws IOException, CorredoresException {
         ArrayList<Corredor> corredors = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(pathFileCorredor));
         String line;

@@ -1,8 +1,17 @@
 package cem.view.dialogs.Menu2;
 
+import cem.controller.Controller;
+import cem.enums.Sexe;
+import cem.exceptions.AdditionException;
+import cem.exceptions.CorredoresException;
+import cem.model.Corredor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,18 +29,21 @@ public class RegisterParticipantDialog extends JDialog {
     private JLabel EmailJLabel;
     private JLabel EntitatJLabel;
     private JLabel FederatJLabel;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField nomField;
+    private JTextField cognomField;
     private JComboBox comboBox1;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
+    private JTextField poblacioField;
+    private JTextField telefonField;
+    private JTextField emailField;
+    private JTextField tentitatField;
     private JSpinner dateSpinner;
+    private JLabel errorLabel;
+    private JComboBox federatBox;
+    private Controller controller;
 
     public RegisterParticipantDialog(Frame owner, boolean modal) {
         super(owner, modal);
+        controller = Controller.getInstance();
         setContentPane(contentPane);
         setModal(true);
         setSize(400, 500);
@@ -85,12 +97,60 @@ public class RegisterParticipantDialog extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        boolean ok = true;
+        String textoAMostrar = "Error";
+        if (!controller.validateNif(DNITextField.getText())) {
+            ok = false;
+            textoAMostrar = "DNI Invalido";
+        } else if (!controller.validateTlf(telefonField.getText())) {
+            ok = false;
+            textoAMostrar = "Telefon Malament";
+        } else if (!controller.validateEmail(emailField.getText())) {
+            ok = false;
+            textoAMostrar = "Email malament";
+        } else {
+
+            boolean federat = "Si".equals(federatBox.getSelectedItem());
+            Sexe sexe = (Sexe) federatBox.getSelectedItem();
+            if (sexe.equals("")) {
+                ok = false;
+            }
+            String dni = DNITextField.getText();
+            String nom = nomField.getText();
+            String cognom = cognomField.getText();
+            String poblacio = poblacioField.getText();
+            String entitat = tentitatField.getText();
+            String email = emailField.getText();
+            String telefon = telefonField.getText();
+            Instant instant = ((Date) dateSpinner.getValue()).toInstant();
+            LocalDate nacimiento = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            if (ok) {
+                try {
+                    Corredor corredor = new Corredor(dni, nom, cognom, nacimiento, sexe, poblacio, telefon, email, entitat, federat);
+                    controller.addCorredor(corredor);
+                } catch (CorredoresException e) {
+                    ok = false;
+                    textoAMostrar = "Faltan alguns camps per posar";
+                } catch (AdditionException e) {
+                    ok = false;
+                    textoAMostrar = "Aquest corredor ja estaba registrat";
+                }
+            }
+            if (!ok) {
+                JOptionPane.showMessageDialog(this, textoAMostrar, "Error", JOptionPane.ERROR_MESSAGE);
+
+
+            }
+
+
+            //dispose();
+        }
     }
 
-    private void onCancel() {
+    private void onCancel () {
         // add your code here if necessary
         dispose();
     }
+
+
 }

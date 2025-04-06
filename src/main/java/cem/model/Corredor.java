@@ -1,6 +1,7 @@
 package cem.model;
 
 import cem.enums.Sexe;
+import cem.exceptions.CorredoresException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,17 +19,21 @@ public class Corredor {
     private boolean federat;
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
-    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat){
-        this.nif = nif;
-        this.nom = nom;
-        this.cognoms = cognoms;
-        this.dataNaixement = dataNaixement;
-        this.sexe = sexe;
-        this.poblacio = poblacio;
-        this.numTelefon = numTelefon;
-        this.email = email;
-        this.entitat = entitat;
-        this.federat = federat;
+    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
+        if ( nom.equals("") ||poblacio.equals("") ||cognoms.equals("") || entitat.equals("")){
+            throw new CorredoresException("Faltan campos");
+        }else {
+            this.nif = nif;
+            this.nom = nom;
+            this.cognoms = cognoms;
+            this.dataNaixement = dataNaixement;
+            this.sexe = sexe;
+            this.poblacio = poblacio;
+            this.numTelefon = numTelefon;
+            this.email = email;
+            this.entitat = entitat;
+            this.federat = federat;
+        }
     }
 
     public Corredor(String nif){
