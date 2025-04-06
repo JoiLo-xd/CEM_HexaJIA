@@ -67,8 +67,10 @@ public class CreateMarxaDialog extends JDialog {
             public void stateChanged(ChangeEvent e) {
                 if (marxes.containsKey((int) editionSpinner.getValue())) {
                     errorMessage.setVisible(true);
+                    buttonOK.setEnabled(false);
                 } else {
                     errorMessage.setVisible(false);
+                    buttonOK.setEnabled(true);
                 }
             }
         });
