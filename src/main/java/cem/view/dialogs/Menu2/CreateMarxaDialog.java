@@ -13,6 +13,8 @@ import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 
 public class CreateMarxaDialog extends JDialog {
+
+    //atributos
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -22,6 +24,7 @@ public class CreateMarxaDialog extends JDialog {
     private Controller controller;
 
 
+    //constructor
     public CreateMarxaDialog(Frame owner, boolean modal) {
         super(owner, modal);
         errorMessage.setVisible(false);
@@ -33,6 +36,7 @@ public class CreateMarxaDialog extends JDialog {
         marxes= (HashMap<Integer, Marxa>) Controller.getInstance().getMarxes();
 
 
+        //accion que ocurre al clicar el boton OK
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -40,6 +44,7 @@ public class CreateMarxaDialog extends JDialog {
 
         });
 
+        //accion que ocurre al clicar el boton Cancel
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -63,6 +68,7 @@ public class CreateMarxaDialog extends JDialog {
         editionSpinner.addComponentListener(new ComponentAdapter() {
         });
         editionSpinner.addChangeListener(new ChangeListener() {
+            //por cada cambio de valor del spinner, hace lo del if o lo del else, depende si ya existe la marxa
             @Override
             public void stateChanged(ChangeEvent e) {
                 if (marxes.containsKey((int) editionSpinner.getValue())) {
@@ -76,6 +82,7 @@ public class CreateMarxaDialog extends JDialog {
         });
     }
 
+    //revisa si la marxa existe, si no existe la crea y vuelve al menu principal
     private void onOK() {
         // add your code here
         if (marxes.containsKey((int)editionSpinner.getValue())) {
@@ -87,6 +94,7 @@ public class CreateMarxaDialog extends JDialog {
         }
     }
 
+    //elimina la ventana de crear marxa
     private void onCancel() {
         // add your code here if necessary
         dispose();

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class EditParticipantDialog extends JDialog {
+    //atributos
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -21,6 +22,7 @@ public class EditParticipantDialog extends JDialog {
     private JPanel acceptCancelButtonsPanel;
     private JPanel acceptCancelButtonsBg;
 
+    //constructor
     public EditParticipantDialog(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
@@ -29,12 +31,14 @@ public class EditParticipantDialog extends JDialog {
         setSize(700, 600);
         setLocationRelativeTo(null);
 
+        //accion del boton ok
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
+        //accion del boton cancel
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -62,6 +66,7 @@ public class EditParticipantDialog extends JDialog {
         dispose();
     }
 
+    //vuelve al menu inicial ya que elimina esa ventana
     private void onCancel() {
         // add your code here if necessary
         dispose();

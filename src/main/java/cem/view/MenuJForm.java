@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 public class MenuJForm extends JFrame {
 
+    //atributos
     private JPanel Contentpanel;
     private JButton ExitButton;
     private JButton marxesButton;
@@ -22,16 +23,21 @@ public class MenuJForm extends JFrame {
     private RegisterParticipantDialog registerParticipantDialog;
     private WatchStatsDialog watchStatsDialog;
 
+    //constructor
     public MenuJForm(){
         setContentPane(Contentpanel);
         setResizable(false);
         setSize(500, 400);
+
+        //accion boton salir, elimina la ventana
         ExitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
+
+        //boton marxes, se muestran las marxas que hay creadas
         marxesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,6 +48,7 @@ public class MenuJForm extends JFrame {
             }
         });
 
+        // boton que sirve para crear una marxa
         crearMarxaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,6 +59,7 @@ public class MenuJForm extends JFrame {
             }
         });
 
+        // boton que sirve para crear un corredor
         altaEsportistaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,6 +69,7 @@ public class MenuJForm extends JFrame {
                 setVisible(true);
             }
         });
+        // boton que sirve para modificar los datos de un corredor
         modificarEsportistaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,6 +79,8 @@ public class MenuJForm extends JFrame {
                 setVisible(true);
             }
         });
+
+        // boton que sirve para ver las estadisiticas
         mostrarEstadístiquesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class RegisterParticipantDialog extends JDialog {
+    //atributos
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -41,6 +42,7 @@ public class RegisterParticipantDialog extends JDialog {
     private JComboBox federatBox;
     private Controller controller;
 
+    //constructor
     public RegisterParticipantDialog(Frame owner, boolean modal) {
         super(owner, modal);
         controller = Controller.getInstance();
@@ -49,12 +51,14 @@ public class RegisterParticipantDialog extends JDialog {
         setSize(400, 500);
         setLocationRelativeTo(null);
 
+        //accion boton OK
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
+        //accion boton Cancel
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -96,6 +100,7 @@ public class RegisterParticipantDialog extends JDialog {
         dateSpinner.setModel(dateModel);
     }
 
+    //valida que los datos sean validos, sino muestra mensaje de error
     private void onOK() {
         boolean ok = true;
         String textoAMostrar = "Error";
@@ -153,6 +158,7 @@ public class RegisterParticipantDialog extends JDialog {
 
     }
 
+    //elimina esta ventana y vuelve al menu
     private void onCancel () {
         // add your code here if necessary
         dispose();

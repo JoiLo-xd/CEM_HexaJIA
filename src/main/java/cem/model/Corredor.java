@@ -19,6 +19,7 @@ public class Corredor {
     private boolean federat;
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
+    // constructor de corredor, se valida que no deje un campo vacio
     public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
         if ( nom.equals("") ||poblacio.equals("") ||cognoms.equals("") || entitat.equals("")){
             throw new CorredoresException("Faltan campos");
@@ -40,12 +41,11 @@ public class Corredor {
         this.nif = nif;
     }
 
-    //Para añadir cosas a la Arraylist // ESTO NO ES LO QUE HACE ESTE CODIGO...
     public ArrayList<Inscripcio> getInscr(){
         return new ArrayList<Inscripcio>(inscripcions);
     }
 
-
+    //añade una inscripcion al arrayList
     public void addIncrip(Inscripcio inscr){
         inscripcions.add(inscr);
     }
@@ -124,6 +124,7 @@ public class Corredor {
     }
 
 
+
     @Override
     public String toString() {
         String esfederat = federat ? "Si" : "No";
@@ -135,6 +136,7 @@ public class Corredor {
         return returned;
     }
 
+    //equals para comparar si ya esxiste el corredor
     @Override
     public boolean equals(Object o) {
         Corredor obj = (Corredor) o;

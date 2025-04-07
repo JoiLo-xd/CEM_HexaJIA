@@ -3,21 +3,26 @@ package cem.model;
 import java.util.ArrayList;
 
 public class Marxa {
+
+    //atributos
     private int edicio;
     private ArrayList<Inscripcio> inscripcionsMarxa;
 
+    //contrscutor
     public Marxa(int edicio) {
         this.edicio = edicio;
         inscripcionsMarxa = new ArrayList<>();
     }
 
 
+    //equals para saber si existe
     @Override
     public boolean equals(Object obj) {
         Marxa m = (Marxa) obj;
         return this.edicio==(m.getEdicio());
     }
-    
+
+    //añade un corredor al arrayList
     public void addCorrInsc(Inscripcio insc){
         inscripcionsMarxa.add(insc);
     }

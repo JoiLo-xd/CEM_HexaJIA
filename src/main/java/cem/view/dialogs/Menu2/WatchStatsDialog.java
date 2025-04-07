@@ -5,10 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class WatchStatsDialog extends JDialog {
+    //aytibutos
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
 
+    //constructor
     public WatchStatsDialog(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
@@ -16,12 +18,14 @@ public class WatchStatsDialog extends JDialog {
         setSize(600, 500);
         setLocationRelativeTo(null);
 
+        //accion boton OK
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
+        //accion boton Cancel
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -43,12 +47,13 @@ public class WatchStatsDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
-
+    //vuelve al menu ya que elimina la ventana
     private void onOK() {
         // add your code here
         dispose();
     }
 
+    //vuelve al menu ya que elimina la ventana
     private void onCancel() {
         // add your code here if necessary
         dispose();

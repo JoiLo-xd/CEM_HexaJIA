@@ -53,6 +53,7 @@ public class Persis {
         }
     }
 
+    //escribir corredor
     public void writerCorredorInFile(Corredor c) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileCorredor, true));
         writer.write(c.getNif() + "/" + c.getNom() + "/" + c.getCognoms() + "/" + c.getDataNaixement() + "/" + c.getSexe() + "/" + c.getPoblacio() +
@@ -61,6 +62,7 @@ public class Persis {
         writer.close();
     }
 
+    //escribir marxa
     public void writerMarxaInFile(Marxa m) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileMarxa, true));
         writer.write((String.valueOf(m.getEdicio()))); //hay que pasarlo a String porque sino lo pilla como caracter unicode ya que es un int, por eso
@@ -69,6 +71,7 @@ public class Persis {
         writer.close();
     }
 
+    //escribir inscripcion
     public void writerInscripcioInFile(Inscripcio i, int edicio) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, true));
         writer.write(edicio + "/" + i.getDorsal() + "/" + i.isModalitat() + "/" + i.getHoraSortida() + "/" + i.getHoraArribada() + "/" + i.getCorredor().getNif());
@@ -76,6 +79,7 @@ public class Persis {
         writer.close();
     }
 
+    //leer corredor
     public ArrayList<Corredor> readCorredor() throws IOException, CorredoresException {
         ArrayList<Corredor> corredors = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(pathFileCorredor));
@@ -96,6 +100,8 @@ public class Persis {
         }
         return corredors;
     }
+
+    //leer marxa
     public ArrayList<Marxa> readMarxa(ArrayList<Corredor> corredores) throws IOException {
         ArrayList<Marxa> marxas = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(pathFileMarxa));
@@ -141,6 +147,7 @@ public class Persis {
         return marxas;
     }
 
+    // busca una marxa
     public static Marxa buscarMarxa(ArrayList<Marxa> marxas, int edicion) {
         for (Marxa m : marxas) {
             if (m.equals(new Marxa(edicion))) {
@@ -150,6 +157,7 @@ public class Persis {
         return null;
     }
 
+    //busca un corredor
     public static Corredor buscarCorredor(ArrayList<Corredor> corredores, String nif) {
         for (Corredor c : corredores) {
             if (c.equals(new Corredor(nif))) {
@@ -160,6 +168,7 @@ public class Persis {
     }
 
 
+    //reescribe los datos de un corredor
     public void ReescribirCorredor(ArrayList<Corredor> corredors) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileCorredor, false));
         for (Corredor c : corredors) {
@@ -168,6 +177,7 @@ public class Persis {
         writer.close();
     }
 
+    //reescribe los datos de una inscripcion
     public void ReescribirInsccripcio(ArrayList<Inscripcio> inscripcions, int edicio) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileInscripcio, false));
         for (Inscripcio i : inscripcions) {

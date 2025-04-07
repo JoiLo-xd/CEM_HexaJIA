@@ -35,10 +35,12 @@ public class Controller {
         return marxes;
     }
 
+    // añade una marxa al hashmap
     public void addMarxa(Integer i){
         marxes.put(i, new Marxa(i));
     }
 
+    //metodo que valida que lo que ponga el usuario es un nif valido
     public boolean validateNif(String nif) {    //comprovación de nif, tien una formula para saver si es real o no
         Pattern REGEXP = Pattern.compile("[0-9]{8}[A-Z]");
         String DIGITO_CONTROL = "TRWAGMYFPDXBNJZSQVHLCKE";
@@ -48,6 +50,7 @@ public class Controller {
                 && nif.charAt(8) == DIGITO_CONTROL.charAt(Integer.parseInt(nif.substring(0, 8)) % 23);
     }
 
+    //metodo que valida que lo que ponga el usuario es un email valido
     public boolean validateEmail(String str){
         if (str.matches(REG_MAIL)){
             return true;
@@ -56,6 +59,7 @@ public class Controller {
 
     }
 
+    //metodo que valida que lo que ponga el usuario es un numero de telefono valido
     public boolean validateTlf(String str){
         if (str.matches(REG_TLF)){
             return true;
@@ -63,6 +67,7 @@ public class Controller {
         return false;
     }
 
+    // añade un corredor al hashmap
     public void addCorredor(Corredor corredor) throws AdditionException{
         if (!corredores.containsKey(corredor.getNif())) {
             corredores.put(corredor.getNif(), corredor);

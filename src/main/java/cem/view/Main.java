@@ -46,8 +46,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
+        //muestra el JForm menu
         MenuJForm menu = new MenuJForm();
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);

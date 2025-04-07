@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 
 public class ShowMarxes extends JDialog {
+    //atributos
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -18,6 +19,8 @@ public class ShowMarxes extends JDialog {
     private Controller controller;
     private HashMap<Integer, Marxa> marxes;
 
+
+    //constructor
     public ShowMarxes(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
@@ -28,12 +31,14 @@ public class ShowMarxes extends JDialog {
         controller = Controller.getInstance();
         listMarxes();
 
+        //accion boton OK
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
+        //accion boton cancel
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -57,6 +62,7 @@ public class ShowMarxes extends JDialog {
 
     }
 
+    //MUestra una tabla en la que se van añadiendo las marxas
     private void listMarxes() {
         marxes = (HashMap<Integer,Marxa>) controller.getMarxes();
         DefaultTableModel dtm = (DefaultTableModel) marxesTable.getModel();
@@ -72,6 +78,7 @@ public class ShowMarxes extends JDialog {
         dispose();
     }
 
+    //elimina la ventana  vuelve al menu
     private void onCancel() {
         // add your code here if necessary
         dispose();

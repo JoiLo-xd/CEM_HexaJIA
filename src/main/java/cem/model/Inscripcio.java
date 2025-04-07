@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class Inscripcio {
 
+    //atributos
     private int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
     private boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
     private LocalTime horaSortida;
@@ -18,16 +19,19 @@ public class Inscripcio {
     private Asistencia asistencia;
     private Corredor corredor;
 
+    //constructor
     public Inscripcio(int dorsal, boolean modalitat, Corredor corredor) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.corredor = corredor;
     }
 
+    //constructor
     public Inscripcio(int dorsal){
         this.dorsal = dorsal;
     }
 
+    //constructor
     public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Corredor corredor){
         this.dorsal = dorsal;
         this.modalitat = modalitat;
@@ -36,6 +40,7 @@ public class Inscripcio {
         this.corredor = corredor;
     }
 
+    //SETTERS Y GETTERS
     public void setModalitat(boolean modalitat) {
         this.modalitat = modalitat;
     }
@@ -55,7 +60,6 @@ public class Inscripcio {
         this.tempsTotal = Duration.between(horaSortida, horaArribada);
     }
 
-    // Este deberia ser con enums pero no sabemos como hacerlo jeje
     public void setAsistencia(Asistencia asistencia) {
         this.asistencia = asistencia;
     }
@@ -88,6 +92,7 @@ public class Inscripcio {
         return corredor;
     }
 
+    //equals para saber si ya existe
     @Override
     public boolean equals(Object o) {
         Inscripcio ins = (Inscripcio) o;
