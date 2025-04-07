@@ -31,7 +31,7 @@ public class RegisterParticipantDialog extends JDialog {
     private JLabel FederatJLabel;
     private JTextField nomField;
     private JTextField cognomField;
-    private JComboBox comboBox1;
+    private JComboBox sexeBox1;
     private JTextField poblacioField;
     private JTextField telefonField;
     private JTextField emailField;
@@ -111,10 +111,7 @@ public class RegisterParticipantDialog extends JDialog {
         } else {
 
             boolean federat = "Si".equals(federatBox.getSelectedItem());
-            Sexe sexe = (Sexe) federatBox.getSelectedItem();
-            if (sexe.equals("")) {
-                ok = false;
-            }
+            String sexe1 = (String) sexeBox1.getSelectedItem();
             String dni = DNITextField.getText();
             String nom = nomField.getText();
             String cognom = cognomField.getText();
@@ -126,6 +123,7 @@ public class RegisterParticipantDialog extends JDialog {
             LocalDate nacimiento = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             if (ok) {
                 try {
+                    Sexe sexe = Sexe.valueOf(sexe1.toUpperCase());
                     Corredor corredor = new Corredor(dni, nom, cognom, nacimiento, sexe, poblacio, telefon, email, entitat, federat);
                     controller.addCorredor(corredor);
                 } catch (CorredoresException e) {
@@ -134,17 +132,25 @@ public class RegisterParticipantDialog extends JDialog {
                 } catch (AdditionException e) {
                     ok = false;
                     textoAMostrar = "Aquest corredor ja estaba registrat";
+                } catch (IllegalArgumentException e){
+                    ok = false;
+                    textoAMostrar = "Faltan alguns camps per posar";
                 }
             }
-            if (!ok) {
-                JOptionPane.showMessageDialog(this, textoAMostrar, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!ok) {
+            JOptionPane.showMessageDialog(this, textoAMostrar, "Error", JOptionPane.ERROR_MESSAGE);
 
 
-            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Participant Registrat!", "Registrat!", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
 
 
             //dispose();
-        }
+
     }
 
     private void onCancel () {
