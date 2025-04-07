@@ -14,6 +14,7 @@ public class WatchStatsDialog extends JDialog {
     public WatchStatsDialog(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
+        setTitle("Estadístiques");
         setModal(true);
         setSize(600, 500);
         setLocationRelativeTo(null);

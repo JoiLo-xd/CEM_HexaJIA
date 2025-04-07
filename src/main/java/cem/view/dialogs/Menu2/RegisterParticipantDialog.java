@@ -47,6 +47,7 @@ public class RegisterParticipantDialog extends JDialog {
         super(owner, modal);
         controller = Controller.getInstance();
         setContentPane(contentPane);
+        setTitle("Registrar participant");
         setModal(true);
         setSize(400, 500);
         setLocationRelativeTo(null);
@@ -117,7 +118,7 @@ public class RegisterParticipantDialog extends JDialog {
 
             boolean federat = "Si".equals(federatBox.getSelectedItem());
             String sexe1 = (String) sexeBox1.getSelectedItem();
-            String dni = DNITextField.getText();
+            String dni = DNITextField.getText().toUpperCase();
             String nom = nomField.getText();
             String cognom = cognomField.getText();
             String poblacio = poblacioField.getText();

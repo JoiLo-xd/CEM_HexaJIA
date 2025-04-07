@@ -29,6 +29,7 @@ public class CreateMarxaDialog extends JDialog {
         super(owner, modal);
         errorMessage.setVisible(false);
         setContentPane(contentPane);
+        setTitle("Registrar marxa");
         setModal(true);
         setSize(600, 500);
         setLocationRelativeTo(null);

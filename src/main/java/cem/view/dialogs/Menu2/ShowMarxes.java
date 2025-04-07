@@ -24,6 +24,7 @@ public class ShowMarxes extends JDialog {
     public ShowMarxes(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
+        setTitle("Marxes");
         setModal(true);
         setSize(600, 500);
         setLocationRelativeTo(null);

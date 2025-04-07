@@ -26,6 +26,7 @@ public class EditParticipantDialog extends JDialog {
     public EditParticipantDialog(Frame owner, boolean modal) {
         super(owner, modal);
         setContentPane(contentPane);
+        setTitle("Modificar participant");
         setModal(true);
         setResizable(false);
         setSize(700, 600);

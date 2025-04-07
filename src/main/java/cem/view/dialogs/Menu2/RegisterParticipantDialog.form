@@ -178,7 +178,7 @@
                 <item value="Home"/>
                 <item value="Dona"/>
               </model>
-              <selectedIndex value="-1"/>
+              <selectedIndex value="0"/>
             </properties>
           </component>
           <component id="53447" class="javax.swing.JTextField" binding="poblacioField">

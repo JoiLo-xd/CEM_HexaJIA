@@ -26,6 +26,7 @@ public class MenuJForm extends JFrame {
     //constructor
     public MenuJForm(){
         setContentPane(Contentpanel);
+        setTitle("Menu principal");
         setResizable(false);
         setSize(500, 400);
 
