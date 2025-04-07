@@ -18,7 +18,7 @@ public class Main {
     private static Persis persis;
 
 //    private static final String MENUMARXES = "\n<> MENÚ MARXES <>\n" +
-//            "1. Afegir participant\n" +
+//            "1. Afegir participant\n" zz+
 //            "2. Editar participant\n" +
 //            "3. Sortida\n" +
 //            "4. Arribada\n" +
