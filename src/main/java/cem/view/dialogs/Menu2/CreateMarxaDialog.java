@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.Year;
 import java.util.HashMap;
 
 public class CreateMarxaDialog extends JDialog {
@@ -88,9 +89,12 @@ public class CreateMarxaDialog extends JDialog {
         // add your code here
         if (marxes.containsKey((int)editionSpinner.getValue())) {
             errorMessage.setVisible(true);
+        } else if ((int)editionSpinner.getValue() <= 2000 || (int)editionSpinner.getValue() >= (Year.now().getValue())+5) {
+            JOptionPane.showMessageDialog(this, "L'edició introduida no és vàlida", "Edició no vàlida", JOptionPane.ERROR_MESSAGE);
         } else {
             errorMessage.setVisible(false);
             controller.addMarxa((int)editionSpinner.getValue());
+            JOptionPane.showMessageDialog(this, "Marxa registrada correctament!", "Marxa registrada!", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
     }

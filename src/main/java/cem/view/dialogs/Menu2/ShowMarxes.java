@@ -66,8 +66,12 @@ public class ShowMarxes extends JDialog {
     //MUestra una tabla en la que se van añadiendo las marxas
     private void listMarxes() {
         marxes = (HashMap<Integer,Marxa>) controller.getMarxes();
-        DefaultTableModel dtm = (DefaultTableModel) marxesTable.getModel();
-        dtm.setColumnIdentifiers(new String[] {"Edició", "Participants"});
+        DefaultTableModel dtm = new DefaultTableModel(new String[] {"Edició", "Participants"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // ninguna celda editable
+            }
+        };
         for (Marxa m : marxes.values()){
             dtm.addRow(new Integer[] { m.getEdicio(),m.getInscripcionsMarxa().size()});
         }

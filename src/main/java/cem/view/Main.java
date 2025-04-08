@@ -13,10 +13,6 @@ import javax.swing.*;
 
 public class Main {
 
-    private static ArrayList<Marxa> marxes;
-    private static ArrayList<Corredor> corredores;
-    private static Persis persis;
-
 //    private static final String MENUMARXES = "\n<> MENÚ MARXES <>\n" +
 //            "1. Afegir participant\n" +
 //            "2. Editar participant\n" +
