@@ -49,6 +49,7 @@ public class MenuJFrame extends javax.swing.JFrame {
         marxesButton = new javax.swing.JButton();
         createRunnerButton = new javax.swing.JButton();
         showStatsButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +117,10 @@ public class MenuJFrame extends javax.swing.JFrame {
         showStatsButton.setAlignmentY(0.0F);
         showStatsButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoCEM.jpeg"))); // NOI18N
+        jLabel1.setAlignmentY(0.0F);
+
         javax.swing.GroupLayout buttonsPanelLayout = new javax.swing.GroupLayout(buttonsPanel);
         buttonsPanel.setLayout(buttonsPanelLayout);
         buttonsPanelLayout.setHorizontalGroup(
@@ -128,12 +133,18 @@ public class MenuJFrame extends javax.swing.JFrame {
                     .addComponent(marxesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modifyRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createMarxaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(290, 290, 290))
+                .addGap(126, 126, 126)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41))
         );
         buttonsPanelLayout.setVerticalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(22, 22, 22))
             .addGroup(buttonsPanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(57, 57, 57)
                 .addComponent(marxesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addComponent(createMarxaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,9 +152,9 @@ public class MenuJFrame extends javax.swing.JFrame {
                 .addComponent(createRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addComponent(modifyRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(62, 62, 62)
                 .addComponent(showStatsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout backgroundPanelMenuLayout = new javax.swing.GroupLayout(backgroundPanelMenu);
@@ -201,6 +212,7 @@ public class MenuJFrame extends javax.swing.JFrame {
     private javax.swing.JButton createRunnerButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel exitPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton marxesButton;
     private javax.swing.JButton modifyRunnerButton;
     private javax.swing.JButton showStatsButton;
