@@ -15,7 +15,9 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
      */
     public RegisterParticipantDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Registrar esportista");
         initComponents();
     }
 
@@ -99,6 +101,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Federat");
+        jCheckBox1.setBorder(null);
         jCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jCheckBox1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {

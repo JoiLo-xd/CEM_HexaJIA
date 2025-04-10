@@ -28,6 +28,8 @@ public class MenuJFrame extends javax.swing.JFrame {
      */
     public MenuJFrame() {
         initComponents();
+        setTitle("Menu principal");
+        setResizable(false);
     }
 
     /**
@@ -197,10 +199,10 @@ public class MenuJFrame extends javax.swing.JFrame {
 
     private void createRunnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRunnerButtonActionPerformed
         // TODO add your handling code here:
-        RegisterParticipantDialog1 registerParticipantDialog1 = new RegisterParticipantDialog1(this, false);
-        this.setVisible(false);
-        registerParticipantDialog1.setVisible(true);
-        this.setVisible(true);
+        registerParticipantDialog = new RegisterParticipantDialog1(this, true);
+        setVisible(false);
+        registerParticipantDialog.setVisible(true);
+        setVisible(true);
     }//GEN-LAST:event_createRunnerButtonActionPerformed
 
 
