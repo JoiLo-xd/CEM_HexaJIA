@@ -8,17 +8,17 @@ package cem.view;
 //import cem.view.dialogsMenu2.EditParticipantDialog1;
 //import cem.view.dialogsMenu2.CreateMarxaDialog1;
 //import cem.view.dialogsMenu2.ShowMarxes1;
+import cem.view.dialogsMenu2.CreateMarxaDialog1;
 import cem.view.dialogsMenu2.RegisterParticipantDialog1;
-
 
 /**
  *
  * @author HexaJIA
  */
 public class MenuJFrame extends javax.swing.JFrame {
-    
+
 //    private ShowMarxes1 showMarxes;
-//    private CreateMarxaDialog1 createMarxaDialog;
+    private CreateMarxaDialog1 createMarxaDialog;
 //    private EditParticipantDialog1 editParticipantDialog;
     private RegisterParticipantDialog1 registerParticipantDialog;
 //    private WatchStatsDialog1 watchStatsDialog;
@@ -97,6 +97,11 @@ public class MenuJFrame extends javax.swing.JFrame {
         createMarxaButton.setText("Crear marxa");
         createMarxaButton.setAlignmentY(0.0F);
         createMarxaButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        createMarxaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createMarxaButtonActionPerformed(evt);
+            }
+        });
 
         modifyRunnerButton.setText("Modificar esportista");
         modifyRunnerButton.setAlignmentY(0.0F);
@@ -205,6 +210,11 @@ public class MenuJFrame extends javax.swing.JFrame {
         setVisible(true);
     }//GEN-LAST:event_createRunnerButtonActionPerformed
 
+    private void createMarxaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMarxaButtonActionPerformed
+        createMarxaDialog = new CreateMarxaDialog1(this, true);
+        setVisible(false);
+        createMarxaDialog.setVisible(true);
+        setVisible(true);    }//GEN-LAST:event_createMarxaButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
