@@ -27,6 +27,11 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
     public CreateMarxaDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        errorMessagejLabel.setVisible(false);
+        setTitle("Registrar marxa");
+        setModal(true);
+        setSize(600, 500);
+        setLocationRelativeTo(null);
         controller = Controller.getInstance();
     }
 
@@ -45,6 +50,7 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jButtonAceptar = new javax.swing.JButton();
         jSpinnerEdicio = new javax.swing.JSpinner();
+        errorMessagejLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,6 +93,14 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         });
 
         jSpinnerEdicio.setModel(new javax.swing.SpinnerNumberModel(2025, 2000, 2099, 1));
+        jSpinnerEdicio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerEdicioStateChanged(evt);
+            }
+        });
+
+        errorMessagejLabel.setForeground(java.awt.Color.red);
+        errorMessagejLabel.setText("**Aquesta marxa ja existeix");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,13 +115,19 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
                         .addGap(58, 58, 58)
                         .addComponent(jButtonAceptar)))
                 .addContainerGap(58, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(errorMessagejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(184, Short.MAX_VALUE)
                 .addComponent(jSpinnerEdicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorMessagejLabel)
+                .addGap(142, 142, 142)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonAceptar))
@@ -142,17 +162,27 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         Marxa m = new Marxa(edicio);
         try {
             controller.addMarxa(m);
-        } catch (SQLException | AdditionException ex) {
-            JOptionPane.showMessageDialog(this, "Error amb el número que has posat", "Erro", JOptionPane.ERROR_MESSAGE);
-        }     
+        } catch (SQLException ex) {
+            System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
+        } catch (AdditionException ex) {
+            System.out.println(ex.getMessage());
+        }
+            
         
+        dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jSpinnerEdicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerEdicioStateChanged
+        // TODO hay que hacer que si el valor es incorrecto o algo se muestre el mensage de error que hay oculto al iniciar, errorMessage:
+        
+    }//GEN-LAST:event_jSpinnerEdicioStateChanged
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel errorMessagejLabel;
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;

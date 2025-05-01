@@ -4,6 +4,8 @@ import cem.exceptions.AdditionException;
 import cem.exceptions.CorredoresException;
 import cem.model.Corredor;
 import cem.model.Marxa;
+import cem.persistence.cemDAO;
+import java.sql.SQLException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Controller {
+    private cemDAO dao;
     private static Controller controller;
     private Map<Integer, Marxa> marxes;
     private Map<String, Corredor> corredores;
@@ -20,6 +23,7 @@ public class Controller {
     private Controller(){
         this.marxes = new HashMap<Integer, Marxa>();
         this.corredores = new HashMap<String,Corredor>();
+        dao = new cemDAO();
 
     }
 
@@ -36,8 +40,11 @@ public class Controller {
     }
 
     // añade una marxa al hashmap
-    public void addMarxa(Integer i){
-        marxes.put(i, new Marxa(i));
+    public void addMarxa(Marxa m) throws SQLException, AdditionException{
+        if (dao.existMarxa(m)) {
+            throw new AdditionException("Ja existeix una marxa amb aquesta edició.");
+        }
+        dao.inserMarxa(m);
     }
 
     //metodo que valida que lo que ponga el usuario es un nif valido
