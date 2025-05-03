@@ -130,12 +130,12 @@ public class RegisterParticipantDialog extends JDialog {
             if (ok) {
                 try {
                     Sexe sexe = Sexe.valueOf(sexe1.toUpperCase());
-                    Corredor corredor = new Corredor(dni, nom, cognom, nacimiento, sexe, poblacio, telefon, email, entitat, federat);
-                    controller.addCorredor(corredor);
-                } catch (CorredoresException e) {
+//                    Corredor corredor = new Corredor(dni, nom, cognom, nacimiento, sexe, poblacio, telefon, email, entitat, federat);
+////                    controller.addCorredor(corredor);
+//                } catch (CorredoresException e) {
                     ok = false;
                     textoAMostrar = "Faltan alguns camps per posar";
-                } catch (AdditionException e) {
+//                } catch (AdditionException e) {
                     ok = false;
                     textoAMostrar = "Aquest corredor ja estaba registrat";
                 } catch (IllegalArgumentException e){
