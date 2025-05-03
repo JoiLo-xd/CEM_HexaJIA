@@ -4,11 +4,22 @@
  */
 package cem.view.dialogsMenu2;
 
+import cem.controller.Controller;
+import cem.enums.Sexe;
+import cem.model.Corredor;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class RegisterParticipantDialog1 extends javax.swing.JDialog {
+
+    private Controller controller;
 
     /**
      * Creates new form RegisterParticipantDialog
@@ -20,6 +31,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         setResizable(false);
         initComponents();
         setLocationRelativeTo(null);
+        controller = Controller.getInstance();
     }
 
     /**
@@ -108,6 +120,11 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         fedejCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 fedejCheckBoxStateChanged(evt);
+            }
+        });
+        fedejCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fedejCheckBoxActionPerformed(evt);
             }
         });
 
@@ -263,8 +280,42 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
-        // TODO add your handling code here:
+
         dispose();
+        boolean ok = true;
+        String textoAMostrar = "Error";
+        if (!controller.validateNif(DNIjTextField.getText())) {
+            ok = false;
+            textoAMostrar = "DNI Invalido";
+        } else if (!controller.validateTlf(telfjTextField.getText())) {
+            ok = false;
+            textoAMostrar = "Telefon Malament";
+        } else if (!controller.validateEmail(mailjTextField.getText())) {
+            ok = false;
+            textoAMostrar = "Email malament";
+        } else {
+            String dni = DNIjTextField.getText();
+            String nom = namejTextField.getText();
+            String cognom = cognomsjTextField.getText();
+            Instant instant = ((Date) birthDatejSpinner.getValue()).toInstant();
+            LocalDate nacimiento = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            String sexe = (String) sexejComboBox.getSelectedItem();
+            String Poblacio = townjTextField.getText();
+            String tel = telfjTextField.getText();
+            String mail = mailjTextField.getText();
+            //NOSE HACER ENTITAT Y FEDERAT
+
+        }
+        if (!ok) {
+            JOptionPane.showMessageDialog(this, textoAMostrar, "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Participant Registrat!", "Registrat!", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
+
+        //dispose();
+
     }//GEN-LAST:event_acceptjButtonActionPerformed
 
     private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceljButtonActionPerformed
@@ -280,6 +331,10 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             fedejTextField.setEnabled(false);
         }
     }//GEN-LAST:event_fedejCheckBoxStateChanged
+
+    private void fedejCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fedejCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fedejCheckBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
