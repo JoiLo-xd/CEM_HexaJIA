@@ -303,7 +303,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             String Poblacio = townjTextField.getText();
             String tel = telfjTextField.getText();
             String mail = mailjTextField.getText();
-            //NOSE HACER ENTITAT Y FEDERAT
+            //NOSE HACER ENTITAT Y FEDERAT por lo del boton
+            
 
         }
         if (!ok) {
