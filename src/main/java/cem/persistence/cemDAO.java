@@ -77,25 +77,15 @@ public class cemDAO {
         return existe;
     }
 
-    public boolean existMarxa2015(int n) throws SQLException {
-        Connection c = conectar();
-        Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("select * from marxa where edicio = '" + n + "';");
-        boolean existe = rs.next();
-        rs.close();
-        st.close();
-        desconectar(c);
-        return existe;
-    }
 
-    public void insertParticpant(Corredor corredor) throws SQLException {
+    public void insertParticipant(Corredor corredor) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("insert into coche values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         ps.setString(1, corredor.getNif());
         ps.setString(2, corredor.getNom());
         ps.setString(3, corredor.getCognoms());
         ps.setDate(4, Date.valueOf(corredor.getDataNaixement()));
-        ps.setBoolean(5, corredor.isSexe());
+        ps.setString(5, corredor.getSexe());
         ps.setString(6, corredor.getPoblacio());
         ps.setString(7, corredor.getNumTelefon());
         ps.setString(8, corredor.getEmail());
@@ -116,7 +106,7 @@ public class cemDAO {
         desconectar(c);
     }
     
-        public boolean existParticpant(Corredor corredor) throws SQLException {
+        public boolean existParticipant(Corredor corredor) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("select * from corredor where nif = '" + corredor.getNif() + "';");

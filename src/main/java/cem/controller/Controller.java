@@ -46,7 +46,7 @@ public class Controller {
         if (dao.existMarxa(m)) {
             throw new AdditionException("Ja existeix una marxa amb aquesta edició.");
         }
-        dao.inserMarxa(m);
+        dao.insertMarxa(m);
     }
     
     public boolean existMarxa(Marxa m) throws SQLException, AdditionException{
@@ -55,6 +55,7 @@ public class Controller {
         }
         return false;
     }
+
 
     //metodo que valida que lo que ponga el usuario es un nif valido
     public boolean validateNif(String nif) {    //comprovación de nif, tien una formula para saver si es real o no

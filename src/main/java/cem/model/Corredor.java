@@ -11,16 +11,17 @@ public class Corredor {
     private String nom;
     private String cognoms;
     private LocalDate dataNaixement;
-    private Sexe sexe;
+    private String sexe;
     private String poblacio;
     private String numTelefon;
     private String email;
     private String entitat;
     private boolean federat;
+    private String observacions;
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
     // constructor de corredor, se valida que no deje un campo vacio
-    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
+    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, String sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
         if ( nom.equals("") ||poblacio.equals("") ||cognoms.equals("") || entitat.equals("")){
             throw new CorredoresException("Faltan campos");
         }else {
@@ -59,7 +60,7 @@ public class Corredor {
         this.cognoms = cognoms;
     }
 
-    public void setSexe(Sexe sexe) {
+    public void setSexe(String sexe) {
         this.sexe = sexe;
     } //validar sexe //REVISAR
 
@@ -103,7 +104,7 @@ public class Corredor {
         return poblacio;
     }
 
-    public Sexe getSexe() {
+    public String getSexe() {
         return sexe;
     }
 
@@ -123,13 +124,17 @@ public class Corredor {
         return federat;
     }
 
+    public String getObservacions() {
+        return observacions;
+    }
+
 
 
     @Override
     public String toString() {
         String esfederat = federat ? "Si" : "No";
         String returned = "NIF: " + getNif() + "    " + getNom() + " " + getCognoms() +"\n"
-                + "   Data naixement: " + getDataNaixement() + "   Sexe: " + getSexe() +"\n"
+                + "   Data naixement: " + getDataNaixement() + "   Sexe: " + getSexe()+"\n"
                 + "    Poblacio: " + getPoblacio() + "    NumTelèfon: " + getNumTelefon() + "   Email: " + getEmail() +"\n"
                 + "    Entitat: " + getEntitat() + "    Federat: " + esfederat;
          // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS

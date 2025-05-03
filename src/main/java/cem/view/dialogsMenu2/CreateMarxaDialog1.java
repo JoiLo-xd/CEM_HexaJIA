@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  * @author ivang
  */
 public class CreateMarxaDialog1 extends javax.swing.JDialog {
-    private Controller controller;
 
+    private Controller controller;
 
     /**
      * Creates new form CreateMarxaDialog1
@@ -34,6 +34,7 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
         controller = Controller.getInstance();
+        jSpinnerEdicioStateChanged(null);
     }
 
     /**
@@ -160,21 +161,20 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         try {
-            controller.addMarxa(new Marxa((int)jSpinnerEdicio.getValue()));
+            controller.addMarxa(new Marxa((int) jSpinnerEdicio.getValue()));
         } catch (SQLException ex) {
             System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
         } catch (AdditionException ex) {
             System.out.println(ex.getMessage());
         }
-            
-        
+
         dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jSpinnerEdicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerEdicioStateChanged
         try {
             // TODO hay que hacer que si la marxa ya existe se muestre el mensage de error que hay oculto al iniciar, errorMessage
-            if (controller.existMarxa(new Marxa((int)jSpinnerEdicio.getValue()))) {
+            if (controller.existMarxa(new Marxa((int) jSpinnerEdicio.getValue()))) {
                 errorMessagejLabel.setVisible(true);
                 jButtonAceptar.setEnabled(false);
             } else {
