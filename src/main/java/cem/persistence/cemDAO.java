@@ -4,7 +4,7 @@
  */
 package cem.persistence;
 
-import cem.model.Corredor;
+import cem.model.Participant;
 import cem.model.Marxa;
 import cem.model.TO.ParticipantEditionTO;
 import java.sql.Connection;
@@ -78,7 +78,7 @@ public class cemDAO {
     }
 
 
-    public void insertParticipant(Corredor corredor) throws SQLException {
+    public void insertParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("insert into coche values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         ps.setString(1, corredor.getNif());
@@ -106,7 +106,7 @@ public class cemDAO {
         desconectar(c);
     }
     
-        public boolean existParticipant(Corredor corredor) throws SQLException {
+        public boolean existParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("select * from corredor where nif = '" + corredor.getNif() + "';");

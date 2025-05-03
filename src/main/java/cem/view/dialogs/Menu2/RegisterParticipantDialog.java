@@ -4,7 +4,7 @@ import cem.controller.Controller;
 import cem.enums.Sexe;
 import cem.exceptions.AdditionException;
 import cem.exceptions.CorredoresException;
-import cem.model.Corredor;
+import cem.model.Participant;
 
 import javax.swing.*;
 import java.awt.*;

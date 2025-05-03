@@ -2,7 +2,7 @@ package cem.controller;
 
 import cem.exceptions.AdditionException;
 import cem.exceptions.CorredoresException;
-import cem.model.Corredor;
+import cem.model.Participant;
 import cem.model.Marxa;
 import cem.model.TO.ParticipantEditionTO;
 import cem.persistence.cemDAO;
@@ -18,13 +18,13 @@ public class Controller {
     private cemDAO dao;
     private static Controller controller;
     private Map<Integer, Marxa> marxes;
-    private Map<String, Corredor> corredores;
+    private Map<String, Participant> corredores;
     private final String REG_TLF = "^6[0-9]{8}$";
     private final String REG_MAIL = ".+@.+\\..+$";
 
     private Controller(){
         this.marxes = new HashMap<Integer, Marxa>();
-        this.corredores = new HashMap<String,Corredor>();
+        this.corredores = new HashMap<String,Participant>();
         dao = new cemDAO();
 
     }
@@ -85,11 +85,11 @@ public class Controller {
     }
 
     // añade un corredor al hashmap
-    public void addCorredor(Corredor corredor) throws AdditionException{
+    public void addParticipant(Participant corredor) throws AdditionException{
         if (!corredores.containsKey(corredor.getNif())) {
             corredores.put(corredor.getNif(), corredor);
         }else{
-            throw new AdditionException("Ya existeix aquest corredor");
+            throw new AdditionException("Ya existeix aquest participant");
         }
     }
 

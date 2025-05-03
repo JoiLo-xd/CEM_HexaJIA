@@ -17,10 +17,10 @@ public class Inscripcio {
     private LocalTime horaArribada;
     private Duration tempsTotal;
     private Asistencia asistencia;
-    private Corredor corredor;
+    private Participant corredor;
 
     //constructor
-    public Inscripcio(int dorsal, boolean modalitat, Corredor corredor) {
+    public Inscripcio(int dorsal, boolean modalitat, Participant corredor) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.corredor = corredor;
@@ -32,7 +32,7 @@ public class Inscripcio {
     }
 
     //constructor
-    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Corredor corredor){
+    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor){
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.horaSortida = horaSortida;
@@ -88,7 +88,7 @@ public class Inscripcio {
         return asistencia;
     }
 
-    public Corredor getCorredor() {
+    public Participant getCorredor() {
         return corredor;
     }
 

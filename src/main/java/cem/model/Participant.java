@@ -6,7 +6,7 @@ import cem.exceptions.CorredoresException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Corredor {
+public class Participant {
     private final String nif;
     private String nom;
     private String cognoms;
@@ -21,7 +21,7 @@ public class Corredor {
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
     // constructor de corredor, se valida que no deje un campo vacio
-    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, String sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
+    public Participant(String nif, String nom, String cognoms, LocalDate dataNaixement, String sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
         if ( nom.equals("") ||poblacio.equals("") ||cognoms.equals("") || entitat.equals("")){
             throw new CorredoresException("Faltan campos");
         }else {
@@ -33,12 +33,12 @@ public class Corredor {
             this.poblacio = poblacio;
             this.numTelefon = numTelefon;
             this.email = email;
-            this.entitat = entitat;
+            this.entitat = federat ? entitat : "no federat";
             this.federat = federat;
         }
     }
 
-    public Corredor(String nif){
+    public Participant(String nif){
         this.nif = nif;
     }
 
@@ -144,7 +144,7 @@ public class Corredor {
     //equals para comparar si ya esxiste el corredor
     @Override
     public boolean equals(Object o) {
-        Corredor obj = (Corredor) o;
+        Participant obj = (Participant) o;
         if (obj.getNif().equalsIgnoreCase(getNif())) return true;
         return false;
     }

@@ -6,11 +6,17 @@ package cem.view.dialogsMenu2;
 
 import cem.controller.Controller;
 import cem.enums.Sexe;
-import cem.model.Corredor;
+import cem.exceptions.AdditionException;
+import cem.exceptions.CorredoresException;
+import cem.model.Participant;
+import java.awt.Color;
+import java.awt.event.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -122,11 +128,6 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 fedejCheckBoxStateChanged(evt);
             }
         });
-        fedejCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fedejCheckBoxActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout titlesjPanelLayout = new javax.swing.GroupLayout(titlesjPanel);
         titlesjPanel.setLayout(titlesjPanelLayout);
@@ -177,9 +178,36 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
         DNIjTextField.setForeground(new java.awt.Color(204, 204, 204));
         DNIjTextField.setText("00000000A");
+        DNIjTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DNIjTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                DNIjTextFieldFocusLost(evt);
+            }
+        });
+        DNIjTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DNIjTextFieldMouseClicked(evt);
+            }
+        });
 
+        fedejTextField.setForeground(new java.awt.Color(204, 204, 204));
         fedejTextField.setText("Entitat");
         fedejTextField.setEnabled(false);
+        fedejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fedejTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fedejTextFieldFocusLost(evt);
+            }
+        });
+        fedejTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fedejTextFieldMouseClicked(evt);
+            }
+        });
 
         birthDatejSpinner.setModel(new javax.swing.SpinnerDateModel());
 
@@ -300,11 +328,19 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             Instant instant = ((Date) birthDatejSpinner.getValue()).toInstant();
             LocalDate nacimiento = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             String sexe = (String) sexejComboBox.getSelectedItem();
-            String Poblacio = townjTextField.getText();
+            String poblacio = townjTextField.getText();
             String tel = telfjTextField.getText();
             String mail = mailjTextField.getText();
-            //NOSE HACER ENTITAT Y FEDERAT por lo del boton
+            Boolean fede = fedejCheckBox.isEnabled();
+            String entitat = fede ? fedejTextField.getText() : "";
             
+            try {
+                controller.addParticipant(new Participant(dni, nom, cognom, nacimiento, sexe, poblacio, tel, mail, entitat, fede));
+            } catch (CorredoresException ex) {
+                System.out.println(ex.getMessage());
+            } catch (AdditionException ex) {
+                System.out.println(ex.getMessage());
+            }
 
         }
         if (!ok) {
@@ -333,9 +369,66 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_fedejCheckBoxStateChanged
 
-    private void fedejCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fedejCheckBoxActionPerformed
+    private void DNIjTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DNIjTextFieldMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_fedejCheckBoxActionPerformed
+        if (DNIjTextField.getText().equals("00000000A")) {
+                DNIjTextField.setText("");
+                DNIjTextField.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_DNIjTextFieldMouseClicked
+
+    private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNIjTextFieldFocusLost
+        // TODO add your handling code here:
+        if (DNIjTextField.getText().isEmpty()) {
+                DNIjTextField.setForeground(Color.GRAY);
+                DNIjTextField.setText("00000000A");
+        }
+        DNIjTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String texto = DNIjTextField.getText();
+                if (!texto.equals("00000000A") && !texto.isEmpty()) {
+                    boolean esValido = controller.validateNif(texto);
+                    DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
+                } else {
+                    DNIjTextField.setBackground(Color.WHITE);
+                }
+            }
+        });
+    }//GEN-LAST:event_DNIjTextFieldFocusLost
+
+    private void DNIjTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNIjTextFieldFocusGained
+        // TODO add your handling code here:
+        if (DNIjTextField.getText().equals("00000000A")) {
+                DNIjTextField.setText("");
+                DNIjTextField.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_DNIjTextFieldFocusGained
+
+    private void fedejTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fedejTextFieldMouseClicked
+        // TODO add your handling code here:
+        if (fedejTextField.getText().equals("Entitat")) {
+                fedejTextField.setText("");
+                fedejTextField.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_fedejTextFieldMouseClicked
+
+    private void fedejTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusGained
+        // TODO add your handling code here:
+        if (fedejTextField.getText().equals("Entitat")) {
+                fedejTextField.setText("");
+                fedejTextField.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_fedejTextFieldFocusGained
+
+    private void fedejTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusLost
+        // TODO add your handling code here:
+        
+        if (fedejTextField.getText().isEmpty()) {
+                fedejTextField.setForeground(Color.GRAY);
+                fedejTextField.setText("Entitat");
+        }
+    }//GEN-LAST:event_fedejTextFieldFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
