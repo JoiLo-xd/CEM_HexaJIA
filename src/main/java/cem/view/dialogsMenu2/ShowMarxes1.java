@@ -4,11 +4,22 @@
  */
 package cem.view.dialogsMenu2;
 
+import cem.controller.Controller;
+import cem.model.Marxa;
+import cem.model.TO.ParticipantEditionTO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admin
  */
 public class ShowMarxes1 extends javax.swing.JDialog {
+    private Controller controller;
+    private ArrayList<ParticipantEditionTO> marxes;
 
     /**
      * Creates new form ShowMarxes1
@@ -21,6 +32,7 @@ public class ShowMarxes1 extends javax.swing.JDialog {
         setResizable(false);
         initComponents();
         setLocationRelativeTo(null);
+        controller = Controller.getInstance();
     }
 
     /**
@@ -119,6 +131,25 @@ public class ShowMarxes1 extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
+    
+    private void listMarxes() {
+        try {
+            marxes = controller.getMarxes();
+        } catch (SQLException ex) {
+            System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
+        }
+        DefaultTableModel dtm = new DefaultTableModel(new String[] {"Edició", "Participants"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // ninguna celda editable
+            }
+        };
+        for (ParticipantEditionTO p : marxes){
+            dtm.addRow(new Integer[] { p.getEdicio(),p.getNumParticipants()});
+        }
+        jTable.setModel(dtm);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backgroundButtonjPanel1;

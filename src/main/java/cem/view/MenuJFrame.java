@@ -10,6 +10,7 @@ package cem.view;
 //import cem.view.dialogsMenu2.ShowMarxes1;
 import cem.view.dialogsMenu2.CreateMarxaDialog1;
 import cem.view.dialogsMenu2.RegisterParticipantDialog1;
+import cem.view.dialogsMenu2.ShowMarxes1;
 
 /**
  *
@@ -17,7 +18,7 @@ import cem.view.dialogsMenu2.RegisterParticipantDialog1;
  */
 public class MenuJFrame extends javax.swing.JFrame {
 
-//    private ShowMarxes1 showMarxes;
+    private ShowMarxes1 showMarxes;
     private CreateMarxaDialog1 createMarxaDialog;
 //    private EditParticipantDialog1 editParticipantDialog;
     private RegisterParticipantDialog1 registerParticipantDialog;
@@ -103,15 +104,20 @@ public class MenuJFrame extends javax.swing.JFrame {
             }
         });
 
-        modifyRunnerButton.setText("Modificar esportista");
+        modifyRunnerButton.setText("Modificar inscripció");
         modifyRunnerButton.setAlignmentY(0.0F);
         modifyRunnerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         marxesButton.setText("Marxes");
         marxesButton.setAlignmentY(0.0F);
         marxesButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        marxesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                marxesButtonActionPerformed(evt);
+            }
+        });
 
-        createRunnerButton.setText("Alta esportista");
+        createRunnerButton.setText("Alta participant");
         createRunnerButton.setAlignmentY(0.0F);
         createRunnerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         createRunnerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +221,14 @@ public class MenuJFrame extends javax.swing.JFrame {
         setVisible(false);
         createMarxaDialog.setVisible(true);
         setVisible(true);    }//GEN-LAST:event_createMarxaButtonActionPerformed
+
+    private void marxesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marxesButtonActionPerformed
+        // TODO add your handling code here:
+        showMarxes = new ShowMarxes1(this, true);
+        setVisible(false);
+        showMarxes.setVisible(true);
+        setVisible(true);
+    }//GEN-LAST:event_marxesButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

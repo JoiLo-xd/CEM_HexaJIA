@@ -32,6 +32,7 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         setModal(true);
         setSize(600, 500);
         setLocationRelativeTo(null);
+        setResizable(false);
         controller = Controller.getInstance();
     }
 
@@ -158,10 +159,8 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        int edicio = (int)jSpinnerEdicio.getValue();
-        Marxa m = new Marxa(edicio);
         try {
-            controller.addMarxa(m);
+            controller.addMarxa(new Marxa((int)jSpinnerEdicio.getValue()));
         } catch (SQLException ex) {
             System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
         } catch (AdditionException ex) {
@@ -173,8 +172,20 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jSpinnerEdicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerEdicioStateChanged
-        // TODO hay que hacer que si el valor es incorrecto o algo se muestre el mensage de error que hay oculto al iniciar, errorMessage:
-        
+        try {
+            // TODO hay que hacer que si la marxa ya existe se muestre el mensage de error que hay oculto al iniciar, errorMessage
+            if (controller.existMarxa(new Marxa((int)jSpinnerEdicio.getValue()))) {
+                errorMessagejLabel.setVisible(true);
+                jButtonAceptar.setEnabled(false);
+            } else {
+                errorMessagejLabel.setVisible(false);
+                jButtonAceptar.setEnabled(true);
+            }
+        } catch (SQLException ex) {
+            System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
+        } catch (AdditionException ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_jSpinnerEdicioStateChanged
 
     /**

@@ -8,10 +8,15 @@ public class Marxa {
     private int edicio;
     private ArrayList<Inscripcio> inscripcionsMarxa;
 
-    //contrscutor
+    //constructor
     public Marxa(int edicio) {
         this.edicio = edicio;
         inscripcionsMarxa = new ArrayList<>();
+    }
+
+    public Marxa(int edicio, ArrayList<Inscripcio> inscripcionsMarxa) {
+        this.edicio = edicio;
+        this.inscripcionsMarxa = inscripcionsMarxa;
     }
 
 

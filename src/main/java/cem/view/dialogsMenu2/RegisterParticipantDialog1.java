@@ -15,10 +15,11 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
      */
     public RegisterParticipantDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setLocationRelativeTo(null);
+        setTitle("Registrar participant");
+        setModal(true);
         setResizable(false);
-        setTitle("Registrar esportista");
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -243,7 +244,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(0, 0, 0)
                 .addComponent(titlesjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(valuesjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

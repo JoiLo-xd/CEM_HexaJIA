@@ -4,8 +4,10 @@ import cem.exceptions.AdditionException;
 import cem.exceptions.CorredoresException;
 import cem.model.Corredor;
 import cem.model.Marxa;
+import cem.model.TO.ParticipantEditionTO;
 import cem.persistence.cemDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,8 +37,8 @@ public class Controller {
 
     }
 
-    public Map<Integer,Marxa> getMarxes(){
-        return marxes;
+    public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException{
+        return dao.getMarxes();
     }
 
     // añade una marxa al hashmap
@@ -45,6 +47,13 @@ public class Controller {
             throw new AdditionException("Ja existeix una marxa amb aquesta edició.");
         }
         dao.inserMarxa(m);
+    }
+    
+    public boolean existMarxa(Marxa m) throws SQLException, AdditionException{
+        if (dao.existMarxa(m)) {
+            return true;
+        }
+        return false;
     }
 
     //metodo que valida que lo que ponga el usuario es un nif valido

@@ -5,12 +5,14 @@
 package cem.persistence;
 
 import cem.model.Marxa;
+import cem.model.TO.ParticipantEditionTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,6 +39,29 @@ public class cemDAO {
         ps.executeUpdate();
         ps.close();
         desconectar(c);
+    }
+    
+    public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException {
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("SELECT edicio FROM marxa");
+        ArrayList<ParticipantEditionTO> marxes = new ArrayList<>();
+        while (rs.next()) {
+            int edicio = rs.getInt("edicio");
+            Statement st2 = c.createStatement();
+            ResultSet rs2 = st2.executeQuery("SELECT COUNT(*) FROM participa WHERE edicio = " + edicio);
+            int numParticipants = 0;
+            if (rs2.next()) {
+                numParticipants = rs2.getInt(1);
+            }
+            rs2.close();
+            st2.close();
+        marxes.add(new ParticipantEditionTO(edicio, numParticipants));
+        }
+        rs.close();
+        st.close();
+        desconectar(c);
+        return marxes;
     }
     
     public boolean existMarxa(Marxa marxa) throws SQLException {

@@ -30,7 +30,7 @@ public class ShowMarxes extends JDialog {
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
         controller = Controller.getInstance();
-        listMarxes();
+//        listMarxes();
 
         //accion boton OK
         buttonOK.addActionListener(new ActionListener() {
@@ -64,19 +64,19 @@ public class ShowMarxes extends JDialog {
     }
 
     //MUestra una tabla en la que se van añadiendo las marxas
-    private void listMarxes() {
-        marxes = (HashMap<Integer,Marxa>) controller.getMarxes();
-        DefaultTableModel dtm = new DefaultTableModel(new String[] {"Edició", "Participants"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // ninguna celda editable
-            }
-        };
-        for (Marxa m : marxes.values()){
-            dtm.addRow(new Integer[] { m.getEdicio(),m.getInscripcionsMarxa().size()});
-        }
-        marxesTable.setModel(dtm);
-    }
+//    private void listMarxes() {
+//        marxes = (HashMap<Integer,Marxa>) controller.getMarxes();
+//        DefaultTableModel dtm = new DefaultTableModel(new String[] {"Edició", "Participants"}, 0) {
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                return false; // ninguna celda editable
+//            }
+//        };
+//        for (Marxa m : marxes.values()){
+//            dtm.addRow(new Integer[] { m.getEdicio(),m.getInscripcionsMarxa().size()});
+//        }
+//        marxesTable.setModel(dtm);
+//    }
 
     private void onOK() {
         // add your code here
