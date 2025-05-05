@@ -289,7 +289,7 @@
                   <Component id="mailjTextField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="fedejTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="55" max="32767" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="acceptjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="canceljButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -320,8 +320,14 @@
         <Component class="javax.swing.JTextField" name="townjTextField">
         </Component>
         <Component class="javax.swing.JTextField" name="telfjTextField">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="telfjTextFieldFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="mailjTextField">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="mailjTextFieldFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="fedejTextField">
           <Properties>
@@ -360,6 +366,7 @@
         <Component class="javax.swing.JButton" name="acceptjButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Acceptar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acceptjButtonActionPerformed"/>

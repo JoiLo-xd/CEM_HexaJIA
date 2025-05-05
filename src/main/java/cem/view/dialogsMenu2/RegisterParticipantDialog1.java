@@ -192,6 +192,18 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             }
         });
 
+        telfjTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telfjTextFieldFocusLost(evt);
+            }
+        });
+
+        mailjTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                mailjTextFieldFocusLost(evt);
+            }
+        });
+
         fedejTextField.setForeground(new java.awt.Color(204, 204, 204));
         fedejTextField.setText("Entitat");
         fedejTextField.setEnabled(false);
@@ -214,6 +226,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         sexejComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Home", "Dona" }));
 
         acceptjButton.setText("Acceptar");
+        acceptjButton.setEnabled(false);
         acceptjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptjButtonActionPerformed(evt);
@@ -277,7 +290,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 .addComponent(mailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(fedejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(acceptjButton)
                     .addComponent(canceljButton))
@@ -308,7 +321,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
-
+/*
         dispose();
         boolean ok = true;
         String textoAMostrar = "Error";
@@ -332,8 +345,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             String tel = telfjTextField.getText();
             String mail = mailjTextField.getText();
             Boolean fede = fedejCheckBox.isEnabled();
-            String entitat = fede ? fedejTextField.getText() : "";
-            
+            //String entitat = fede ? fednamejTextFieldejTextField.getText() : "";
+
             try {
                 controller.addParticipant(new Participant(dni, nom, cognom, nacimiento, sexe, poblacio, tel, mail, entitat, fede));
             } catch (CorredoresException ex) {
@@ -352,7 +365,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
 
         //dispose();
-
+*/
     }//GEN-LAST:event_acceptjButtonActionPerformed
 
     private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceljButtonActionPerformed
@@ -372,12 +385,53 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     private void DNIjTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DNIjTextFieldMouseClicked
         // TODO add your handling code here:
         if (DNIjTextField.getText().equals("00000000A")) {
-                DNIjTextField.setText("");
-                DNIjTextField.setForeground(Color.BLACK);
+            DNIjTextField.setText("");
+            DNIjTextField.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_DNIjTextFieldMouseClicked
-
+    /*
     private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNIjTextFieldFocusLost
+        // TODO add your handling code here:
+        if (DNIjTextField.getText().isEmpty()) {
+                DNIjTextField.setForeground(Color.GRAY);
+                DNIjTextField.setText("00000000A");
+        }
+        DNIjTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String texto = DNIjTextField.getText();
+                if (!texto.equals("00000000A") && !texto.isEmpty()) {
+                    boolean esValido = controller.validateNif(texto);
+                    DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
+                } else {
+                    DNIjTextField.setBackground(Color.WHITE);
+                }
+            }
+    }                                             
+
+    private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        dispose();
+    }                                             
+
+    private void fedejCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {                                           
+        // TODO add your handling code here:
+        if (fedejCheckBox.isSelected()) {
+            fedejTextField.setEnabled(true);
+        } else {
+            fedejTextField.setEnabled(false);
+        }
+    }                                          
+
+    private void DNIjTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        // TODO add your handling code here:
+        if (DNIjTextField.getText().equals("00000000A")) {
+            DNIjTextField.setText("");
+            DNIjTextField.setForeground(Color.BLACK);
+        }
+    }                                          
+    /*
+    private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {                                        
         // TODO add your handling code here:
         if (DNIjTextField.getText().isEmpty()) {
                 DNIjTextField.setForeground(Color.GRAY);
@@ -396,39 +450,86 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             }
         });
     }//GEN-LAST:event_DNIjTextFieldFocusLost
+*/
+    private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (DNIjTextField.getText().isEmpty()) {
+            DNIjTextField.setForeground(Color.GRAY);
+            DNIjTextField.setBackground(Color.WHITE);
+            DNIjTextField.setText("00000000A");
+        } else {
+
+            String texto = DNIjTextField.getText();
+            boolean esValido = controller.validateNif(texto);
+            DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
+            checkbotones();
+        }
+    }
+    
+    private void checkbotones(){
+        boolean aprobate;
+        if (controller.validateNif(DNIjTextField.getText()) && controller.validateEmail(mailjTextField.getText()) && controller.validateTlf(telfjTextField.getText())
+                && !namejTextField.getText().isEmpty() && !cognomsjTextField.getText().isEmpty() && !townjTextField.getText().isEmpty()){
+            acceptjButton.setEnabled(true);
+        }else{
+            acceptjButton.setEnabled(false);
+        }
+    }
+    
+    
+    
+
 
     private void DNIjTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNIjTextFieldFocusGained
         // TODO add your handling code here:
         if (DNIjTextField.getText().equals("00000000A")) {
-                DNIjTextField.setText("");
-                DNIjTextField.setForeground(Color.BLACK);
+            DNIjTextField.setText("");
+            DNIjTextField.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_DNIjTextFieldFocusGained
 
     private void fedejTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fedejTextFieldMouseClicked
         // TODO add your handling code here:
         if (fedejTextField.getText().equals("Entitat")) {
-                fedejTextField.setText("");
-                fedejTextField.setForeground(Color.BLACK);
+            fedejTextField.setText("");
+            fedejTextField.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_fedejTextFieldMouseClicked
 
     private void fedejTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusGained
         // TODO add your handling code here:
         if (fedejTextField.getText().equals("Entitat")) {
-                fedejTextField.setText("");
-                fedejTextField.setForeground(Color.BLACK);
+            fedejTextField.setText("");
+            fedejTextField.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_fedejTextFieldFocusGained
 
     private void fedejTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusLost
         // TODO add your handling code here:
-        
+
         if (fedejTextField.getText().isEmpty()) {
-                fedejTextField.setForeground(Color.GRAY);
-                fedejTextField.setText("Entitat");
+            fedejTextField.setForeground(Color.GRAY);
+            fedejTextField.setText("Entitat");
         }
     }//GEN-LAST:event_fedejTextFieldFocusLost
+
+    private void telfjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telfjTextFieldFocusLost
+        if (!controller.validateTlf(telfjTextField.getText())){
+            telfjTextField.setBackground(Color.PINK);
+        }else{
+            telfjTextField.setBackground(Color.GREEN);
+            checkbotones();
+        }
+    }//GEN-LAST:event_telfjTextFieldFocusLost
+
+    private void mailjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mailjTextFieldFocusLost
+        if (!controller.validateEmail(mailjTextField.getText())){
+            mailjTextField.setBackground(Color.PINK);
+        }else{
+            mailjTextField.setBackground(Color.GREEN);
+            checkbotones();
+        }
+    }//GEN-LAST:event_mailjTextFieldFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
