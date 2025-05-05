@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
  * @author admin
  */
 public class ShowMarxes1 extends javax.swing.JDialog {
+
     private Controller controller;
-    private ArrayList<ParticipantEditionTO> marxes;
 
     /**
      * Creates new form ShowMarxes1
@@ -33,6 +35,7 @@ public class ShowMarxes1 extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         controller = Controller.getInstance();
+        listMarxes();
     }
 
     /**
@@ -97,6 +100,11 @@ public class ShowMarxes1 extends javax.swing.JDialog {
                 return types [columnIndex];
             }
         });
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
         jScrollPane.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,29 +134,37 @@ public class ShowMarxes1 extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_canceljButtonActionPerformed
 
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        // TODO add your handling code here:
+        JTable source = (JTable)evt.getSource();
+            int row = source.rowAtPoint( evt.getPoint() );
+            int column = source.columnAtPoint( evt.getPoint() );
+            String s=source.getModel().getValueAt(row, column)+"";
+
+            JOptionPane.showMessageDialog(null, s);
+    }//GEN-LAST:event_jTableMouseClicked
+
     //TODO false ahcer el metodo para meter los valores en la tabla
-    
     /**
      * @param args the command line arguments
      */
-    
-    
     private void listMarxes() {
         try {
-            marxes = controller.getMarxes();
+            ArrayList<ParticipantEditionTO> marxes = controller.getMarxes();
+            DefaultTableModel dtm = new DefaultTableModel(new String[]{"Edició", "Participants"}, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // ninguna celda editable
+                }
+            };
+            for (ParticipantEditionTO p : marxes) {
+                dtm.addRow(new Integer[]{p.getEdicio(), p.getNumParticipants()});
+            }
+            jTable.setModel(dtm);
         } catch (SQLException ex) {
             System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
         }
-        DefaultTableModel dtm = new DefaultTableModel(new String[] {"Edició", "Participants"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // ninguna celda editable
-            }
-        };
-        for (ParticipantEditionTO p : marxes){
-            dtm.addRow(new Integer[] { p.getEdicio(),p.getNumParticipants()});
-        }
-        jTable.setModel(dtm);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
