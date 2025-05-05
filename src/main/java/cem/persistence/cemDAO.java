@@ -24,8 +24,8 @@ public class cemDAO {
 
     private Connection conectar() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/cem";
-        String user = "root";
-        String pass = "root";
+        String user = "user1";
+        String pass = "Asdqwe123";
         Connection c = DriverManager.getConnection(url, user, pass);
         return c;
     }
@@ -42,7 +42,7 @@ public class cemDAO {
         while (rs.next()) {
             int edicio = rs.getInt("edicio");
             Statement st2 = c.createStatement();
-            ResultSet rs2 = st2.executeQuery("SELECT COUNT(*) FROM participants WHERE edicio = " + edicio);
+            ResultSet rs2 = st2.executeQuery("SELECT COUNT(*) FROM inscripcio WHERE edicio = " + edicio);
             int numParticipants = 0;
             if (rs2.next()) {
                 numParticipants = rs2.getInt(1);
