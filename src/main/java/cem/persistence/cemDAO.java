@@ -85,7 +85,7 @@ public class cemDAO {
         ps.setString(2, corredor.getNom());
         ps.setString(3, corredor.getCognoms());
         ps.setDate(4, Date.valueOf(corredor.getDataNaixement()));
-        ps.setString(5, corredor.getSexe());
+        ps.setBoolean(5, corredor.isSexe());
         ps.setString(6, corredor.getPoblacio());
         ps.setString(7, corredor.getNumTelefon());
         ps.setString(8, corredor.getEmail());
