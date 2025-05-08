@@ -33,13 +33,12 @@ public class Inscripcio {
     }
 
     //constructor
-    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor, long codi){
+    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor){
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.horaSortida = horaSortida;
         this.horaArribada = horaArribada;
         this.corredor = corredor;
-        this.codi = codi;
     }
 
     //SETTERS Y GETTERS
@@ -92,6 +91,10 @@ public class Inscripcio {
 
     public Participant getCorredor() {
         return corredor;
+    }
+    
+    public void addCodiBarres(long codi) {
+        this.codi = codi;
     }
 
     //equals para saber si ya existe
