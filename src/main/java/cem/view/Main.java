@@ -1,12 +1,5 @@
 package cem.view;
 
-import cem.enums.Sexe;
-import cem.model.*;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
