@@ -1,4 +1,4 @@
-package cem.view.dialogs.Menu2.subMenuMarxes;
+package cem.view.dialogs.Menu2;
 
 import javax.swing.*;
 import java.awt.*;

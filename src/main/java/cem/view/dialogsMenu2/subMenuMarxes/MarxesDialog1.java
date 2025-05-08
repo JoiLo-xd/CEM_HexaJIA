@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package cem.view.dialogs.Menu2.subMenuMarxes;
+package cem.view.dialogsMenu2.subMenuMarxes;
 
 /**
  *
