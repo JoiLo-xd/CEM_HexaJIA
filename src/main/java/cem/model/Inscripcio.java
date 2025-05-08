@@ -18,7 +18,7 @@ public class Inscripcio {
     private Duration tempsTotal;
     private Asistencia asistencia;
     private Participant corredor;
-    private long codi;
+    private String codi;
 
     //constructor
     public Inscripcio(int dorsal, boolean modalitat, Participant corredor) {
@@ -93,7 +93,7 @@ public class Inscripcio {
         return corredor;
     }
     
-    public void addCodiBarres(long codi) {
+    public void addCodiBarres(String codi) {
         this.codi = codi;
     }
 

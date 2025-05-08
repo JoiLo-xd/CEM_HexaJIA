@@ -14,20 +14,24 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import cem.view.dialogsMenu2.subMenuMarxes.*;
 
 /**
  *
  * @author admin
  */
+import cem.view.dialogsMenu2.subMenuMarxes.MarxesDialog1;
 public class ShowMarxes1 extends javax.swing.JDialog {
 
     private Controller controller;
+    private java.awt.Frame parent;
 
     /**
      * Creates new form ShowMarxes1
      */
     public ShowMarxes1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         setTitle("Mostrar marxes");
         setModal(true);
         pack();
@@ -140,8 +144,12 @@ public class ShowMarxes1 extends javax.swing.JDialog {
             int row = source.rowAtPoint( evt.getPoint() );
             int column = source.columnAtPoint( evt.getPoint() );
             String s=source.getModel().getValueAt(row, column)+"";
+            
 
-            JOptionPane.showMessageDialog(null, s);
+            this.setVisible(false);
+            MarxesDialog1 marxadialog = new MarxesDialog1(parent,true,s);
+            marxadialog.setVisible(true);
+            //JOptionPane.showMessageDialog(null, s);
     }//GEN-LAST:event_jTableMouseClicked
 
     //TODO false ahcer el metodo para meter los valores en la tabla

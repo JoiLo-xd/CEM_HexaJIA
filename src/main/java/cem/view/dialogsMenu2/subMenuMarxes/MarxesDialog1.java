@@ -13,9 +13,11 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     /**
      * Creates new form MarxesDialog1
      */
-    public MarxesDialog1(java.awt.Frame parent, boolean modal) {
+    
+    public MarxesDialog1(java.awt.Frame parent, boolean modal, String edicio) {
         super(parent, modal);
         initComponents();
+        ediciojLabel.setText(edicio);
     }
 
     /**
