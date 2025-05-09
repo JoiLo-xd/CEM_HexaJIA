@@ -11,6 +11,7 @@ import cem.exceptions.CorredoresException;
 import cem.model.Participant;
 import java.awt.Color;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -321,7 +322,32 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
-/*
+        try{
+            String dni = DNIjTextField.getText();
+            String nom = namejLabel.getText();
+            String cognom = cognomsjLabel.getText();
+            Instant instant = ((Date) birthDatejSpinner.getValue()).toInstant();
+            LocalDate neix = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            String town = townjTextField.getText();
+            String tlf = telfjTextField.getText();
+            String email = mailjTextField.getText();
+            boolean sex;
+            if (sexejComboBox.getSelectedIndex() == 0) sex = true;
+            else sex = false;
+            String entitat = null;
+            if (fedejCheckBox.isEnabled()){
+                entitat = fedejTextField.getText();
+            }
+            controller.addParticipant(new Participant(dni,nom,cognom,neix,sex,town,tlf,email,entitat,fedejCheckBox.isEnabled()));
+            
+        }catch(AdditionException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }catch(SQLException e){
+            System.out.println("Este error no se deberia dar: " + e.getMessage());
+        }
+        
+        
+        /*
         dispose();
         boolean ok = true;
         String textoAMostrar = "Error";
@@ -408,7 +434,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 }
             }
     }                                             
-
+    
     private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
         dispose();
