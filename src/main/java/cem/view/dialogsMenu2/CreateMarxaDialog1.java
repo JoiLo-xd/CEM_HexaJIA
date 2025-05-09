@@ -183,8 +183,6 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
             }
         } catch (SQLException ex) {
             System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
-        } catch (AdditionException ex) {
-            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jSpinnerEdicioStateChanged
 

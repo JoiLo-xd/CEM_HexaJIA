@@ -17,14 +17,10 @@ import java.util.regex.Pattern;
 public class Controller {
     private cemDAO dao;
     private static Controller controller;
-    private Map<Integer, Marxa> marxes;
-    private Map<String, Participant> corredores;
     private final String REG_TLF = "^6[0-9]{8}$";
     private final String REG_MAIL = ".+@.+\\..+$";
 
     private Controller(){
-        this.marxes = new HashMap<Integer, Marxa>();
-        this.corredores = new HashMap<String,Participant>();
         dao = new cemDAO();
 
     }
@@ -41,7 +37,6 @@ public class Controller {
         return dao.getMarxes();
     }
 
-    // añade una marxa al hashmap
     public void addMarxa(Marxa m) throws SQLException, AdditionException{
         if (dao.existMarxa(m)) {
             throw new AdditionException("Ja existeix una marxa amb aquesta edició.");
@@ -49,7 +44,7 @@ public class Controller {
         dao.insertMarxa(m);
     }
     
-    public boolean existMarxa(Marxa m) throws SQLException, AdditionException{
+    public boolean existMarxa(Marxa m) throws SQLException{
         if (dao.existMarxa(m)) {
             return true;
         }
@@ -78,20 +73,18 @@ public class Controller {
 
     //metodo que valida que lo que ponga el usuario es un numero de telefono valido
     public boolean validateTlf(String str){
-        if (str.matches(REG_TLF)){
-            return true;
+        return str.matches(REG_TLF);
+    }
+    
+    public void addParticipant(Participant corredor) throws SQLException,AdditionException{
+        if (!dao.existParticipant(corredor)){
+            dao.insertParticipant(corredor);
+        }else{
+             throw new AdditionException("Ja existeix un participant amb aquest nom");
         }
-        return false;
     }
 
-    // añade un corredor al hashmap
-    public void addParticipant(Participant corredor) throws AdditionException{
-        if (!corredores.containsKey(corredor.getNif())) {
-            corredores.put(corredor.getNif(), corredor);
-        }else{
-            throw new AdditionException("Ya existeix aquest participant");
-        }
-    }
+    
 
 
 }

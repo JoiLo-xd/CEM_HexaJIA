@@ -21,10 +21,7 @@ public class Participant {
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
     // constructor de corredor, se valida que no deje un campo vacio
-    public Participant(String nif, String nom, String cognoms, LocalDate dataNaixement, boolean sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
-        if ( nom.equals("") ||poblacio.equals("") ||cognoms.equals("") || entitat.equals("")){
-            throw new CorredoresException("Faltan campos");
-        }else {
+    public Participant(String nif, String nom, String cognoms, LocalDate dataNaixement, boolean sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat){
             this.nif = nif;
             this.nom = nom;
             this.cognoms = cognoms;
@@ -35,7 +32,7 @@ public class Participant {
             this.email = email;
             this.entitat = federat ? entitat : "no federat";
             this.federat = federat;
-        }
+        
     }
 
     public Participant(String nif){
