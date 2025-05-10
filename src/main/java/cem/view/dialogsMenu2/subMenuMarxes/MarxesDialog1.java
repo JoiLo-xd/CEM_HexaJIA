@@ -91,7 +91,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         jButtonArribada.setText("Arribada");
 
         jButtonParticipantsMarxa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonParticipantsMarxa.setText("Participants de la marxa");
+        jButtonParticipantsMarxa.setText("Estadístiques de la marxa");
 
         jButtonSortit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSortit.setText("Sortir");
