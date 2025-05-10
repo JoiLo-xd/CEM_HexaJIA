@@ -213,7 +213,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
     private void jButtonSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortirActionPerformed
         dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSortirActionPerformed
-
+//b
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         try {
             int dorsal = (int) jSpinnerDorsal.getValue();
