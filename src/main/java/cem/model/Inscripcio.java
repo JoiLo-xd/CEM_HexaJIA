@@ -16,15 +16,17 @@ public class Inscripcio {
     private LocalTime horaSortida;
     private LocalTime horaArribada;
     private Duration tempsTotal;
-    private Asistencia asistencia;
+    private String asistencia;
     private Participant corredor;
     private String codi;
+    private int edicio;
 
     //constructor
-    public Inscripcio(int dorsal, boolean modalitat, Participant corredor) {
+    public Inscripcio(int dorsal, boolean modalitat, Participant corredor, int edicio) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.corredor = corredor;
+        this.edicio = edicio;
     }
 
     //constructor
@@ -33,12 +35,13 @@ public class Inscripcio {
     }
 
     //constructor
-    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor){
+    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor, int edicio){
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.horaSortida = horaSortida;
         this.horaArribada = horaArribada;
         this.corredor = corredor;
+        this.edicio = edicio;
     }
 
     //SETTERS Y GETTERS
@@ -61,7 +64,7 @@ public class Inscripcio {
         this.tempsTotal = Duration.between(horaSortida, horaArribada);
     }
 
-    public void setAsistencia(Asistencia asistencia) {
+    public void setAsistencia(String asistencia) {
         this.asistencia = asistencia;
     }
 
@@ -85,13 +88,32 @@ public class Inscripcio {
         return tempsTotal;
     }
 
-    public Asistencia getAsistencia() {
+    public String getAsistencia() {
         return asistencia;
     }
 
     public Participant getCorredor() {
         return corredor;
     }
+
+    public String getCodi() {
+        return codi;
+    }
+
+    public void setCodi(String codi) {
+        this.codi = codi;
+    }
+
+    public int getEdicio() {
+        return edicio;
+    }
+
+    public void setEdicio(int edicio) {
+        this.edicio = edicio;
+    }
+    
+    
+    
     
     public void addCodiBarres(String codi) {
         this.codi = codi;
