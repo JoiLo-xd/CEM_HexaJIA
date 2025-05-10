@@ -4,6 +4,7 @@
  */
 package cem.persistence;
 
+import cem.model.Inscripcio;
 import cem.model.Participant;
 import cem.model.Marxa;
 import cem.model.TO.ParticipantEditionTO;
@@ -14,6 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -116,5 +120,31 @@ public class cemDAO {
         desconectar(c);
         return existe;
     }
+        
+        public void insertInscripcio(Inscripcio inscripcio) throws SQLException {
+        Connection c = conectar();
+        PreparedStatement ps = c.prepareStatement("insert into inscripcio values (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        ps.setInt(1, inscripcio.getDorsal());
+        ps.setBoolean(2, inscripcio.isModalitat());
+        ps.setString(6, inscripcio.getAsistencia());
+        ps.setString(7, inscripcio.getCorredor().getNif());
+        ps.setInt(8, inscripcio.getEdicio());
+        ps.setString(9, inscripcio.getCodi());
+        ps.executeUpdate();
+        ps.close();
+        desconectar(c);
+    }
+        
+        public boolean existInscripcio(Inscripcio inscricpio) throws SQLException {
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("select * from inscricpio where nif = '" + inscricpio.getDorsal()+ "';");
+        boolean existe = rs.next();
+        rs.close();
+        st.close();
+        desconectar(c);
+        return existe;
+    }
+    
 
 }
