@@ -81,10 +81,9 @@ public class cemDAO {
         return existe;
     }
 
-
     public void insertParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
-        PreparedStatement ps = c.prepareStatement("insert into coche values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        PreparedStatement ps = c.prepareStatement("insert into participant values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         ps.setString(1, corredor.getNif());
         ps.setString(2, corredor.getNom());
         ps.setString(3, corredor.getCognoms());
@@ -109,42 +108,65 @@ public class cemDAO {
         ps.close();
         desconectar(c);
     }
-    
-        public boolean existParticipant(Participant corredor) throws SQLException {
+
+    public boolean existParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("select * from corredor where nif = '" + corredor.getNif() + "';");
+        ResultSet rs = st.executeQuery("select * from participant where nif = '" + corredor.getNif() + "';");
         boolean existe = rs.next();
         rs.close();
         st.close();
         desconectar(c);
         return existe;
     }
-        
-        public void insertInscripcio(Inscripcio inscripcio) throws SQLException {
+
+    public void insertInscripcio(Inscripcio inscripcio) throws SQLException {
         Connection c = conectar();
-        PreparedStatement ps = c.prepareStatement("insert into inscripcio values (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        PreparedStatement ps = c.prepareStatement(" INSERT INTO inscripcio (dorsal, modalitat, asistencia, nif, edicio) VALUES (?, ?, ?, ?, ?);");
         ps.setInt(1, inscripcio.getDorsal());
         ps.setBoolean(2, inscripcio.isModalitat());
-        ps.setString(6, inscripcio.getAsistencia());
-        ps.setString(7, inscripcio.getCorredor().getNif());
-        ps.setInt(8, inscripcio.getEdicio());
-        ps.setString(9, inscripcio.getCodi());
+        ps.setString(3, inscripcio.getAsistencia());
+        ps.setString(4, inscripcio.getDni());
+        ps.setInt(5, inscripcio.getEdicio());
         ps.executeUpdate();
         ps.close();
         desconectar(c);
     }
-        
-        public boolean existInscripcio(Inscripcio inscricpio) throws SQLException {
+
+    public boolean existInscripcio(Inscripcio inscricpio) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("select * from inscricpio where nif = '" + inscricpio.getDorsal()+ "';");
+        ResultSet rs = st.executeQuery("select * from inscripcio where nif = '" + inscricpio.getDorsal() + "';");
         boolean existe = rs.next();
         rs.close();
         st.close();
         desconectar(c);
         return existe;
     }
-    
+
+    public boolean existParticipantinInscripcio(String dni, int edicio) throws SQLException {
+        Connection c = conectar();
+        String query = "SELECT * FROM inscripcio WHERE nif = ? AND edicio = ?";
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setString(1, dni);
+        ps.setInt(2, edicio);
+        ResultSet rs = ps.executeQuery();
+        boolean existe = rs.next();
+        rs.close();
+        ps.close();
+        desconectar(c);
+        return existe;
+    }
+
+    public boolean existParticipantforDNI(String dni) throws SQLException {
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("select * from participant where nif = '" + dni + "';");
+        boolean existe = rs.next();
+        rs.close();
+        st.close();
+        desconectar(c);
+        return existe;
+    }
 
 }

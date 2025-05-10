@@ -10,10 +10,11 @@ package cem.view.dialogsMenu2.subMenuMarxes;
  */
 public class MarxesDialog1 extends javax.swing.JDialog {
 
+    private InscriureParticipantDialog1 inscriureParticipant;
+
     /**
      * Creates new form MarxesDialog1
      */
-    
     public MarxesDialog1(java.awt.Frame parent, boolean modal, String edicio) {
         super(parent, modal);
         initComponents();
@@ -33,12 +34,12 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         textEdiciojLabel = new javax.swing.JLabel();
         ediciojLabel = new javax.swing.JLabel();
         buttonsjPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jButtonInscriureParticipant = new javax.swing.JButton();
+        jButtonEditarInscripció = new javax.swing.JButton();
+        jButtonSortida = new javax.swing.JButton();
+        jButtonArribada = new javax.swing.JButton();
+        jButtonParticipantsMarxa = new javax.swing.JButton();
+        jButtonSortit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,23 +73,33 @@ public class MarxesDialog1 extends javax.swing.JDialog {
 
         buttonsjPanel.setBackground(new java.awt.Color(204, 255, 255));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Inscriure participant");
+        jButtonInscriureParticipant.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonInscriureParticipant.setText("Inscriure participant");
+        jButtonInscriureParticipant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInscriureParticipantActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Editar inscripció");
+        jButtonEditarInscripció.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonEditarInscripció.setText("Editar inscripció");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("Sortida");
+        jButtonSortida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonSortida.setText("Sortida");
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setText("Arribada");
+        jButtonArribada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonArribada.setText("Arribada");
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton5.setText("Participants de la marxa");
+        jButtonParticipantsMarxa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonParticipantsMarxa.setText("Participants de la marxa");
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton6.setText("Sortir");
+        jButtonSortit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonSortit.setText("Sortir");
+        jButtonSortit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSortitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout buttonsjPanelLayout = new javax.swing.GroupLayout(buttonsjPanel);
         buttonsjPanel.setLayout(buttonsjPanelLayout);
@@ -97,32 +108,32 @@ public class MarxesDialog1 extends javax.swing.JDialog {
             .addGroup(buttonsjPanelLayout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addGroup(buttonsjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonParticipantsMarxa, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonArribada, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSortida, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditarInscripció, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonInscriureParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsjPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSortit, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
         );
         buttonsjPanelLayout.setVerticalGroup(
             buttonsjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsjPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonInscriureParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditarInscripció, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSortida, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonArribada, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonParticipantsMarxa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSortit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
 
@@ -144,21 +155,32 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSortitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonSortitActionPerformed
+
+    private void jButtonInscriureParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriureParticipantActionPerformed
+        inscriureParticipant = new InscriureParticipantDialog1(null, true); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
+        setVisible(false);
+        inscriureParticipant.setVisible(true);
+        setVisible(true);
+    }//GEN-LAST:event_jButtonInscriureParticipantActionPerformed
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonsjPanel;
     private javax.swing.JLabel ediciojLabel;
     private javax.swing.JPanel ediciojPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonArribada;
+    private javax.swing.JButton jButtonEditarInscripció;
+    private javax.swing.JButton jButtonInscriureParticipant;
+    private javax.swing.JButton jButtonParticipantsMarxa;
+    private javax.swing.JButton jButtonSortida;
+    private javax.swing.JButton jButtonSortit;
     private javax.swing.JLabel textEdiciojLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,6 +20,7 @@ public class Inscripcio {
     private Participant corredor;
     private String codi;
     private int edicio;
+    private String dni;
 
     //constructor
     public Inscripcio(int dorsal, boolean modalitat, Participant corredor, int edicio) {
@@ -28,6 +29,16 @@ public class Inscripcio {
         this.corredor = corredor;
         this.edicio = edicio;
     }
+
+    public Inscripcio(int dorsal, boolean modalitat, String asistencia, String dni, int edicio) {
+        this.dorsal = dorsal;
+        this.modalitat = modalitat;
+        this.asistencia = asistencia;
+        this.dni = dni;
+        this.edicio = edicio;
+    }
+    
+    
 
     //constructor
     public Inscripcio(int dorsal){
@@ -110,6 +121,10 @@ public class Inscripcio {
 
     public void setEdicio(int edicio) {
         this.edicio = edicio;
+    }
+
+    public String getDni() {
+        return dni;
     }
     
     

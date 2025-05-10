@@ -2,6 +2,7 @@ package cem.controller;
 
 import cem.exceptions.AdditionException;
 import cem.exceptions.CorredoresException;
+import cem.model.Inscripcio;
 import cem.model.Participant;
 import cem.model.Marxa;
 import cem.model.TO.ParticipantEditionTO;
@@ -85,6 +86,26 @@ public class Controller {
     }
 
     
+    public void addInscripcio(Inscripcio inscripcio) throws SQLException,AdditionException{
+        if (!dao.existInscripcio(inscripcio)){
+            dao.insertInscripcio(inscripcio);
+        }else{
+             throw new AdditionException("Ja existeix una inscripcio amb aquest dprsal");
+        }
+    }
+    
+    public boolean existParticipantinInscripcio(String dni, int edicio) throws SQLException{
+        if(dao.existParticipantinInscripcio(dni, edicio)){
+            return true;
+        } else { return false;}
+    }
+        public boolean existParticipantforDNI(String dni) throws SQLException{
+        if(dao.existParticipantforDNI(dni)){
+            return true;
+        } else { return false;}
+    }
+
+
 
 
 }
