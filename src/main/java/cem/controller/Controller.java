@@ -5,6 +5,7 @@ import cem.exceptions.CorredoresException;
 import cem.model.Inscripcio;
 import cem.model.Participant;
 import cem.model.Marxa;
+import cem.model.TO.InscripcionsRanking;
 import cem.model.TO.ParticipantEditionTO;
 import cem.model.TO.StatsMarxesTO;
 import cem.persistence.cemDAO;
@@ -63,6 +64,10 @@ public class Controller {
 
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException{
         return dao.getMarxes();
+    }
+    
+    public ArrayList<InscripcionsRanking> getInscripcions(int edicio) throws SQLException{
+        return dao.getInscripcions(edicio);
     }
     
     public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException{

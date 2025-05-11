@@ -62,7 +62,4 @@ public class StatsMarxesTO {
     public LocalTime getTempsMesLent() {
         return tempsMesLent;
     }
-    
-    
-    
 }

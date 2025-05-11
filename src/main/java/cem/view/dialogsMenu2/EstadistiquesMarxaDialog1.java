@@ -7,6 +7,8 @@ package cem.view.dialogsMenu2;
 import cem.controller.Controller;
 import cem.model.TO.ParticipantEditionTO;
 import cem.model.TO.StatsMarxesTO;
+import cem.view.dialogsMenu2.subMenuMarxes.MarxesDialog1;
+import cem.view.dialogsMenu2.subMenuMarxes.RankingInscripcionsMarxa;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -19,13 +21,15 @@ import javax.swing.table.DefaultTableModel;
 public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
     
     private Controller controller;
+    private java.awt.Frame parent;
 
     /**
      * Creates new form EstadistiquesMarxaDialog1
      */
     public EstadistiquesMarxaDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setTitle("Mostrar marxes");
+        this.parent = parent;
+        setTitle("Estadistiques de les marxes");
         setModal(true);
         pack();
         setResizable(false);
@@ -133,7 +137,15 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
 
     private void statsjTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statsjTableMouseClicked
         // TODO add your handling code here:
-        
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        int column = source.columnAtPoint( evt.getPoint() );
+        String s=source.getModel().getValueAt(row, 0)+"";
+        this.setVisible(false);
+        RankingInscripcionsMarxa rankingInscripcionsMarxa = new RankingInscripcionsMarxa(parent,true,s);
+        rankingInscripcionsMarxa.setLocationRelativeTo(this);
+        rankingInscripcionsMarxa.setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_statsjTableMouseClicked
 
     

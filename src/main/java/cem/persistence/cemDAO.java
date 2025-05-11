@@ -7,6 +7,7 @@ package cem.persistence;
 import cem.model.Inscripcio;
 import cem.model.Participant;
 import cem.model.Marxa;
+import cem.model.TO.InscripcionsRanking;
 import cem.model.TO.ParticipantEditionTO;
 import cem.model.TO.StatsMarxesTO;
 import java.sql.Connection;
@@ -62,6 +63,35 @@ public class cemDAO {
         return marxes;
     }
     
+    public ArrayList<InscripcionsRanking> getInscripcions(int edicio) throws SQLException {
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+        ArrayList<InscripcionsRanking> inscripcions = new ArrayList<>();
+        while (rs.next()) {
+            String nom = rs.getString(1);
+            nom = nom.concat(" " + rs.getString(2));
+            String nif = rs.getString(3);
+            Statement st2 = c.createStatement();
+            ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+            String temps = "--:--:--";
+            String assistencia = "";
+            if (rs2.next()) {
+                if (rs2.getTimestamp(1) != null) {
+                    temps = rs2.getTimestamp(1).toString();
+                }
+                assistencia = rs2.getString(2);
+            }
+            rs2.close();
+            st2.close();
+            inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+        }
+        rs.close();
+        st.close();
+        desconectar(c);
+        return inscripcions;
+    }
+    
     public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException {
         //hacer codigo bien
         Connection c = conectar();
@@ -91,24 +121,17 @@ public class cemDAO {
             if (rs2.next()) {
                 absents = rs2.getInt(1);
             }
-            rs2 = st2.executeQuery("SELECT MAX(hora_sortida - hora_arribada) FROM inscripcio WHERE asistencia = 'ha abandonat' and edicio = " + edicio);
+            rs2 = st2.executeQuery("SELECT MAX(hora_sortida - hora_arribada), MAX(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)), MIN(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)) FROM inscripcio WHERE asistencia = 'ha abandonat' and edicio = " + edicio);
             int abandonat = 0;
-            if (rs2.next()) {
-                abandonat = rs2.getInt(1);
-            }
-            rs2 = st2.executeQuery("SELECT MAX(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)) FROM inscripcio WHERE asistencia = 'ha abandonat' AND edicio = " + edicio);
             int segons = 0;
-            LocalTime rapid = null;
-            if (rs2.next()) {
-                segons = rs2.getInt(1);
-                rapid = LocalTime.ofSecondOfDay(segons);
-            }
-            
-            rs2 = st2.executeQuery("SELECT MIN(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)) FROM inscripcio WHERE asistencia = 'ha abandonat' AND edicio = " + edicio);
             int segons2 = 0;
+            LocalTime rapid = null;
             LocalTime lent = null;
             if (rs2.next()) {
-                segons2 = rs2.getInt(1);
+                abandonat = rs2.getInt(1);
+                segons = rs2.getInt(2);
+                rapid = LocalTime.ofSecondOfDay(segons);
+                segons2 = rs2.getInt(3);
                 lent = LocalTime.ofSecondOfDay(segons2);
             }
             rs2.close();
