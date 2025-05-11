@@ -11,7 +11,7 @@ package cem.view.dialogsMenu2.subMenuMarxes;
 public class MarxesDialog1 extends javax.swing.JDialog {
 
     private InscriureParticipantDialog1 inscriureParticipant;
-
+    private String edicio;
     /**
      * Creates new form MarxesDialog1
      */
@@ -19,6 +19,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ediciojLabel.setText(edicio);
+        this.edicio = edicio;
     }
 
     /**
@@ -161,7 +162,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSortitActionPerformed
 
     private void jButtonInscriureParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriureParticipantActionPerformed
-        inscriureParticipant = new InscriureParticipantDialog1(null, true); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
+        inscriureParticipant = new InscriureParticipantDialog1(null, true, edicio); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
         setVisible(false);
         inscriureParticipant.setVisible(true);
         setVisible(true);

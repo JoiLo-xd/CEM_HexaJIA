@@ -7,6 +7,7 @@ package cem.view.dialogsMenu2.subMenuMarxes;
 import cem.controller.Controller;
 import cem.exceptions.AdditionException;
 import cem.model.Inscripcio;
+import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -17,14 +18,17 @@ import javax.swing.JOptionPane;
 public class InscriureParticipantDialog1 extends javax.swing.JDialog {
 
     private Controller controller;
+    private String edicio;
 
     /**
      * Creates new form InscriureParticipantDialog1
      */
-    public InscriureParticipantDialog1(java.awt.Frame parent, boolean modal) {
+    public InscriureParticipantDialog1(java.awt.Frame parent, boolean modal, String edicio) {
         super(parent, modal);
         initComponents();
         controller = Controller.getInstance();
+        this.edicio = edicio;
+        jLabelAny.setText(edicio);
     }
 
     /**
@@ -41,15 +45,16 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         jLabelDorsal = new javax.swing.JLabel();
         jLabelAsistencia = new javax.swing.JLabel();
         jLabelNif = new javax.swing.JLabel();
-        jLabelEdicio = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jSpinnerDorsal = new javax.swing.JSpinner();
         jComboBoxModalitat = new javax.swing.JComboBox<>();
         jComboBoxAsistencia = new javax.swing.JComboBox<>();
         jTextFieldDNI = new javax.swing.JTextField();
-        jSpinnerEdicio = new javax.swing.JSpinner();
         jButtonSortir = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelEdicio = new javax.swing.JLabel();
+        jLabelAny = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,46 +72,37 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         jLabelNif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelNif.setText("DNI / NIF PARTICIPANT");
 
-        jLabelEdicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelEdicio.setText("EDICIÓ");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabelEdicio)
-                .addContainerGap(111, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(98, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabelDorsal))
-                            .addComponent(jLabelAsistencia)
-                            .addComponent(jLabelModalitat))
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelNif)
-                        .addGap(44, 44, 44))))
+                    .addComponent(jLabelNif)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabelDorsal)))
+                .addGap(55, 55, 55))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelAsistencia)
+                    .addComponent(jLabelModalitat))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(jLabelDorsal)
-                .addGap(44, 44, 44)
-                .addComponent(jLabelModalitat)
-                .addGap(44, 44, 44)
-                .addComponent(jLabelAsistencia)
                 .addGap(42, 42, 42)
+                .addComponent(jLabelModalitat)
+                .addGap(51, 51, 51)
+                .addComponent(jLabelAsistencia)
+                .addGap(44, 44, 44)
                 .addComponent(jLabelNif)
-                .addGap(61, 61, 61)
-                .addComponent(jLabelEdicio)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGap(105, 105, 105))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
@@ -122,11 +118,9 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 jTextFieldDNIActionPerformed(evt);
             }
         });
-
-        jSpinnerEdicio.setModel(new javax.swing.SpinnerNumberModel(2025, 2000, 2099, 1));
-        jSpinnerEdicio.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSpinnerEdicioStateChanged(evt);
+        jTextFieldDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldDNIKeyReleased(evt);
             }
         });
 
@@ -155,48 +149,80 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 .addComponent(jButtonSortir)
                 .addGap(56, 56, 56))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinnerDorsal)
-                    .addComponent(jComboBoxModalitat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxAsistencia, javax.swing.GroupLayout.Alignment.TRAILING, 0, 270, Short.MAX_VALUE)
-                    .addComponent(jTextFieldDNI)
-                    .addComponent(jSpinnerEdicio))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSpinnerDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxModalitat, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSpinnerDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(38, 38, 38)
                 .addComponent(jComboBoxModalitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(51, 51, 51)
                 .addComponent(jComboBoxAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(36, 36, 36)
                 .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(jSpinnerEdicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSortir)
                     .addComponent(jButtonRegistrar))
                 .addGap(21, 21, 21))
         );
 
+        jPanel3.setBackground(new java.awt.Color(0, 152, 204));
+
+        jLabelEdicio.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabelEdicio.setText("EDICIO");
+
+        jLabelAny.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addComponent(jLabelAny)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelEdicio)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelEdicio)
+                    .addComponent(jLabelAny))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -205,10 +231,6 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
     private void jTextFieldDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDNIActionPerformed
         //  NADA
     }//GEN-LAST:event_jTextFieldDNIActionPerformed
-
-    private void jSpinnerEdicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerEdicioStateChanged
-        //NADA
-    }//GEN-LAST:event_jSpinnerEdicioStateChanged
 
     private void jButtonSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortirActionPerformed
         dispose();       // TODO add your handling code here:
@@ -225,14 +247,16 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
             }
             String asistencia = (String) jComboBoxAsistencia.getSelectedItem();
             String dni = jTextFieldDNI.getText();
-            int edicio = (int) jSpinnerEdicio.getValue();
 
-            if (controller.existParticipantforDNI(dni)) {
+            if (!controller.existParticipantforDNI(dni)) {
                 JOptionPane.showMessageDialog(this, "Aquest participant no està registrat", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (controller.existParticipantinInscripcio(dni, edicio)) {
-                JOptionPane.showMessageDialog(this, "Aquest participant està registrar en altre cursa d'aquesta edició", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (controller.existParticipantinInscripcio(dni, Integer.parseInt(edicio))) {
+                JOptionPane.showMessageDialog(this, "Aquest participant ja està registrat en una cursa d'aquesta edició", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (controller.existDorsal(dorsal, Integer.parseInt(edicio))) {
+                JOptionPane.showMessageDialog(this, "Aquest dorsal ja està utilitzat en aquesta cursa", "Dorsa Repetit", JOptionPane.ERROR_MESSAGE);
             } else {
-                controller.addInscripcio(new Inscripcio(dorsal, modalitat, asistencia, dni, edicio));
+                controller.addInscripcio(new Inscripcio(dorsal, modalitat, asistencia, dni, Integer.parseInt(edicio)));
+                dispose();
             }
         } catch (AdditionException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -240,18 +264,36 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
             System.out.println("Este error no se deberia dar: " + e.getMessage());
         }
 
+
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private void jTextFieldDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDNIKeyReleased
+        if (jTextFieldDNI.getText().isEmpty()) {
+            jTextFieldDNI.setForeground(Color.GRAY);
+            jTextFieldDNI.setBackground(Color.WHITE);
+            jTextFieldDNI.setText("00000000A");
+        } else {
+            String texto = jTextFieldDNI.getText();
+            boolean esValido = controller.validateNif(texto);
+            jTextFieldDNI.setBackground(esValido ? Color.GREEN : Color.PINK);
+            if(esValido){
+                jButtonRegistrar.setEnabled(true);
+            } else {
+                jButtonRegistrar.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_jTextFieldDNIKeyReleased
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonSortir;
     private javax.swing.JComboBox<String> jComboBoxAsistencia;
     private javax.swing.JComboBox<String> jComboBoxModalitat;
+    private javax.swing.JLabel jLabelAny;
     private javax.swing.JLabel jLabelAsistencia;
     private javax.swing.JLabel jLabelDorsal;
     private javax.swing.JLabel jLabelEdicio;
@@ -259,8 +301,8 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelNif;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSpinner jSpinnerDorsal;
-    private javax.swing.JSpinner jSpinnerEdicio;
     private javax.swing.JTextField jTextFieldDNI;
     // End of variables declaration//GEN-END:variables
 }
