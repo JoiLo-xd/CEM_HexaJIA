@@ -7,8 +7,12 @@ package cem.view.dialogsMenu2.subMenuMarxes;
 import cem.controller.Controller;
 import cem.model.TO.InscripcionsRanking;
 import cem.model.TO.ParticipantEditionTO;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,7 +27,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
     /**
      * Creates new form RankingInscripcionsMarxa
      */
-    public RankingInscripcionsMarxa(java.awt.Frame parent, boolean modal, String edicio) {
+    public RankingInscripcionsMarxa(java.awt.Frame parent, boolean modal, String edicio) throws SQLException {
         super(parent, modal);
         setTitle("Ranking de les inscripcions");
         setModal(true);
@@ -34,7 +38,9 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         controller = Controller.getInstance();
         this.edicio = edicio;
         editionjLabel.setText(edicio);
-        listInscripcions();
+        jCheckBox1.setForeground(Color.white);
+        jCheckBox1.setBackground(jPanel1.getBackground());
+        listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), 1));
     }
 
     /**
@@ -59,6 +65,12 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
         optionsjComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ranking", "Absent", "Abandonament", " " }));
+        optionsjComboBox.setToolTipText("");
+        optionsjComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                optionsjComboBoxItemStateChanged(evt);
+            }
+        });
 
         rankingjLabel.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
         rankingjLabel.setText("RANKING");
@@ -143,26 +155,49 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
+        try {
+        if (jCheckBox1.isSelected() && optionsjComboBox.getSelectedIndex() == 0) {
+            jCheckBox1.setForeground(Color.black);
+            listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), (optionsjComboBox.getSelectedIndex()+3)));
+        } else {
+            jCheckBox1.setForeground(Color.white);
+            listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), optionsjComboBox.getSelectedIndex()));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(RankingInscripcionsMarxa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    
-    private void listInscripcions() {
+    private void optionsjComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optionsjComboBoxItemStateChanged
         try {
-            ArrayList<InscripcionsRanking> inscripcions = controller.getInscripcions(Integer.parseInt(edicio));
-            DefaultTableModel dtm = new DefaultTableModel(new String[]{"Nom", "Temps", "Assistencia"}, 0) {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false; // ninguna celda editable
-                }
-            };
-            for (InscripcionsRanking p : inscripcions) {
-                dtm.addRow(new String[]{p.getNom(), p.getTemps(), p.getAssistencia()});
+            if (optionsjComboBox.getSelectedIndex() == 0) {
+                jCheckBox1.setEnabled(true);
+            } else {
+                jCheckBox1.setEnabled(false);
             }
-            jTable1.setModel(dtm);
+            listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), optionsjComboBox.getSelectedIndex()));
         } catch (SQLException ex) {
-            System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
+            Logger.getLogger(RankingInscripcionsMarxa.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_optionsjComboBoxItemStateChanged
 
+    
+    private void listInscripcions(ArrayList<InscripcionsRanking> inscripcions) {
+        DefaultTableModel dtm = new DefaultTableModel(new String[]{"Nom", "Temps", "Assistencia"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // ninguna celda editable
+            }
+        };
+        for (InscripcionsRanking p : inscripcions) {
+            dtm.addRow(new String[]{p.getNom(), p.getTemps(), p.getAssistencia()});
+        }
+        jTable1.setModel(dtm);
+    }
+    
+    private int getAssistencia() {
+        return optionsjComboBox.getSelectedIndex();
     }
     
 
