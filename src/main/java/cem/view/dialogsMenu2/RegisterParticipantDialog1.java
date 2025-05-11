@@ -94,51 +94,51 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
         titlesjPanel.setBackground(new java.awt.Color(0, 153, 204));
 
-        DNIjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNIjLabel.setText("DNI/NIF");
         DNIjLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         DNIjLabel.setForeground(new java.awt.Color(255, 255, 255));
+        DNIjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNIjLabel.setText("DNI/NIF");
 
-        namejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        namejLabel.setText("Nom");
         namejLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         namejLabel.setForeground(new java.awt.Color(255, 255, 255));
+        namejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        namejLabel.setText("Nom");
 
-        cognomsjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cognomsjLabel.setText("Cognoms");
         cognomsjLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cognomsjLabel.setForeground(new java.awt.Color(255, 255, 255));
+        cognomsjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cognomsjLabel.setText("Cognoms");
 
-        birthDatejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        birthDatejLabel.setText("Data de naixement");
         birthDatejLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         birthDatejLabel.setForeground(new java.awt.Color(255, 255, 255));
+        birthDatejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        birthDatejLabel.setText("Data de naixement");
 
-        sexejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sexejLabel.setText("Sexe");
         sexejLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sexejLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sexejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sexejLabel.setText("Sexe");
 
-        townjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        townjLabel.setText("Població");
         townjLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         townjLabel.setForeground(new java.awt.Color(255, 255, 255));
+        townjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        townjLabel.setText("Població");
 
-        telfjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        telfjLabel.setText("Telefon");
         telfjLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         telfjLabel.setForeground(new java.awt.Color(255, 255, 255));
+        telfjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        telfjLabel.setText("Telefon");
 
-        mailjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mailjLabel.setText("Email");
         mailjLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         mailjLabel.setForeground(new java.awt.Color(255, 255, 255));
+        mailjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mailjLabel.setText("Email");
 
-        fedejCheckBox.setText("Federat");
         fedejCheckBox.setBackground(new java.awt.Color(0, 153, 204));
-        fedejCheckBox.setBorder(null);
         fedejCheckBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         fedejCheckBox.setForeground(new java.awt.Color(255, 255, 255));
+        fedejCheckBox.setText("Federat");
+        fedejCheckBox.setBorder(null);
         fedejCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fedejCheckBox.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         fedejCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -194,8 +194,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         valuesjPanel.setBackground(new java.awt.Color(204, 255, 255));
         valuesjPanel.setPreferredSize(new java.awt.Dimension(490, 680));
 
-        DNIjTextField.setText("00000000A");
         DNIjTextField.setForeground(new java.awt.Color(204, 204, 204));
+        DNIjTextField.setText("00000000A");
         DNIjTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 DNIjTextFieldFocusGained(evt);
@@ -209,10 +209,20 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 DNIjTextFieldMouseClicked(evt);
             }
         });
+        DNIjTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                DNIjTextFieldKeyReleased(evt);
+            }
+        });
 
         telfjTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 telfjTextFieldFocusLost(evt);
+            }
+        });
+        telfjTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                telfjTextFieldKeyReleased(evt);
             }
         });
 
@@ -221,10 +231,15 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 mailjTextFieldFocusLost(evt);
             }
         });
+        mailjTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mailjTextFieldKeyReleased(evt);
+            }
+        });
 
+        fedejTextField.setForeground(new java.awt.Color(204, 204, 204));
         fedejTextField.setText("Entitat");
         fedejTextField.setEnabled(false);
-        fedejTextField.setForeground(new java.awt.Color(204, 204, 204));
         fedejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fedejTextFieldFocusGained(evt);
@@ -302,7 +317,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 .addComponent(mailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(fedejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(acceptjButton)
                     .addComponent(canceljButton))
@@ -494,21 +509,13 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 */
     private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-        if (!modifier) {
-            if (DNIjTextField.getText().isEmpty()) {
+        if (modifier) {
+            DNIjTextField.setText(dni_res);
+        }
+        if (DNIjTextField.getText().isEmpty() && !modifier) {
                 DNIjTextField.setForeground(Color.GRAY);
                 DNIjTextField.setBackground(Color.WHITE);
                 DNIjTextField.setText("00000000A");
-            } else {
-
-                String texto = DNIjTextField.getText();
-                boolean esValido = controller.validateNif(texto);
-                DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
-                checkbotones();
-            }
-        }else{
-            DNIjTextField.setText(dni_res);
-            
         }
     }
     
@@ -572,22 +579,39 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_fedejTextFieldFocusLost
 
     private void telfjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telfjTextFieldFocusLost
+        //nothing
+    }//GEN-LAST:event_telfjTextFieldFocusLost
+
+    private void mailjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mailjTextFieldFocusLost
+        //nothing
+    }//GEN-LAST:event_mailjTextFieldFocusLost
+
+    private void DNIjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DNIjTextFieldKeyReleased
+
+            String texto = DNIjTextField.getText();
+            boolean esValido = controller.validateNif(texto);
+            DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
+            checkbotones();
+        
+    }//GEN-LAST:event_DNIjTextFieldKeyReleased
+
+    private void telfjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telfjTextFieldKeyReleased
         if (!controller.validateTlf(telfjTextField.getText())){
             telfjTextField.setBackground(Color.PINK);
         }else{
             telfjTextField.setBackground(Color.GREEN);
             checkbotones();
         }
-    }//GEN-LAST:event_telfjTextFieldFocusLost
+    }//GEN-LAST:event_telfjTextFieldKeyReleased
 
-    private void mailjTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mailjTextFieldFocusLost
+    private void mailjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mailjTextFieldKeyReleased
         if (!controller.validateEmail(mailjTextField.getText())){
             mailjTextField.setBackground(Color.PINK);
         }else{
             mailjTextField.setBackground(Color.GREEN);
             checkbotones();
         }
-    }//GEN-LAST:event_mailjTextFieldFocusLost
+    }//GEN-LAST:event_mailjTextFieldKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

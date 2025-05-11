@@ -148,7 +148,9 @@ public class ShowMarxes1 extends javax.swing.JDialog {
 
             this.setVisible(false);
             MarxesDialog1 marxadialog = new MarxesDialog1(parent,true,s);
+            marxadialog.setLocationRelativeTo(this);
             marxadialog.setVisible(true);
+            
             //JOptionPane.showMessageDialog(null, s);
     }//GEN-LAST:event_jTableMouseClicked
 

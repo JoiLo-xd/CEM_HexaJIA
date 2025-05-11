@@ -35,7 +35,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 Inscripcio chosen = controller.getInscripcio(dni, edicio);
                 if (chosen != null) {
                     jTextFieldDNI.setText(dni);
-                    jLabelEdicio.setText(edicio);
+                    //jLabelEdicio.setText(edicio);
                     modifier = true;
                     jTextFieldDNI.setEditable(false);
                     jButtonRegistrar.setEnabled(false);
@@ -47,6 +47,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             }
         } else {
+            jButtonModificar.setVisible(false);
             jButtonModificar.setEnabled(false);
         }
     }
