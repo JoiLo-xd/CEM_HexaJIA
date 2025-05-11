@@ -11,6 +11,8 @@ import cem.view.dialogsMenu2.subMenuMarxes.MarxesDialog1;
 import cem.view.dialogsMenu2.subMenuMarxes.RankingInscripcionsMarxa;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -142,10 +144,16 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         int column = source.columnAtPoint( evt.getPoint() );
         String s=source.getModel().getValueAt(row, 0)+"";
         this.setVisible(false);
-        RankingInscripcionsMarxa rankingInscripcionsMarxa = new RankingInscripcionsMarxa(parent,true,s);
-        rankingInscripcionsMarxa.setLocationRelativeTo(this);
-        rankingInscripcionsMarxa.setVisible(true);
-        this.setVisible(true);
+        RankingInscripcionsMarxa rankingInscripcionsMarxa;
+        try {
+            rankingInscripcionsMarxa = new RankingInscripcionsMarxa(parent,true,s);
+            rankingInscripcionsMarxa.setLocationRelativeTo(this);
+            rankingInscripcionsMarxa.setVisible(true);
+            this.setVisible(true);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
     }//GEN-LAST:event_statsjTableMouseClicked
 
     

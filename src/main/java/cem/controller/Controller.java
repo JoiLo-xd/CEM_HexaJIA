@@ -66,8 +66,8 @@ public class Controller {
         return dao.getMarxes();
     }
     
-    public ArrayList<InscripcionsRanking> getInscripcions(int edicio) throws SQLException{
-        return dao.getInscripcions(edicio);
+    public ArrayList<InscripcionsRanking> getInscripcions(int edicio, int opcio) throws SQLException{
+        return dao.getInscripcions(edicio, opcio);
     }
     
     public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException{

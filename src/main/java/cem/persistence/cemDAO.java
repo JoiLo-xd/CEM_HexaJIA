@@ -63,30 +63,80 @@ public class cemDAO {
         return marxes;
     }
     
-    public ArrayList<InscripcionsRanking> getInscripcions(int edicio) throws SQLException {
+    public ArrayList<InscripcionsRanking> getInscripcions(int edicio, int opcio) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
         ArrayList<InscripcionsRanking> inscripcions = new ArrayList<>();
-        while (rs.next()) {
-            String nom = rs.getString(1);
-            nom = nom.concat(" " + rs.getString(2));
-            String nif = rs.getString(3);
-            Statement st2 = c.createStatement();
-            ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
-            String temps = "--:--:--";
-            String assistencia = "";
-            if (rs2.next()) {
-                if (rs2.getTimestamp(1) != null) {
-                    temps = rs2.getTimestamp(1).toString();
-                }
-                assistencia = rs2.getString(2);
-            }
-            rs2.close();
-            st2.close();
-            inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+        switch(opcio) {
+            case 0:
+                ResultSet rs0 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+                while (rs0.next()) {
+                    String nom = rs0.getString(1);
+                    nom = nom.concat(" " + rs0.getString(2));
+                    String nif = rs0.getString(3);
+                    Statement st2 = c.createStatement();
+                    ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    String temps = "--:--:--";
+                    String assistencia = "";
+                    if (rs2.next()) {
+                        if (rs2.getTimestamp(1) != null) {
+                            temps = rs2.getTimestamp(1).toString();
+                        }
+                        assistencia = rs2.getString(2);
+                    }
+                    rs2.close();
+                    st2.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    
+                }rs0.close();
+                break;
+            case 1:
+                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and asistencia = 'no ha vingut'");
+                while (rs1.next()) {
+                    String nom = rs1.getString(1);
+                    nom = nom.concat(" " + rs1.getString(2));
+                    String nif = rs1.getString(3);
+                    String temps = "--:--:--";
+                    String assistencia = "absent";
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    
+                }rs1.close();
+                break;
+            case 2:
+                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and asistencia = 'ha abandonat'");
+                while (rs2.next()) {
+                    String nom = rs2.getString(1);
+                    nom = nom.concat(" " + rs2.getString(2));
+                    String nif = rs2.getString(3);
+                    String temps = "--:--:--";
+                    String assistencia = "abandonament";
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    
+                }rs2.close();
+                break;
+            case 3:
+                ResultSet rs3 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida) desc");
+                while (rs3.next()) {
+                    String nom = rs3.getString(1);
+                    nom = nom.concat(" " + rs3.getString(2));
+                    String nif = rs3.getString(3);
+                    Statement st32 = c.createStatement();
+                    ResultSet rs32 = st32.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    String temps = "--:--:--";
+                    String assistencia = "";
+                    if (rs32.next()) {
+                        if (rs32.getTimestamp(1) != null) {
+                            temps = rs32.getTimestamp(1).toString();
+                        }
+                        assistencia = rs32.getString(2);
+                    }
+                    rs32.close();
+                    st32.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    
+                }rs3.close();
+                break;
         }
-        rs.close();
         st.close();
         desconectar(c);
         return inscripcions;
