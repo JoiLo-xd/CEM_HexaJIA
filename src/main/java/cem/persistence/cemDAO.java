@@ -199,4 +199,18 @@ public class cemDAO {
         desconectar(c);
     }
 
+    public boolean existDorsal(int dorsal, int edicio) throws SQLException {
+        Connection c = conectar();
+        String query = "SELECT * FROM inscripcio WHERE dorsal = ? AND edicio = ?";
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setInt(1, dorsal);
+        ps.setInt(2, edicio);
+        ResultSet rs = ps.executeQuery();
+        boolean existe = rs.next();
+        rs.close();
+        ps.close();
+        desconectar(c);
+        return existe;
+    }
+
 }

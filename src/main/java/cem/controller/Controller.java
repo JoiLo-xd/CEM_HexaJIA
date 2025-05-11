@@ -103,7 +103,7 @@ public class Controller {
         if (!dao.existInscripcio(inscripcio)){
             dao.insertInscripcio(inscripcio);
         }else{
-             throw new AdditionException("Ja existeix una inscripcio amb aquest dprsal");
+             throw new AdditionException("Ja existeix una inscripcio amb aquest dorsal");
         }
     }
     
@@ -117,6 +117,14 @@ public class Controller {
             return true;
         } else { return false;}
     }
+        
+        public boolean existDorsal(int dorsal, int edicio) throws SQLException{
+        if(dao.existDorsal(dorsal, edicio)){
+            return true;
+        } else { return false;}
+    }
+        
+        
     
     public void modifiParticipant(Participant as){
         try{
