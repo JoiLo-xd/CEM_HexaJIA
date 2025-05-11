@@ -141,20 +141,19 @@ public class ShowMarxes1 extends javax.swing.JDialog {
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // TODO add your handling code here:
         JTable source = (JTable)evt.getSource();
-            int row = source.rowAtPoint( evt.getPoint() );
-            int column = source.columnAtPoint( evt.getPoint() );
-            String s=source.getModel().getValueAt(row, column)+"";
-            
+        int row = source.rowAtPoint( evt.getPoint() );
+        int column = source.columnAtPoint( evt.getPoint() );
+        String s=source.getModel().getValueAt(row, column)+"";
 
-            this.setVisible(false);
-            MarxesDialog1 marxadialog = new MarxesDialog1(parent,true,s);
-            marxadialog.setLocationRelativeTo(this);
-            marxadialog.setVisible(true);
+
+        this.setVisible(false);
+        MarxesDialog1 marxadialog = new MarxesDialog1(parent,true,s);
+        marxadialog.setLocationRelativeTo(this);
+        marxadialog.setVisible(true);
             
             //JOptionPane.showMessageDialog(null, s);
     }//GEN-LAST:event_jTableMouseClicked
 
-    //TODO false ahcer el metodo para meter los valores en la tabla
     /**
      * @param args the command line arguments
      */

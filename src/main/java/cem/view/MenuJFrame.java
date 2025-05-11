@@ -12,6 +12,7 @@ import cem.view.dialogsMenu2.ChoseParticipant;
 import cem.view.dialogsMenu2.CreateMarxaDialog1;
 import cem.view.dialogsMenu2.RegisterParticipantDialog1;
 import cem.view.dialogsMenu2.ShowMarxes1;
+import cem.view.dialogsMenu2.EstadistiquesMarxaDialog1;
 
 /**
  *
@@ -21,9 +22,9 @@ public class MenuJFrame extends javax.swing.JFrame {
 
     private ShowMarxes1 showMarxes;
     private CreateMarxaDialog1 createMarxaDialog;
-//    private EditParticipantDialog1 editParticipantDialog;
     private RegisterParticipantDialog1 registerParticipantDialog;
-//    private WatchStatsDialog1 watchStatsDialog;
+    private EstadistiquesMarxaDialog1 estadistiquesMarxaDialog;
+    private ChoseParticipant choseParticipantDialog;
 
     /**
      * Creates new form NewJFrame
@@ -53,6 +54,7 @@ public class MenuJFrame extends javax.swing.JFrame {
         marxesButton = new javax.swing.JButton();
         createRunnerButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        ParticipantsMarxajButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +79,7 @@ public class MenuJFrame extends javax.swing.JFrame {
         exitPanelLayout.setHorizontalGroup(
             exitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitPanelLayout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(exitButton)
@@ -119,7 +121,6 @@ public class MenuJFrame extends javax.swing.JFrame {
         marxesButton.setText("Marxes");
         marxesButton.setAlignmentY(0.0F);
         marxesButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        marxesButton.setMinimumSize(new java.awt.Dimension(92, 32));
         marxesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 marxesButtonActionPerformed(evt);
@@ -141,17 +142,28 @@ public class MenuJFrame extends javax.swing.JFrame {
         jLabel1.setAlignmentY(0.0F);
         jLabel1.setMaximumSize(new java.awt.Dimension(78, 91));
 
+        ParticipantsMarxajButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ParticipantsMarxajButton.setText("Estadístiques de les marxes");
+        ParticipantsMarxajButton.setAlignmentY(0.0F);
+        ParticipantsMarxajButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ParticipantsMarxajButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ParticipantsMarxajButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout buttonsPanelLayout = new javax.swing.GroupLayout(buttonsPanel);
         buttonsPanel.setLayout(buttonsPanelLayout);
         buttonsPanelLayout.setHorizontalGroup(
             buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createRunnerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modifyRunnerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createMarxaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(marxesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(261, Short.MAX_VALUE)
+                .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ParticipantsMarxajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modifyRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createMarxaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(marxesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(100, 100, 100)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100))
@@ -172,36 +184,42 @@ public class MenuJFrame extends javax.swing.JFrame {
                         .addComponent(createRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(modifyRunnerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(ParticipantsMarxajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout backgroundPanelMenuLayout = new javax.swing.GroupLayout(backgroundPanelMenu);
         backgroundPanelMenu.setLayout(backgroundPanelMenuLayout);
         backgroundPanelMenuLayout.setHorizontalGroup(
             backgroundPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(backgroundPanelMenuLayout.createSequentialGroup()
-                .addGroup(backgroundPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundPanelMenuLayout.createSequentialGroup()
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(exitPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         backgroundPanelMenuLayout.setVerticalGroup(
             backgroundPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanelMenuLayout.createSequentialGroup()
                 .addComponent(exitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backgroundPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backgroundPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,17 +253,25 @@ public class MenuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_marxesButtonActionPerformed
 
     private void modifyRunnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyRunnerButtonActionPerformed
-        ChoseParticipant window = new ChoseParticipant(this, true);
+        choseParticipantDialog = new ChoseParticipant(this, true);
         setVisible(false);
-        window.setLocationRelativeTo(this);
-        window.setVisible(true);
+        choseParticipantDialog.setLocationRelativeTo(this);
+        choseParticipantDialog.setVisible(true);
         setVisible(true);
-        
-
     }//GEN-LAST:event_modifyRunnerButtonActionPerformed
+
+    private void ParticipantsMarxajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParticipantsMarxajButtonActionPerformed
+        // TODO add your handling code here:
+        estadistiquesMarxaDialog = new EstadistiquesMarxaDialog1(this, true);
+        setVisible(false);
+        estadistiquesMarxaDialog.setLocationRelativeTo(this);
+        estadistiquesMarxaDialog.setVisible(true);
+        setVisible(true);
+    }//GEN-LAST:event_ParticipantsMarxajButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ParticipantsMarxajButton;
     private javax.swing.JPanel backgroundPanelMenu;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JButton createMarxaButton;

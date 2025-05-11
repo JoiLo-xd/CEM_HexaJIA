@@ -2,20 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package cem.view.dialogsMenu2.subMenuMarxes;
+package cem.view.dialogsMenu2;
+
+import cem.controller.Controller;
+import cem.model.TO.ParticipantEditionTO;
+import cem.model.TO.StatsMarxesTO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author admin
  */
 public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
+    
+    private Controller controller;
 
     /**
      * Creates new form EstadistiquesMarxaDialog1
      */
     public EstadistiquesMarxaDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Mostrar marxes");
+        setModal(true);
+        pack();
+        setResizable(false);
         initComponents();
+        setLocationRelativeTo(null);
+        controller = Controller.getInstance();
+        listStatsMarxes();
     }
 
     /**
@@ -31,7 +48,7 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        statsjTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -40,7 +57,7 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
-        jLabel1.setText("ESTADÍSTIQUES DE LA MARXA");
+        jLabel1.setText("ESTADÍSTIQUES DE LES MARXES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -59,18 +76,31 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        statsjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "participants inscrits", "participants en cursa", "arribats", "absents", "abandonat", "homes", "dones", "temps mes rapid", "temps mes lent"
+                "Edició", "Inscrits", "En cursa", "Arribats", "Absents", "Abandonat", "Temps més ràpid", "Temps més lent"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        statsjTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                statsjTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(statsjTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,6 +131,32 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void statsjTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statsjTableMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_statsjTableMouseClicked
+
+    
+    private void listStatsMarxes() {
+        try {
+            ArrayList<StatsMarxesTO> stats = controller.getStatsMarxes();
+            DefaultTableModel dtm = new DefaultTableModel(new String[]{"Edició", "Inscrits", "En cursa", "Arribat", "Absent", "Abandonat", "Temps més ràpid", "Temps més lent"}, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // ninguna celda editable
+                }
+            };
+            for (StatsMarxesTO p : stats) {
+                String rapid = p.getTempsMesRapid() == null ? p.getTempsMesRapid().toString() : "--:--:--";
+                String lent = p.getTempsMesLent() == null ? p.getTempsMesLent().toString() : "--:--:--";
+                dtm.addRow(new String[]{p.getEdicio(), p.getInscrits(), p.getEnCursa(), p.getArribats(), p.getAbsents(), p.getAbandonat(), rapid, lent});
+            }
+            statsjTable.setModel(dtm);
+        } catch (SQLException ex) {
+            System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -111,6 +167,6 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable statsjTable;
     // End of variables declaration//GEN-END:variables
 }

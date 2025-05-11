@@ -107,13 +107,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jButtonParticipantsMarxa" min="-2" pref="496" max="-2" attributes="0"/>
                       <Component id="jButtonArribada" min="-2" pref="496" max="-2" attributes="0"/>
                       <Component id="jButtonSortida" min="-2" pref="496" max="-2" attributes="0"/>
                       <Component id="jButtonEditarInscripció" min="-2" pref="496" max="-2" attributes="0"/>
                       <Component id="jButtonInscriureParticipant" min="-2" pref="496" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="172" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -133,8 +132,6 @@
                   <Component id="jButtonSortida" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButtonArribada" min="-2" pref="65" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButtonParticipantsMarxa" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace pref="36" max="32767" attributes="0"/>
                   <Component id="jButtonSortit" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -179,14 +176,6 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Arribada"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonParticipantsMarxa">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Estad&#xed;stiques de la marxa"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSortit">

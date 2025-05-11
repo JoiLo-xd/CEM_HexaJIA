@@ -42,7 +42,6 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         jButtonEditarInscripció = new javax.swing.JButton();
         jButtonSortida = new javax.swing.JButton();
         jButtonArribada = new javax.swing.JButton();
-        jButtonParticipantsMarxa = new javax.swing.JButton();
         jButtonSortit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -102,9 +101,6 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         jButtonArribada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonArribada.setText("Arribada");
 
-        jButtonParticipantsMarxa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonParticipantsMarxa.setText("Estadístiques de la marxa");
-
         jButtonSortit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSortit.setText("Sortir");
         jButtonSortit.addActionListener(new java.awt.event.ActionListener() {
@@ -120,12 +116,11 @@ public class MarxesDialog1 extends javax.swing.JDialog {
             .addGroup(buttonsjPanelLayout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addGroup(buttonsjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonParticipantsMarxa, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonArribada, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSortida, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEditarInscripció, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonInscriureParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsjPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSortit, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,8 +137,6 @@ public class MarxesDialog1 extends javax.swing.JDialog {
                 .addComponent(jButtonSortida, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonArribada, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonParticipantsMarxa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jButtonSortit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
@@ -180,7 +173,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonInscriureParticipantActionPerformed
 
     private void jButtonEditarInscripcióActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarInscripcióActionPerformed
-        ChoseParticipantIns window = new ChoseParticipantIns(null, true, edicio);
+        ChoseParticipants window = new ChoseParticipants(null, true, edicio);
         setVisible(false);
         window.setLocationRelativeTo(this);
         window.setVisible(true);
@@ -197,7 +190,6 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     private javax.swing.JButton jButtonArribada;
     private javax.swing.JButton jButtonEditarInscripció;
     private javax.swing.JButton jButtonInscriureParticipant;
-    private javax.swing.JButton jButtonParticipantsMarxa;
     private javax.swing.JButton jButtonSortida;
     private javax.swing.JButton jButtonSortit;
     private javax.swing.JLabel textEdiciojLabel;

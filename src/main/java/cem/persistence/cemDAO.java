@@ -8,6 +8,7 @@ import cem.model.Inscripcio;
 import cem.model.Participant;
 import cem.model.Marxa;
 import cem.model.TO.ParticipantEditionTO;
+import cem.model.TO.StatsMarxesTO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -59,6 +60,65 @@ public class cemDAO {
         st.close();
         desconectar(c);
         return marxes;
+    }
+    
+    public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException {
+        //hacer codigo bien
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("SELECT edicio FROM marxa");
+        ArrayList<StatsMarxesTO> statsMarxes = new ArrayList<>();
+        while (rs.next()) {
+            int edicio = rs.getInt("edicio");
+            Statement st2 = c.createStatement();
+            ResultSet rs2 = st2.executeQuery("SELECT COUNT(*) FROM inscripcio WHERE edicio = " + edicio);
+            int inscrits = 0;
+            if (rs2.next()) {
+                inscrits = rs2.getInt(1);
+            }
+            rs2 = st2.executeQuery("SELECT COUNT(*) FROM inscripcio WHERE hora_sortida is not null and edicio = " + edicio);
+            int enCursa = 0;
+            if (rs2.next()) {
+                enCursa = rs2.getInt(1);
+            }
+            rs2 = st2.executeQuery("SELECT COUNT(*) FROM inscripcio WHERE hora_arribada is not null and edicio = " + edicio);
+            int arribats = 0;
+            if (rs2.next()) {
+                arribats = rs2.getInt(1);
+            }
+            rs2 = st2.executeQuery("SELECT COUNT(*) FROM inscripcio WHERE hora_arribada is null and hora_sortida is null and edicio = " + edicio);
+            int absents = 0;
+            if (rs2.next()) {
+                absents = rs2.getInt(1);
+            }
+            rs2 = st2.executeQuery("SELECT MAX(hora_sortida - hora_arribada) FROM inscripcio WHERE asistencia = 'ha abandonat' and edicio = " + edicio);
+            int abandonat = 0;
+            if (rs2.next()) {
+                abandonat = rs2.getInt(1);
+            }
+            rs2 = st2.executeQuery("SELECT MAX(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)) FROM inscripcio WHERE asistencia = 'ha abandonat' AND edicio = " + edicio);
+            int segons = 0;
+            LocalTime rapid = null;
+            if (rs2.next()) {
+                segons = rs2.getInt(1);
+                rapid = LocalTime.ofSecondOfDay(segons);
+            }
+            
+            rs2 = st2.executeQuery("SELECT MIN(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)) FROM inscripcio WHERE asistencia = 'ha abandonat' AND edicio = " + edicio);
+            int segons2 = 0;
+            LocalTime lent = null;
+            if (rs2.next()) {
+                segons2 = rs2.getInt(1);
+                lent = LocalTime.ofSecondOfDay(segons2);
+            }
+            rs2.close();
+            st2.close();
+            statsMarxes.add(new StatsMarxesTO(edicio, inscrits, enCursa, arribats, absents, abandonat, rapid, lent));
+        }
+        rs.close();
+        st.close();
+        desconectar(c);
+        return statsMarxes;
     }
 
     public void insertMarxa(Marxa marxa) throws SQLException {

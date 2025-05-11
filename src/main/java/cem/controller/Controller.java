@@ -6,6 +6,7 @@ import cem.model.Inscripcio;
 import cem.model.Participant;
 import cem.model.Marxa;
 import cem.model.TO.ParticipantEditionTO;
+import cem.model.TO.StatsMarxesTO;
 import cem.persistence.cemDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -62,6 +63,10 @@ public class Controller {
 
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException{
         return dao.getMarxes();
+    }
+    
+    public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException{
+        return dao.getStatsMarxes();
     }
 
     public void addMarxa(Marxa m) throws SQLException, AdditionException{

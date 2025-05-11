@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author joellopez
  */
-public class ChoseParticipantIns extends javax.swing.JDialog {
+public class ChoseParticipants extends javax.swing.JDialog {
         private String edicio;
 
 
@@ -22,7 +22,7 @@ public class ChoseParticipantIns extends javax.swing.JDialog {
      */
     java.awt.Frame parent;
     Controller controller;
-    public ChoseParticipantIns(java.awt.Frame parent, boolean modal, String edicio) {
+    public ChoseParticipants(java.awt.Frame parent, boolean modal, String edicio) {
         super(parent, modal);
         initComponents();
         controller = Controller.getInstance();
