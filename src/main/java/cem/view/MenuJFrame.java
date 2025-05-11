@@ -8,6 +8,7 @@ package cem.view;
 //import cem.view.dialogsMenu2.EditParticipantDialog1;
 //import cem.view.dialogsMenu2.CreateMarxaDialog1;
 //import cem.view.dialogsMenu2.ShowMarxes1;
+import cem.view.dialogsMenu2.ChoseParticipant;
 import cem.view.dialogsMenu2.CreateMarxaDialog1;
 import cem.view.dialogsMenu2.RegisterParticipantDialog1;
 import cem.view.dialogsMenu2.ShowMarxes1;
@@ -108,6 +109,11 @@ public class MenuJFrame extends javax.swing.JFrame {
         modifyRunnerButton.setText("Modificar participant");
         modifyRunnerButton.setAlignmentY(0.0F);
         modifyRunnerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        modifyRunnerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyRunnerButtonActionPerformed(evt);
+            }
+        });
 
         marxesButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         marxesButton.setText("Marxes");
@@ -208,7 +214,7 @@ public class MenuJFrame extends javax.swing.JFrame {
 
     private void createRunnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRunnerButtonActionPerformed
         // TODO add your handling code here:
-        registerParticipantDialog = new RegisterParticipantDialog1(this, true);
+        registerParticipantDialog = new RegisterParticipantDialog1(this, true, null);
         setVisible(false);
         registerParticipantDialog.setVisible(true);
         setVisible(true);
@@ -227,6 +233,16 @@ public class MenuJFrame extends javax.swing.JFrame {
         showMarxes.setVisible(true);
         setVisible(true);
     }//GEN-LAST:event_marxesButtonActionPerformed
+
+    private void modifyRunnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyRunnerButtonActionPerformed
+        ChoseParticipant window = new ChoseParticipant(this, true);
+        setVisible(false);
+        window.setLocationRelativeTo(this);
+        window.setVisible(true);
+        setVisible(true);
+        
+
+    }//GEN-LAST:event_modifyRunnerButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

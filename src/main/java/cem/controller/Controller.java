@@ -33,6 +33,19 @@ public class Controller {
         return controller;
 
     }
+    
+    public Participant getParticipant(String dni) throws AdditionException{
+        try {
+            if (existParticipantforDNI(dni)) {
+                return dao.getParticipant(dni);
+            } else {
+                throw new AdditionException("Aquesta persona no existeix");
+            }
+        } catch (SQLException e) {
+            System.out.println("Este error no se deberia dar");
+        }
+        return null; //nunca llega aqui btw
+    }
 
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException{
         return dao.getMarxes();
@@ -81,7 +94,7 @@ public class Controller {
         if (!dao.existParticipant(corredor)){
             dao.insertParticipant(corredor);
         }else{
-             throw new AdditionException("Ja existeix un participant amb aquest nom");
+             throw new AdditionException("Ja existeix un participant amb aquest nie");
         }
     }
 
@@ -99,10 +112,18 @@ public class Controller {
             return true;
         } else { return false;}
     }
-        public boolean existParticipantforDNI(String dni) throws SQLException{
+    public boolean existParticipantforDNI(String dni) throws SQLException{
         if(dao.existParticipantforDNI(dni)){
             return true;
         } else { return false;}
+    }
+    
+    public void modifiParticipant(Participant as){
+        try{
+        dao.modifiParticipant(as);
+        }catch (SQLException e){
+            System.out.println("No se deberia dar este error" + e.getMessage());
+        }
     }
 
 

@@ -27,11 +27,12 @@ import javax.swing.JOptionPane;
 public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
     private Controller controller;
-
+    private boolean modifier = false;
+    private String dni_res;
     /**
      * Creates new form RegisterParticipantDialog
      */
-    public RegisterParticipantDialog1(java.awt.Frame parent, boolean modal) {
+    public RegisterParticipantDialog1(java.awt.Frame parent, boolean modal, String dni) {
         super(parent, modal);
         setTitle("Registrar participant");
         setModal(true);
@@ -39,6 +40,23 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         controller = Controller.getInstance();
+        if (dni != null){
+            try{
+            Participant chosen = controller.getParticipant(dni);
+            DNIjTextField.setText(dni);
+            namejTextField.setText(chosen.getNom());
+            cognomsjTextField.setText(chosen.getCognoms());
+            townjTextField.setText(chosen.getPoblacio());
+            telfjTextField.setText(chosen.getNumTelefon());
+            mailjTextField.setText(chosen.getEmail());
+            DNIjLabel.setEnabled(false);
+            modifier = true;
+            dni_res = dni; 
+            }catch(AdditionException e){
+                System.out.println("Este error no se debe dar en esta circunstancia " + e.getMessage());
+            }
+            
+        }
     }
 
     /**
@@ -335,17 +353,22 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             if (fedejCheckBox.isEnabled()){
                 entitat = fedejTextField.getText();
             }
-            controller.addParticipant(new Participant(dni,nom,cognom,neix,sex,town,tlf,email,entitat,fedejCheckBox.isEnabled()));
-            
+            Participant pr = new Participant(dni,nom,cognom,neix,sex,town,tlf,email,entitat,fedejCheckBox.isEnabled()); 
+            if (!modifier){
+            controller.addParticipant(pr);
+            }else{
+                controller.modifiParticipant(pr);
+            }
         }catch(AdditionException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }catch(SQLException e){
             System.out.println("Este error no se deberia dar: " + e.getMessage());
+            
         }
-        
+        dispose();
         
         /*
-        dispose();
+        
         boolean ok = true;
         String textoAMostrar = "Error";
         if (!controller.validateNif(DNIjTextField.getText())) {
@@ -407,7 +430,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
     private void DNIjTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DNIjTextFieldMouseClicked
         // TODO add your handling code here:
-        if (DNIjTextField.getText().equals("00000000A")) {
+        if (DNIjTextField.getText().equals("00000000A") && !modifier) {
             DNIjTextField.setText("");
             DNIjTextField.setForeground(Color.BLACK);
         }
@@ -476,27 +499,44 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 */
     private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-        if (DNIjTextField.getText().isEmpty()) {
-            DNIjTextField.setForeground(Color.GRAY);
-            DNIjTextField.setBackground(Color.WHITE);
-            DNIjTextField.setText("00000000A");
-        } else {
+        if (!modifier) {
+            if (DNIjTextField.getText().isEmpty()) {
+                DNIjTextField.setForeground(Color.GRAY);
+                DNIjTextField.setBackground(Color.WHITE);
+                DNIjTextField.setText("00000000A");
+            } else {
 
-            String texto = DNIjTextField.getText();
-            boolean esValido = controller.validateNif(texto);
-            DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
-            checkbotones();
+                String texto = DNIjTextField.getText();
+                boolean esValido = controller.validateNif(texto);
+                DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
+                checkbotones();
+            }
+        }else{
+            DNIjTextField.setText(dni_res);
+            
         }
     }
     
     private void checkbotones(){
         boolean aprobate;
-        if (controller.validateNif(DNIjTextField.getText()) && controller.validateEmail(mailjTextField.getText()) && controller.validateTlf(telfjTextField.getText())
-                && !namejTextField.getText().isEmpty() && !cognomsjTextField.getText().isEmpty() && !townjTextField.getText().isEmpty()){
-            acceptjButton.setEnabled(true);
+        if (!modifier) {
+            if (controller.validateNif(DNIjTextField.getText()) && controller.validateEmail(mailjTextField.getText()) && controller.validateTlf(telfjTextField.getText())
+                    && !namejTextField.getText().isEmpty() && !cognomsjTextField.getText().isEmpty() && !townjTextField.getText().isEmpty()) {
+                acceptjButton.setEnabled(true);
+            } else {
+                acceptjButton.setEnabled(false);
+            }
         }else{
-            acceptjButton.setEnabled(false);
+            if (controller.validateEmail(mailjTextField.getText()) && controller.validateTlf(telfjTextField.getText())
+                    && !namejTextField.getText().isEmpty() && !cognomsjTextField.getText().isEmpty() && !townjTextField.getText().isEmpty()){
+                acceptjButton.setEnabled(true);
+            } else {
+                acceptjButton.setEnabled(false);
+            }
+            
+            
         }
+        
     }
     
     
