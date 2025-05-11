@@ -46,6 +46,19 @@ public class Controller {
         }
         return null; //nunca llega aqui btw
     }
+    public Inscripcio getInscripcio(String dni,  String edicio) throws AdditionException{
+        try {
+            if (dao.existParticipantinInscripcio(dni, Integer.parseInt(edicio))) {
+                return dao.getInscripcio(dni, edicio);
+            } else {
+                throw new AdditionException("Aquesta persona no està registrada en aquesta marxa");
+            }
+        } catch (SQLException e) {
+            System.out.println("Este error no se deberia dar");
+        }
+        return null; //nunca llega aqui btw
+    }
+    
 
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException{
         return dao.getMarxes();
@@ -129,6 +142,14 @@ public class Controller {
     public void modifiParticipant(Participant as){
         try{
         dao.modifiParticipant(as);
+        }catch (SQLException e){
+            System.out.println("No se deberia dar este error" + e.getMessage());
+        }
+    }
+    
+    public void modifiInscripcio(Inscripcio in){
+        try{
+        dao.modifiInscripcio(in);
         }catch (SQLException e){
             System.out.println("No se deberia dar este error" + e.getMessage());
         }

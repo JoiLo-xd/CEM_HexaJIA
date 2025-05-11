@@ -4,6 +4,8 @@
  */
 package cem.view.dialogsMenu2.subMenuMarxes;
 
+import cem.view.dialogsMenu2.ChoseParticipant;
+
 /**
  *
  * @author admin
@@ -12,6 +14,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
 
     private InscriureParticipantDialog1 inscriureParticipant;
     private String edicio;
+
     /**
      * Creates new form MarxesDialog1
      */
@@ -84,6 +87,11 @@ public class MarxesDialog1 extends javax.swing.JDialog {
 
         jButtonEditarInscripció.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonEditarInscripció.setText("Editar inscripció");
+        jButtonEditarInscripció.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarInscripcióActionPerformed(evt);
+            }
+        });
 
         jButtonSortida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonSortida.setText("Sortida");
@@ -162,11 +170,18 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSortitActionPerformed
 
     private void jButtonInscriureParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriureParticipantActionPerformed
-        inscriureParticipant = new InscriureParticipantDialog1(null, true, edicio); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
+        inscriureParticipant = new InscriureParticipantDialog1(null, true,null, edicio); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
         setVisible(false);
         inscriureParticipant.setVisible(true);
         setVisible(true);
     }//GEN-LAST:event_jButtonInscriureParticipantActionPerformed
+
+    private void jButtonEditarInscripcióActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarInscripcióActionPerformed
+        ChoseParticipantIns window = new ChoseParticipantIns(null, true, edicio);
+        setVisible(false);
+        window.setLocationRelativeTo(this);
+        window.setVisible(true);
+        setVisible(true);    }//GEN-LAST:event_jButtonEditarInscripcióActionPerformed
 
     /**
      * @param args the command line arguments

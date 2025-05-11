@@ -108,18 +108,36 @@ public class cemDAO {
         ps.close();
         desconectar(c);
     }
-    
-    public Participant getParticipant(String dni) throws SQLException{
+
+    public Participant getParticipant(String dni) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("select nif, nom,cognom,naixement,sexe,poblacio,num_telf,gmail,federat,entitat from participant where nif = '" + dni + "';");
         //Patata incoming
         rs.next();
-        return new Participant(rs.getString(1),rs.getString(2),rs.getString(3),
-                rs.getDate(4).toLocalDate(),rs.getBoolean(5),rs.getString(6),
-                rs.getString(7),rs.getString(8),rs.getString(10),rs.getBoolean(9));
-        
-    } 
+        return new Participant(rs.getString(1), rs.getString(2), rs.getString(3),
+                rs.getDate(4).toLocalDate(), rs.getBoolean(5), rs.getString(6),
+                rs.getString(7), rs.getString(8), rs.getString(10), rs.getBoolean(9));
+
+    }
+
+    public Inscripcio getInscripcio(String dni, String edicio) throws SQLException {
+        Connection c = conectar();
+        String query = ("SELECT nif, edicio FROM inscripcio WHERE nif = ? AND edicio = ?");
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setString(1, dni);
+        ps.setInt(2, Integer.parseInt(edicio));
+        ResultSet rs = ps.executeQuery();
+
+        Inscripcio inscripcio = null;
+        if (rs.next()) {
+            inscripcio = new Inscripcio(rs.getString(1), rs.getInt(2));
+        }
+        rs.close();
+        ps.close();
+        desconectar(c);
+        return inscripcio;
+    }
 
     public boolean existParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
@@ -158,7 +176,7 @@ public class cemDAO {
 
     public boolean existParticipantinInscripcio(String dni, int edicio) throws SQLException {
         Connection c = conectar();
-        String query = "SELECT * FROM inscripcio WHERE nif = ? AND edicio = ?";
+        String query = ("SELECT * FROM inscripcio WHERE nif = ? AND edicio = ?");
         PreparedStatement ps = c.prepareStatement(query);
         ps.setString(1, dni);
         ps.setInt(2, edicio);
@@ -180,20 +198,32 @@ public class cemDAO {
         desconectar(c);
         return existe;
     }
-    
-    public void modifiParticipant(Participant pa) throws SQLException{
+
+    public void modifiParticipant(Participant pa) throws SQLException {
         Connection c = conectar();
         String query = "UPDATE participant set nom = ?, cognom = ?, sexe = ?, poblacio = ?, num_telf = ?, gmail = ?, federat = ?, entitat = ? where nif = '" + pa.getNif() + "';";
-        
+
         PreparedStatement ps = c.prepareStatement(query);
         ps.setString(1, pa.getNom());
         ps.setString(2, pa.getCognoms());
         ps.setBoolean(3, pa.isSexe());
         ps.setString(4, pa.getPoblacio());
         ps.setString(5, pa.getNumTelefon());
-        ps.setString(6,pa.getEmail());
+        ps.setString(6, pa.getEmail());
         ps.setBoolean(7, pa.isFederat());
-        ps.setString(8,pa.getEntitat());
+        ps.setString(8, pa.getEntitat());
+        ps.executeUpdate();
+        ps.close();
+        desconectar(c);
+    }
+    
+    public void modifiInscripcio(Inscripcio in) throws SQLException {
+        Connection c = conectar();
+        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ? where nif = '" + in.getDni()+ "';";
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setString(1, in.getDni());
+        ps.setBoolean(2, in.isModalitat());
+        ps.setInt(3, in.getDorsal());
         ps.executeUpdate();
         ps.close();
         desconectar(c);

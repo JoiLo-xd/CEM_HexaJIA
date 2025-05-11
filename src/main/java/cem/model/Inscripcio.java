@@ -30,6 +30,13 @@ public class Inscripcio {
         this.edicio = edicio;
     }
 
+    public Inscripcio(String dni, int edicio) {
+        this.edicio = edicio;
+        this.dni = dni;
+    }
+    
+    
+
     public Inscripcio(int dorsal, boolean modalitat, String asistencia, String dni, int edicio) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;

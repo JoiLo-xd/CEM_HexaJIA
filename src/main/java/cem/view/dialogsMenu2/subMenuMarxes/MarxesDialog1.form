@@ -155,6 +155,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Editar inscripci&#xf3;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarInscripci&#xf3;ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSortida">
           <Properties>
