@@ -53,6 +53,7 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        exitjButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         statsjTable = new javax.swing.JTable();
 
@@ -65,19 +66,33 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
         jLabel1.setText("ESTADÍSTIQUES DE LES MARXES");
 
+        exitjButton.setText("sortir");
+        exitjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(390, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(390, 390, 390))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(390, 390, 390))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(exitjButton)
+                        .addGap(10, 10, 10))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(10, 10, 10)
+                .addComponent(exitjButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -149,12 +164,16 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
             rankingInscripcionsMarxa = new RankingInscripcionsMarxa(parent,true,s);
             rankingInscripcionsMarxa.setLocationRelativeTo(this);
             rankingInscripcionsMarxa.setVisible(true);
-            this.setVisible(true);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+        this.setVisible(true);
     }//GEN-LAST:event_statsjTableMouseClicked
+
+    private void exitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitjButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_exitjButtonActionPerformed
 
     
     private void listStatsMarxes() {
@@ -183,6 +202,7 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exitjButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

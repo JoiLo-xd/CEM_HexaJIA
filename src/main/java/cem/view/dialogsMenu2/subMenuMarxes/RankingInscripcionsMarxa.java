@@ -40,7 +40,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         editionjLabel.setText(edicio);
         jCheckBox1.setForeground(Color.white);
         jCheckBox1.setBackground(jPanel1.getBackground());
-        listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), 1));
+        listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), optionsjComboBox.getSelectedIndex()));
     }
 
     /**
@@ -57,6 +57,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         rankingjLabel = new javax.swing.JLabel();
         editionjLabel = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        exitjButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -84,6 +85,13 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
             }
         });
 
+        exitjButton.setText("sortir");
+        exitjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,13 +106,20 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
                 .addGap(52, 52, 52))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
-                .addGap(126, 126, 126))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(exitjButton)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
+                .addComponent(exitjButton)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(optionsjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rankingjLabel)
@@ -182,6 +197,11 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_optionsjComboBoxItemStateChanged
 
+    private void exitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitjButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_exitjButtonActionPerformed
+
     
     private void listInscripcions(ArrayList<InscripcionsRanking> inscripcions) {
         DefaultTableModel dtm = new DefaultTableModel(new String[]{"Nom", "Temps", "Assistencia"}, 0) {
@@ -203,6 +223,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel editionjLabel;
+    private javax.swing.JButton exitjButton;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

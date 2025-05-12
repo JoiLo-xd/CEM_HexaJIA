@@ -95,25 +95,25 @@ public class cemDAO {
                 }rs0.close();
                 break;
             case 1:
-                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and asistencia = 'no ha vingut'");
+                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.asistencia = 'No ha vingut'");
                 while (rs1.next()) {
                     String nom = rs1.getString(1);
                     nom = nom.concat(" " + rs1.getString(2));
                     String nif = rs1.getString(3);
                     String temps = "--:--:--";
-                    String assistencia = "absent";
+                    String assistencia = rs1.getString(4);
                     inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
                     
                 }rs1.close();
                 break;
             case 2:
-                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and asistencia = 'ha abandonat'");
+                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
                 while (rs2.next()) {
                     String nom = rs2.getString(1);
                     nom = nom.concat(" " + rs2.getString(2));
                     String nif = rs2.getString(3);
                     String temps = "--:--:--";
-                    String assistencia = "abandonament";
+                    String assistencia = rs2.getString(4);
                     inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
                     
                 }rs2.close();
