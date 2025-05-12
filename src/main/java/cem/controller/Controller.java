@@ -27,6 +27,8 @@ public class Controller {
         dao = new cemDAO();
 
     }
+    
+    
 
     public static Controller getInstance(){
         if (controller == null) {
@@ -48,6 +50,12 @@ public class Controller {
         }
         return null; //nunca llega aqui btw
     }
+    
+    public void putTime(String dorsal, String edicio){
+        //per posar aqui
+    }
+    
+    
     public Inscripcio getInscripcio(String dni,  String edicio) throws AdditionException{
         try {
             if (dao.existParticipantinInscripcio(dni, Integer.parseInt(edicio))) {

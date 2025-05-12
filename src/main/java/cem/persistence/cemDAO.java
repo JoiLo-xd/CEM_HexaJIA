@@ -39,6 +39,10 @@ public class cemDAO {
     private void desconectar(Connection c) throws SQLException {
         c.close();
     }
+    
+    public void setTimeInscripcio(int Dorsal, int edicio, LocalTime valor_imp)throws SQLException{
+        //por poner
+    }
 
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException {
         Connection c = conectar();
