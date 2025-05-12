@@ -99,9 +99,19 @@ public class MarxesDialog1 extends javax.swing.JDialog {
 
         jButtonSortida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonSortida.setText("Sortida");
+        jButtonSortida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSortidaActionPerformed(evt);
+            }
+        });
 
         jButtonArribada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonArribada.setText("Arribada");
+        jButtonArribada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonArribadaActionPerformed(evt);
+            }
+        });
 
         jButtonSortit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSortit.setText("Sortir");
@@ -205,6 +215,20 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         }
         this.setVisible(true);
     }//GEN-LAST:event_jButtonStatsActionPerformed
+
+    private void jButtonSortidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortidaActionPerformed
+        PosarTemps ps = new PosarTemps(null, true,true, edicio);
+        setVisible(false);
+        ps.setLocationRelativeTo(this);
+        ps.setVisible(true); 
+    }//GEN-LAST:event_jButtonSortidaActionPerformed
+
+    private void jButtonArribadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArribadaActionPerformed
+        PosarTemps ps = new PosarTemps(null, true,false, edicio);
+        setVisible(false);
+        ps.setLocationRelativeTo(this);
+        ps.setVisible(true); 
+    }//GEN-LAST:event_jButtonArribadaActionPerformed
 
     /**
      * @param args the command line arguments

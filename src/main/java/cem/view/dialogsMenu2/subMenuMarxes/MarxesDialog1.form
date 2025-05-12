@@ -172,6 +172,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Sortida"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSortidaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonArribada">
           <Properties>
@@ -180,6 +183,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Arribada"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonArribadaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSortit">
           <Properties>

@@ -18,19 +18,23 @@ public class PosarTemps extends javax.swing.JDialog {
     /**
      * Creates new form PosarTemps
      */
-    String edicio; 
-    Controller controller; 
+    private String edicio; 
+    private Controller controller; 
+    
     // false es que aquesta finestra s'utilitza per la iniciada de començar a correr
     private boolean func = false;
     public PosarTemps(java.awt.Frame parent, boolean modal,boolean func,String edicio) {
         super(parent, modal);
         initComponents();
         controller = Controller.getInstance();
-        posarBoton.setEnabled(false);
+        this.func = func;
+        
         this.edicio = edicio; 
         if (func){
             textLabel.setText(textLabel.getText() + "sortit");
             
+        }else{
+            textLabel.setText(textLabel.getText() + "arribat");
         }
     }
 
@@ -172,8 +176,19 @@ public class PosarTemps extends javax.swing.JDialog {
 
     private void posarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posarBotonActionPerformed
         try{
+            
         if (controller.existDorsal(Integer.parseInt(dorsalTextField.getText()), Integer.parseInt(edicio))){
-            //controller.puttime(dorsalTextField.getText(),edicio);
+            if (func) {controller.putTimes(dorsalTextField.getText(),edicio);}
+            else{
+                
+                if (controller.gettimesbyDorsal(dorsalTextField.getText(), edicio) != null){
+                    controller.putTimesa(dorsalTextField.getText(), edicio);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Aquest concursant encara no ha sortit", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                    
+            }
+                    
             
             
         }else{

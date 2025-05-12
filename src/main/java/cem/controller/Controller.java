@@ -10,6 +10,7 @@ import cem.model.TO.ParticipantEditionTO;
 import cem.model.TO.StatsMarxesTO;
 import cem.persistence.cemDAO;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import java.util.Arrays;
@@ -51,8 +52,34 @@ public class Controller {
         return null; //nunca llega aqui btw
     }
     
-    public void putTime(String dorsal, String edicio){
-        //per posar aqui
+    public void putTimes(String dorsal, String edicio){
+        try{
+            LocalTime temps_actual = LocalTime.now();
+            dao.setTimesInscripcio(Integer.parseInt(dorsal), Integer.parseInt(edicio), temps_actual);
+        }catch (SQLException e){
+            System.out.println("Aquest error no es hauria de donar " + e.getMessage());
+        }
+    }
+    
+    public void putTimesa(String dorsal, String edicio){
+        try{
+            LocalTime temps_actual = LocalTime.now();
+            dao.setTimeaIncripcio(Integer.parseInt(dorsal), Integer.parseInt(edicio), temps_actual);
+            
+        }catch (SQLException e){
+            System.out.println("Aquest error no es hauria de donar " + e.getMessage());
+        }
+    }
+    
+    public LocalTime gettimesbyDorsal(String dorsal, String edicio){
+        try{
+            return dao.getTimebyDorsal(Integer.parseInt(dorsal), Integer.parseInt(edicio));
+            
+            
+        }catch (SQLException e){
+            System.out.println("Este error no deberia salir: " + e.getMessage());
+        }
+        return null; 
     }
     
     

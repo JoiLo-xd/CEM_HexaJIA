@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,8 +41,46 @@ public class cemDAO {
         c.close();
     }
     
-    public void setTimeInscripcio(int Dorsal, int edicio, LocalTime valor_imp)throws SQLException{
-        //por poner
+    public LocalTime getTimebyDorsal(int Dorsal, int edicio) throws SQLException {
+        
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        PreparedStatement ps = c.prepareStatement("SELECT hora_sortida from inscripcio where dorsal = ? and edicio = ?");
+        ps.setInt(1, Dorsal);
+        ps.setInt(2,edicio);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            Time a = rs.getTime(1);
+            return a.toLocalTime();
+            
+        }
+        return null; 
+
+        
+        
+    }
+    
+    public void setTimesInscripcio(int Dorsal, int edicio, LocalTime valor_imp)throws SQLException{
+        Connection c = conectar();
+        PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_sortida = ? WHERE dorsal = ? and edicio = ? ");
+        ps.setTime(1,Time.valueOf(valor_imp));
+        ps.setInt(2, Dorsal);
+        ps.setInt(3, edicio);
+        ps.executeUpdate();
+        ps.close();
+        desconectar(c);
+        
+    }
+    
+    public void setTimeaIncripcio(int Dorsal, int edicio, LocalTime valor_imp) throws SQLException{
+        Connection c = conectar();
+        PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_arribada = ? WHERE dorsal = ? and edicio = ? ");
+        ps.setTime(1,Time.valueOf(valor_imp));
+        ps.setInt(2, Dorsal);
+        ps.setInt(3, edicio);
+        ps.executeUpdate();
+        ps.close();
+        desconectar(c);
     }
 
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException {
