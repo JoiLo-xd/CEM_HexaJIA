@@ -78,6 +78,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         telfjLabel = new javax.swing.JLabel();
         mailjLabel = new javax.swing.JLabel();
         fedejCheckBox = new javax.swing.JCheckBox();
+        ObservacionsjLabel1 = new javax.swing.JLabel();
         valuesjPanel = new javax.swing.JPanel();
         DNIjTextField = new javax.swing.JTextField();
         namejTextField = new javax.swing.JTextField();
@@ -90,6 +91,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         acceptjButton = new javax.swing.JButton();
         canceljButton = new javax.swing.JButton();
         birthDateDatePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        observacioojTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,6 +150,11 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             }
         });
 
+        ObservacionsjLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ObservacionsjLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        ObservacionsjLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ObservacionsjLabel1.setText("Observacions");
+
         javax.swing.GroupLayout titlesjPanelLayout = new javax.swing.GroupLayout(titlesjPanel);
         titlesjPanel.setLayout(titlesjPanelLayout);
         titlesjPanelLayout.setHorizontalGroup(
@@ -155,6 +162,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             .addGroup(titlesjPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(titlesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ObservacionsjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mailjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telfjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(townjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,6 +197,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 .addComponent(mailjLabel)
                 .addGap(41, 41, 41)
                 .addComponent(fedejCheckBox)
+                .addGap(34, 34, 34)
+                .addComponent(ObservacionsjLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -278,14 +288,25 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             }
         });
 
+        observacioojTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                observacioojTextField1FocusLost(evt);
+            }
+        });
+        observacioojTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                observacioojTextField1KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout valuesjPanelLayout = new javax.swing.GroupLayout(valuesjPanel);
         valuesjPanel.setLayout(valuesjPanelLayout);
         valuesjPanelLayout.setHorizontalGroup(
             valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(valuesjPanelLayout.createSequentialGroup()
-                .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(birthDateDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(birthDateDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(valuesjPanelLayout.createSequentialGroup()
                                 .addContainerGap()
@@ -299,12 +320,13 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                                     .addComponent(townjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cognomsjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(namejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DNIjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(valuesjPanelLayout.createSequentialGroup()
-                            .addGap(84, 84, 84)
-                            .addComponent(acceptjButton)
-                            .addGap(102, 102, 102)
-                            .addComponent(canceljButton))))
+                                    .addComponent(DNIjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(observacioojTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(valuesjPanelLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(acceptjButton)
+                        .addGap(111, 111, 111)
+                        .addComponent(canceljButton)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         valuesjPanelLayout.setVerticalGroup(
@@ -328,11 +350,13 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
                 .addComponent(mailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(fedejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(observacioojTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(valuesjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(acceptjButton)
                     .addComponent(canceljButton))
-                .addGap(45, 45, 45))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -374,7 +398,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             if (fedejCheckBox.isEnabled()){
                 entitat = fedejTextField.getText();
             }
-            Participant pr = new Participant(dni,nom,cognom,neix,sex,town,tlf,email,entitat,fedejCheckBox.isEnabled()); 
+            String observacio = observacioojTextField1.getText();
+            Participant pr = new Participant(dni,nom,cognom,neix,sex,town,tlf,email,entitat,fedejCheckBox.isEnabled(), observacio); 
             if (!modifier){
             controller.addParticipant(pr);
             }else{
@@ -628,10 +653,19 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_namejTextFieldActionPerformed
 
+    private void observacioojTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_observacioojTextField1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_observacioojTextField1FocusLost
+
+    private void observacioojTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_observacioojTextField1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_observacioojTextField1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DNIjLabel;
     private javax.swing.JTextField DNIjTextField;
+    private javax.swing.JLabel ObservacionsjLabel1;
     private javax.swing.JButton acceptjButton;
     private com.github.lgooddatepicker.components.DatePicker birthDateDatePicker1;
     private javax.swing.JLabel birthDatejLabel;
@@ -644,6 +678,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     private javax.swing.JTextField mailjTextField;
     private javax.swing.JLabel namejLabel;
     private javax.swing.JTextField namejTextField;
+    private javax.swing.JTextField observacioojTextField1;
     private javax.swing.JComboBox<String> sexejComboBox;
     private javax.swing.JLabel sexejLabel;
     private javax.swing.JLabel telfjLabel;

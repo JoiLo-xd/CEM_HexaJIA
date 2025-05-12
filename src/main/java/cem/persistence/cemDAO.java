@@ -239,7 +239,7 @@ public class cemDAO {
         if (corredor.getObservacions() == null) {
             ps.setNull(11, java.sql.Types.VARCHAR);
         } else {
-            ps.setString(8, corredor.getObservacions());
+            ps.setString(11, corredor.getObservacions());
         }
         ps.executeUpdate();
         ps.close();
@@ -249,12 +249,12 @@ public class cemDAO {
     public Participant getParticipant(String dni) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("select nif, nom,cognom,naixement,sexe,poblacio,num_telf,gmail,federat,entitat from participant where nif = '" + dni + "';");
+        ResultSet rs = st.executeQuery("select nif, nom,cognom,naixement,sexe,poblacio,num_telf,gmail,federat,entitat,observacions from participant where nif = '" + dni + "';");
         //Patata incoming
         rs.next();
         return new Participant(rs.getString(1), rs.getString(2), rs.getString(3),
                 rs.getDate(4).toLocalDate(), rs.getBoolean(5), rs.getString(6),
-                rs.getString(7), rs.getString(8), rs.getString(10), rs.getBoolean(9));
+                rs.getString(7), rs.getString(8), rs.getString(10), rs.getBoolean(9),rs.getString(10));
 
     }
 
@@ -289,7 +289,7 @@ public class cemDAO {
 
     public void insertInscripcio(Inscripcio inscripcio) throws SQLException {
         Connection c = conectar();
-        PreparedStatement ps = c.prepareStatement(" INSERT INTO inscripcio (dorsal, modalitat, asistencia, nif, edicio) VALUES (?, ?, ?, ?, ?);");
+        PreparedStatement ps = c.prepareStatement(" INSERT INTO inscripcio (dorsal, modalitat, asistencia, nif) VALUES (?, ?, ?, ?, ?);");
         ps.setInt(1, inscripcio.getDorsal());
         ps.setBoolean(2, inscripcio.isModalitat());
         ps.setString(3, inscripcio.getAsistencia());
