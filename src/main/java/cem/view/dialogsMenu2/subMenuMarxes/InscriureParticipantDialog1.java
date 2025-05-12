@@ -318,8 +318,8 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Aquest dorsal ja està utilitzat en aquesta cursa", "Dorsa Repetit", JOptionPane.ERROR_MESSAGE);
             } else {
                 controller.modifiInscripcio(i);
+                dispose();
             }
-            dispose();
         } catch (SQLException e) {
             System.out.println("Este error no se deberia dar: " + e.getMessage());
         }

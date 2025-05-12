@@ -328,7 +328,7 @@ public class cemDAO {
 
     public void insertInscripcio(Inscripcio inscripcio) throws SQLException {
         Connection c = conectar();
-        PreparedStatement ps = c.prepareStatement(" INSERT INTO inscripcio (dorsal, modalitat, asistencia, nif) VALUES (?, ?, ?, ?, ?);");
+        PreparedStatement ps = c.prepareStatement(" INSERT INTO inscripcio (dorsal, modalitat, asistencia, nif, edicio) VALUES (?, ?, ?, ?, ?);");
         ps.setInt(1, inscripcio.getDorsal());
         ps.setBoolean(2, inscripcio.isModalitat());
         ps.setString(3, inscripcio.getAsistencia());
