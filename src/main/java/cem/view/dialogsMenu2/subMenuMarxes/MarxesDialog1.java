@@ -222,6 +222,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         setVisible(false);
         ps.setLocationRelativeTo(this);
         ps.setVisible(true); 
+        setVisible(true);
     }//GEN-LAST:event_jButtonSortidaActionPerformed
 
     private void jButtonArribadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArribadaActionPerformed
@@ -229,6 +230,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         setVisible(false);
         ps.setLocationRelativeTo(this);
         ps.setVisible(true); 
+        setVisible(true);
     }//GEN-LAST:event_jButtonArribadaActionPerformed
 
     /**
