@@ -416,11 +416,12 @@ public class cemDAO {
     
     public void modifiInscripcio(Inscripcio in) throws SQLException {
         Connection c = conectar();
-        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ? where nif = '" + in.getDni()+ "';";
+        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ?, asistencia = ? where nif = '" + in.getDni()+ "';";
         PreparedStatement ps = c.prepareStatement(query);
         ps.setString(1, in.getDni());
         ps.setBoolean(2, in.isModalitat());
         ps.setInt(3, in.getDorsal());
+        ps.setString(4, in.getAsistencia());
         ps.executeUpdate();
         ps.close();
         desconectar(c);

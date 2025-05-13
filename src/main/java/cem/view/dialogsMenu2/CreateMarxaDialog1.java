@@ -167,7 +167,7 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         } catch (AdditionException ex) {
             System.out.println(ex.getMessage());
         }
-
+        JOptionPane.showMessageDialog(this, "S'ha afegit correctament aquesta marca", "Afegit", JOptionPane.INFORMATION_MESSAGE);
         dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
