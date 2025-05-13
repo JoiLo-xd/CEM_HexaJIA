@@ -17,18 +17,18 @@ public class StatsMarxesTO {
     private int arribats;
     private int absents;
     private int abandonat;
-    private LocalTime tempsMesRapid;
-    private LocalTime tempsMesLent;
+    private String tempsMesRapid;
+    private String tempsMesLent;
 
-    public StatsMarxesTO(int edicio, int inscrits, int enCursa, int arribats, int absents, int abandonat, LocalTime tempsMesRapid, LocalTime tempsMesLent) {
+    public StatsMarxesTO(int edicio, int inscrits, int enCursa, int arribats, int absents, int abandonat, String tempsMesRapid, String tempsMesLent) {
         this.edicio = edicio;
         this.inscrits = inscrits;
         this.enCursa = enCursa;
         this.arribats = arribats;
         this.absents = absents;
         this.abandonat = abandonat;
-        this.tempsMesRapid =  tempsMesRapid != null ? tempsMesRapid : null;
-        this.tempsMesLent = tempsMesLent != null ? tempsMesLent : null;
+        this.tempsMesRapid =  tempsMesRapid;
+        this.tempsMesLent = tempsMesLent;
     }
 
     public String getEdicio() {
@@ -55,11 +55,11 @@ public class StatsMarxesTO {
         return abandonat + "";
     }
 
-    public LocalTime getTempsMesRapid() {
+    public String getTempsMesRapid() {
         return tempsMesRapid;
     }
 
-    public LocalTime getTempsMesLent() {
+    public String getTempsMesLent() {
         return tempsMesLent;
     }
 }

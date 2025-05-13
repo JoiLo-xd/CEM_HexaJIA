@@ -191,6 +191,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     private void jButtonInscriureParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriureParticipantActionPerformed
         inscriureParticipant = new InscriureParticipantDialog1(null, true,null, edicio); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
         setVisible(false);
+        inscriureParticipant.setLocationRelativeTo(this);
         inscriureParticipant.setVisible(true);
         setVisible(true);
     }//GEN-LAST:event_jButtonInscriureParticipantActionPerformed

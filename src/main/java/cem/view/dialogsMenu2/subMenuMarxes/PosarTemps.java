@@ -176,27 +176,22 @@ public class PosarTemps extends javax.swing.JDialog {
 
     private void posarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posarBotonActionPerformed
         try{
-            
         if (controller.existDorsal(Integer.parseInt(dorsalTextField.getText()), Integer.parseInt(edicio))){
             if (func) {controller.putTimes(dorsalTextField.getText(),edicio);}
             else{
-                
                 if (controller.gettimesbyDorsal(dorsalTextField.getText(), edicio) != null){
                     controller.putTimesa(dorsalTextField.getText(), edicio);
                 }else{
                     JOptionPane.showMessageDialog(this, "Aquest concursant encara no ha sortit", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                    
             }
-                    
-            
-            
         }else{
             JOptionPane.showMessageDialog(this, "Aquest dorsal no existeix en aquesta marxa", "Error", JOptionPane.ERROR_MESSAGE);
         }
         }catch(SQLException e){
             System.out.println("Este error no se deberia dar " + e.getMessage());
         }
+        dispose();
     }//GEN-LAST:event_posarBotonActionPerformed
 
     private void dorsalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dorsalTextFieldActionPerformed

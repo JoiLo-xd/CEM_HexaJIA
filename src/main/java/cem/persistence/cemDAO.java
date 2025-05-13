@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ivang
+ * @author HexaJIA
  */
 public class cemDAO {
 
@@ -42,7 +42,6 @@ public class cemDAO {
     }
     
     public LocalTime getTimebyDorsal(int Dorsal, int edicio) throws SQLException {
-        
         Connection c = conectar();
         Statement st = c.createStatement();
         PreparedStatement ps = c.prepareStatement("SELECT hora_sortida from inscripcio where dorsal = ? and edicio = ?");
@@ -52,12 +51,8 @@ public class cemDAO {
         if (rs.next()){
             Time a = rs.getTime(1);
             return a.toLocalTime();
-            
         }
         return null; 
-
-        
-        
     }
     
     public void setTimesInscripcio(int Dorsal, int edicio, LocalTime valor_imp)throws SQLException{
@@ -118,12 +113,16 @@ public class cemDAO {
                     nom = nom.concat(" " + rs0.getString(2));
                     String nif = rs0.getString(3);
                     Statement st2 = c.createStatement();
-                    ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
                     String assistencia = "";
                     if (rs2.next()) {
-                        if (rs2.getTimestamp(1) != null) {
-                            temps = rs2.getTimestamp(1).toString();
+                        long segons = rs2.getLong(1);
+                        if (!rs2.wasNull()) {
+                            long hores = segons / 3600;
+                            long minuts = (segons % 3600) / 60;
+                            long restants = segons % 60;
+                            temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
                         }
                         assistencia = rs2.getString(2);
                     }
@@ -164,12 +163,16 @@ public class cemDAO {
                     nom = nom.concat(" " + rs3.getString(2));
                     String nif = rs3.getString(3);
                     Statement st32 = c.createStatement();
-                    ResultSet rs32 = st32.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    ResultSet rs32 = st32.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
                     String assistencia = "";
                     if (rs32.next()) {
-                        if (rs32.getTimestamp(1) != null) {
-                            temps = rs32.getTimestamp(1).toString();
+                        long segons = rs32.getLong(1);
+                        if (!rs32.wasNull()) {
+                            long hores = segons / 3600;
+                            long minuts = (segons % 3600) / 60;
+                            long restants = segons % 60;
+                            temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
                         }
                         assistencia = rs32.getString(2);
                     }
@@ -214,27 +217,45 @@ public class cemDAO {
             if (rs2.next()) {
                 absents = rs2.getInt(1);
             }
-            rs2 = st2.executeQuery("SELECT MAX(hora_sortida - hora_arribada), MAX(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)), MIN(TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)) FROM inscripcio WHERE asistencia = 'ha abandonat' and edicio = " + edicio);
+            
+            rs2 = st2.executeQuery("SELECT MAX(TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada)), MIN(TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada)) FROM inscripcio WHERE edicio = " + edicio + " AND hora_arribada IS NOT NULL AND hora_sortida IS NOT NULL");
+            String mesLent = null;
+            String mesRapid = null;
+            if (rs2.next()) {
+                long segonsLent = rs2.getLong(1);
+                long segonsRapid = rs2.getLong(2);
+                if (segonsLent >= 0) {
+                    Duration duracioLenta = Duration.ofSeconds(segonsLent);
+                    mesLent = formatDuration(duracioLenta);
+                } else {
+                    mesLent = "Tiempo no válido";
+                }
+                if (segonsRapid >= 0) {
+                    Duration duracioRapida = Duration.ofSeconds(segonsRapid);
+                    mesRapid = formatDuration(duracioRapida);
+                } else {
+                    mesRapid = "Tiempo no válido";
+                }
+            }
+            rs2 = st2.executeQuery("SELECT COUNT(*) FROM inscripcio WHERE asistencia = 'ha abandonat' AND edicio = " + edicio);
             int abandonat = 0;
-            int segons = 0;
-            int segons2 = 0;
-            LocalTime rapid = null;
-            LocalTime lent = null;
             if (rs2.next()) {
                 abandonat = rs2.getInt(1);
-                segons = rs2.getInt(2);
-                rapid = LocalTime.ofSecondOfDay(segons);
-                segons2 = rs2.getInt(3);
-                lent = LocalTime.ofSecondOfDay(segons2);
             }
-            rs2.close();
-            st2.close();
-            statsMarxes.add(new StatsMarxesTO(edicio, inscrits, enCursa, arribats, absents, abandonat, rapid, lent));
+            statsMarxes.add(new StatsMarxesTO(edicio, inscrits, enCursa, arribats, absents, abandonat, mesRapid, mesLent));
         }
         rs.close();
         st.close();
         desconectar(c);
         return statsMarxes;
+    }
+    
+    private String formatDuration(Duration duration) {
+        long seconds = duration.getSeconds();
+        long hours = seconds / 3600;
+        long minutes = (seconds % 3600) / 60;
+        long remainingSeconds = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
     }
 
     public void insertMarxa(Marxa marxa) throws SQLException {

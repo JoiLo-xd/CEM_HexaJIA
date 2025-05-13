@@ -186,8 +186,8 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
                 }
             };
             for (StatsMarxesTO p : stats) {
-                String rapid = p.getTempsMesRapid() == null ? p.getTempsMesRapid().toString() : "--:--:--";
-                String lent = p.getTempsMesLent() == null ? p.getTempsMesLent().toString() : "--:--:--";
+                String rapid = p.getTempsMesRapid() != null ? p.getTempsMesRapid() : "--:--:--";
+                String lent = p.getTempsMesLent() != null ? p.getTempsMesLent() : "--:--:--";
                 dtm.addRow(new String[]{p.getEdicio(), p.getInscrits(), p.getEnCursa(), p.getArribats(), p.getAbsents(), p.getAbandonat(), rapid, lent});
             }
             statsjTable.setModel(dtm);
