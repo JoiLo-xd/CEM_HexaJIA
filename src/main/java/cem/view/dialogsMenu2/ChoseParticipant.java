@@ -207,6 +207,7 @@ public class ChoseParticipant extends javax.swing.JDialog {
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         jTextField1.setText("");
+        jTextField1.setForeground(Color.black);
     }//GEN-LAST:event_jTextField1FocusGained
 
     /**

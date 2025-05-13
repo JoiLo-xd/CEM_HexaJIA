@@ -52,6 +52,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             DNIjLabel.setEnabled(false);
             modifier = true;
             dni_res = dni; 
+            checkbotones();
             }catch(AdditionException e){
                 System.out.println("Este error no se debe dar en esta circunstancia " + e.getMessage());
             }
@@ -385,8 +386,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
         try{
             String dni = DNIjTextField.getText();
-            String nom = namejLabel.getText();
-            String cognom = cognomsjLabel.getText();
+            String nom = namejTextField.getText();
+            String cognom = cognomsjTextField.getText();
             LocalDate neix = birthDateDatePicker1.getDate();
             String town = townjTextField.getText();
             String tlf = telfjTextField.getText();

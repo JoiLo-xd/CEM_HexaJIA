@@ -57,10 +57,10 @@ public class cemDAO {
     
     public void setTimesInscripcio(int Dorsal, int edicio, LocalTime valor_imp)throws SQLException{
         Connection c = conectar();
-        PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_sortida = ? WHERE dorsal = ? and edicio = ? ");
+        PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_sortida = ?,asistencia = 'en cursa' WHERE dorsal = ? and edicio = ? ");
         ps.setTime(1,Time.valueOf(valor_imp));
-        ps.setInt(2, Dorsal);
-        ps.setInt(3, edicio);
+        ps.setInt(3, Dorsal);
+        ps.setInt(4, edicio);
         ps.executeUpdate();
         ps.close();
         desconectar(c);
@@ -69,12 +69,12 @@ public class cemDAO {
     
     public void setTimeaIncripcio(int Dorsal, int edicio, LocalTime valor_imp) throws SQLException{
         Connection c = conectar();
-        PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_arribada = ? WHERE dorsal = ? and edicio = ? ");
+        PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_arribada = ?,asistencia = 'finalitzat' WHERE dorsal = ? and edicio = ? ");
         ps.setTime(1,Time.valueOf(valor_imp));
-        ps.setInt(2, Dorsal);
-        ps.setInt(3, edicio);
-        ps.executeUpdate();
-        ps.close();
+        ps.setInt(3, Dorsal);
+        ps.setInt(4, edicio);
+        ps.executeUpdate();       
+        ps.close();        
         desconectar(c);
     }
 
