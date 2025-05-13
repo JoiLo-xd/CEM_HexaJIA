@@ -591,7 +591,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
     private void fedejTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fedejTextFieldMouseClicked
         // TODO add your handling code here:
-        if (fedejTextField.getText().equals("Entitat")) {
+        if (fedejTextField.getText().equals("Entitat") && fedejCheckBox.isSelected()) {
             fedejTextField.setText("");
             fedejTextField.setForeground(Color.BLACK);
         }
@@ -599,7 +599,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
     private void fedejTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusGained
         // TODO add your handling code here:
-        if (fedejTextField.getText().equals("Entitat")) {
+        if (fedejTextField.getText().equals("Entitat") && fedejCheckBox.isSelected()) {
             fedejTextField.setText("");
             fedejTextField.setForeground(Color.BLACK);
         }
