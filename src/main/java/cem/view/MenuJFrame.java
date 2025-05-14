@@ -298,6 +298,7 @@ public class MenuJFrame extends javax.swing.JFrame {
         setVisible(false);
         window.setLocationRelativeTo(this);
         window.setVisible(true);
+        setVisible(true);
     }//GEN-LAST:event_eliminarParticiantActionPerformed
 
 
