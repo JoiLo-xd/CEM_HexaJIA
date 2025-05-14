@@ -8,10 +8,15 @@ public class Marxa {
     private int edicio;
     private ArrayList<Inscripcio> inscripcionsMarxa;
 
-    //contrscutor
+    //constructores
     public Marxa(int edicio) {
         this.edicio = edicio;
         inscripcionsMarxa = new ArrayList<>();
+    }
+
+    public Marxa(int edicio, ArrayList<Inscripcio> inscripcionsMarxa) {
+        this.edicio = edicio;
+        this.inscripcionsMarxa = inscripcionsMarxa;
     }
 
 
@@ -20,11 +25,6 @@ public class Marxa {
     public boolean equals(Object obj) {
         Marxa m = (Marxa) obj;
         return this.edicio==(m.getEdicio());
-    }
-
-    //añade un corredor al arrayList
-    public void addCorrInsc(Inscripcio insc){
-        inscripcionsMarxa.add(insc);
     }
 
     //GETTERS

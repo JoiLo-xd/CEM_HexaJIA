@@ -6,24 +6,22 @@ import cem.exceptions.CorredoresException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Corredor {
+public class Participant {
     private final String nif;
     private String nom;
     private String cognoms;
     private LocalDate dataNaixement;
-    private Sexe sexe;
+    private boolean sexe;
     private String poblacio;
     private String numTelefon;
     private String email;
     private String entitat;
     private boolean federat;
+    private String observacions;
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
-    // constructor de corredor, se valida que no deje un campo vacio
-    public Corredor(String nif, String nom, String cognoms, LocalDate dataNaixement, Sexe sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat) throws CorredoresException{
-        if ( nom.equals("") ||poblacio.equals("") ||cognoms.equals("") || entitat.equals("")){
-            throw new CorredoresException("Faltan campos");
-        }else {
+    // constructores
+    public Participant(String nif, String nom, String cognoms, LocalDate dataNaixement, boolean sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat, String observacions){
             this.nif = nif;
             this.nom = nom;
             this.cognoms = cognoms;
@@ -32,15 +30,17 @@ public class Corredor {
             this.poblacio = poblacio;
             this.numTelefon = numTelefon;
             this.email = email;
-            this.entitat = entitat;
+            this.entitat = federat ? entitat : "no federat";
             this.federat = federat;
-        }
+            this.observacions = observacions;
+        
     }
 
-    public Corredor(String nif){
+    public Participant(String nif){
         this.nif = nif;
     }
 
+    //getters y setters
     public ArrayList<Inscripcio> getInscr(){
         return new ArrayList<Inscripcio>(inscripcions);
     }
@@ -59,7 +59,7 @@ public class Corredor {
         this.cognoms = cognoms;
     }
 
-    public void setSexe(Sexe sexe) {
+    public void setSexe(boolean sexe) {
         this.sexe = sexe;
     } //validar sexe //REVISAR
 
@@ -103,7 +103,7 @@ public class Corredor {
         return poblacio;
     }
 
-    public Sexe getSexe() {
+    public boolean isSexe() {
         return sexe;
     }
 
@@ -123,23 +123,26 @@ public class Corredor {
         return federat;
     }
 
+    public String getObservacions() {
+        return observacions;
+    }
+
 
 
     @Override
     public String toString() {
         String esfederat = federat ? "Si" : "No";
         String returned = "NIF: " + getNif() + "    " + getNom() + " " + getCognoms() +"\n"
-                + "   Data naixement: " + getDataNaixement() + "   Sexe: " + getSexe() +"\n"
+                + "   Data naixement: " + getDataNaixement() + "   Sexe: " + isSexe()+"\n"
                 + "    Poblacio: " + getPoblacio() + "    NumTelèfon: " + getNumTelefon() + "   Email: " + getEmail() +"\n"
                 + "    Entitat: " + getEntitat() + "    Federat: " + esfederat;
-         // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
         return returned;
     }
 
     //equals para comparar si ya esxiste el corredor
     @Override
     public boolean equals(Object o) {
-        Corredor obj = (Corredor) o;
+        Participant obj = (Participant) o;
         if (obj.getNif().equalsIgnoreCase(getNif())) return true;
         return false;
     }

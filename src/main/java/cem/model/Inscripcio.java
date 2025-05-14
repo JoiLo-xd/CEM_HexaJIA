@@ -11,33 +11,49 @@ import java.util.Objects;
 public class Inscripcio {
 
     //atributos
-    private int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
-    private boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
+    private int dorsal;
+    private boolean modalitat;
     private LocalTime horaSortida;
     private LocalTime horaArribada;
     private Duration tempsTotal;
-    private Asistencia asistencia;
-    private Corredor corredor;
+    private String asistencia;
+    private Participant corredor;
+    private String codi;
+    private int edicio;
+    private String dni;
 
-    //constructor
-    public Inscripcio(int dorsal, boolean modalitat, Corredor corredor) {
+    //constructores
+    public Inscripcio(int dorsal, boolean modalitat, Participant corredor, int edicio) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.corredor = corredor;
+        this.edicio = edicio;
     }
 
-    //constructor
+    public Inscripcio(String dni, int edicio) {
+        this.edicio = edicio;
+        this.dni = dni;
+    }
+
+    public Inscripcio(int dorsal, boolean modalitat, String asistencia, String dni, int edicio) {
+        this.dorsal = dorsal;
+        this.modalitat = modalitat;
+        this.asistencia = asistencia;
+        this.dni = dni;
+        this.edicio = edicio;
+    }
+    
     public Inscripcio(int dorsal){
         this.dorsal = dorsal;
     }
 
-    //constructor
-    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Corredor corredor){
+    public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor, int edicio){
         this.dorsal = dorsal;
         this.modalitat = modalitat;
         this.horaSortida = horaSortida;
         this.horaArribada = horaArribada;
         this.corredor = corredor;
+        this.edicio = edicio;
     }
 
     //SETTERS Y GETTERS
@@ -49,10 +65,10 @@ public class Inscripcio {
         this.horaSortida = horaSortida;
     }
 
-    public void setHoraArribada(LocalTime horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
+    public void setHoraArribada(LocalTime horaArribada) { 
         if (horaSortida != null) {
             this.horaArribada = horaArribada;
-        } // Aqui en un futuro lanzara una excepcion jeje
+        }
     }
 
     public void setTempsTotal() {
@@ -60,7 +76,7 @@ public class Inscripcio {
         this.tempsTotal = Duration.between(horaSortida, horaArribada);
     }
 
-    public void setAsistencia(Asistencia asistencia) {
+    public void setAsistencia(String asistencia) {
         this.asistencia = asistencia;
     }
 
@@ -84,12 +100,39 @@ public class Inscripcio {
         return tempsTotal;
     }
 
-    public Asistencia getAsistencia() {
+    public String getAsistencia() {
         return asistencia;
     }
 
-    public Corredor getCorredor() {
+    public Participant getCorredor() {
         return corredor;
+    }
+
+    public String getCodi() {
+        return codi;
+    }
+
+    public void setCodi(String codi) {
+        this.codi = codi;
+    }
+
+    public int getEdicio() {
+        return edicio;
+    }
+
+    public void setEdicio(int edicio) {
+        this.edicio = edicio;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+    
+    
+    
+    
+    public void addCodiBarres(String codi) {
+        this.codi = codi;
     }
 
     //equals para saber si ya existe
