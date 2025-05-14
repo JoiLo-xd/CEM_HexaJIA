@@ -107,11 +107,12 @@ public class cemDAO {
         ArrayList<InscripcionsRanking> inscripcions = new ArrayList<>();
         switch(opcio) {
             case 0:
-                ResultSet rs0 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+                ResultSet rs0 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
                 while (rs0.next()) {
                     String nom = rs0.getString(1);
                     nom = nom.concat(" " + rs0.getString(2));
                     String nif = rs0.getString(3);
+                    String sexe = rs0.getBoolean(4) ? "Home" : "Dona";
                     Statement st2 = c.createStatement();
                     ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
@@ -130,12 +131,11 @@ public class cemDAO {
                     }
                     rs2.close();
                     st2.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
-                    
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
                 }rs0.close();
                 break;
             case 1:
-                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, dorsal  FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.asistencia = 'No ha vingut'");
+                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, dorsal, p.sexe  FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.asistencia = 'No ha vingut'");
                 while (rs1.next()) {
                     String nom = rs1.getString(1);
                     nom = nom.concat(" " + rs1.getString(2));
@@ -143,12 +143,12 @@ public class cemDAO {
                     String temps = "--:--:--";
                     String assistencia = rs1.getString(4);
                     int dorsal = rs1.getInt(5);
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
-                    
+                    String sexe = rs1.getBoolean(6) ? "Home" : "Dona";
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
                 }rs1.close();
                 break;
             case 2:
-                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, i.dorsal  FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
+                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, i.dorsal, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
                 while (rs2.next()) {
                     String nom = rs2.getString(1);
                     nom = nom.concat(" " + rs2.getString(2));
@@ -156,16 +156,73 @@ public class cemDAO {
                     String temps = "--:--:--";
                     String assistencia = rs2.getString(4);
                     int dorsal = rs2.getInt(5);
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
-                    
+                    String sexe = rs2.getBoolean(6) ? "Home" : "Dona";
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
                 }rs2.close();
                 break;
             case 3:
-                ResultSet rs3 = st.executeQuery("SELECT p.nom, p.cognom, p.nif FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida) desc");
+                ResultSet rs4 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and p.sexe = 1 order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+                while (rs4.next()) {
+                    String nom = rs4.getString(1);
+                    nom = nom.concat(" " + rs4.getString(2));
+                    String nif = rs4.getString(3);
+                    String sexe = rs4.getBoolean(4) ? "Home" : "Dona";
+                    Statement st42 = c.createStatement();
+                    ResultSet rs42 = st42.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    String temps = "--:--:--";
+                    String assistencia = "";
+                    int dorsal = 0;
+                    if (rs42.next()) {
+                        long segons = rs42.getLong(1);
+                        if (!rs42.wasNull()) {
+                            long hores = segons / 3600;
+                            long minuts = (segons % 3600) / 60;
+                            long restants = segons % 60;
+                            temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
+                        }
+                        assistencia = rs42.getString(2);
+                        dorsal = rs42.getInt(3);
+                    }
+                    rs42.close();
+                    st42.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
+                }rs4.close();
+                break;
+            case 4:
+                ResultSet rs5 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and p.sexe = 0 order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+                while (rs5.next()) {
+                    String nom = rs5.getString(1);
+                    nom = nom.concat(" " + rs5.getString(2));
+                    String nif = rs5.getString(3);
+                    String sexe = rs5.getBoolean(4) ? "Home" : "Dona";
+                    Statement st52 = c.createStatement();
+                    ResultSet rs52 = st52.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    String temps = "--:--:--";
+                    String assistencia = "";
+                    int dorsal = 0;
+                    if (rs52.next()) {
+                        long segons = rs52.getLong(1);
+                        if (!rs52.wasNull()) {
+                            long hores = segons / 3600;
+                            long minuts = (segons % 3600) / 60;
+                            long restants = segons % 60;
+                            temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
+                        }
+                        assistencia = rs52.getString(2);
+                        dorsal = rs52.getInt(3);
+                    }
+                    rs52.close();
+                    st52.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
+                }rs5.close();
+                break;
+            case 5:
+                ResultSet rs3 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida) desc");
                 while (rs3.next()) {
                     String nom = rs3.getString(1);
                     nom = nom.concat(" " + rs3.getString(2));
                     String nif = rs3.getString(3);
+                    String sexe = rs3.getBoolean(4) ? "Home" : "Dona";
                     Statement st32 = c.createStatement();
                     ResultSet rs32 = st32.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
@@ -184,8 +241,7 @@ public class cemDAO {
                     }
                     rs32.close();
                     st32.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
-                    
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
                 }rs3.close();
                 break;
         }

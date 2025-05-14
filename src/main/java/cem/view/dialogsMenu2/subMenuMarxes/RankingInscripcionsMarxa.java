@@ -68,7 +68,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
-        optionsjComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ranking", "Absent", "Abandonament", " " }));
+        optionsjComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ranking", "Absent", "Abandonament", "Homes", "Dones" }));
         optionsjComboBox.setToolTipText("");
         optionsjComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -134,17 +134,17 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nom", "Temps", "Assistencia"
+                "Dorsal", "Nom", "Sexe", "Temps", "Assistencia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -181,7 +181,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         try {
         if (jCheckBox1.isSelected() && optionsjComboBox.getSelectedIndex() == 0) {
             jCheckBox1.setForeground(Color.black);
-            listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), (optionsjComboBox.getSelectedIndex()+3)));
+            listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), (optionsjComboBox.getSelectedIndex()+5)));
         } else {
             jCheckBox1.setForeground(Color.white);
             listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), optionsjComboBox.getSelectedIndex()));
@@ -200,6 +200,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
                 jCheckBox1.setEnabled(false);
             }
             listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), optionsjComboBox.getSelectedIndex()));
+            System.out.println(optionsjComboBox.getSelectedIndex());
         } catch (SQLException ex) {
             Logger.getLogger(RankingInscripcionsMarxa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -227,14 +228,14 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
 
     
     private void listInscripcions(ArrayList<InscripcionsRanking> inscripcions) {
-        DefaultTableModel dtm = new DefaultTableModel(new String[]{"Dorsal","Nom", "Temps", "Assistencia"}, 0) {
+        DefaultTableModel dtm = new DefaultTableModel(new String[]{"Dorsal","Nom", "Sexe", "Temps", "Assistencia"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // ninguna celda editable
             }
         };
         for (InscripcionsRanking p : inscripcions) {
-            dtm.addRow(new String[]{p.getDorsal() + "", p.getNom(), p.getTemps(), p.getAssistencia()});
+            dtm.addRow(new String[]{p.getDorsal() + "", p.getNom(), p.getSexe(), p.getTemps(), p.getAssistencia()});
         }
         jTable1.setModel(dtm);
     }
