@@ -183,19 +183,21 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton salir
     private void jButtonSortitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortitActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButtonSortitActionPerformed
 
+    //abre un JDialog de InscriureParticipant
     private void jButtonInscriureParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriureParticipantActionPerformed
-        inscriureParticipant = new InscriureParticipantDialog1(null, true,null, edicio); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
+        inscriureParticipant = new InscriureParticipantDialog1(null, true, null, edicio); // lo pongo null porque se que la maria dijo que se pone null o el padre del padre
         setVisible(false);
         inscriureParticipant.setLocationRelativeTo(this);
         inscriureParticipant.setVisible(true);
         setVisible(true);
     }//GEN-LAST:event_jButtonInscriureParticipantActionPerformed
-
+    //abre un JDialog de CoseParticiànt
     private void jButtonEditarInscripcióActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarInscripcióActionPerformed
         ChoseParticipants window = new ChoseParticipants(null, true, edicio);
         setVisible(false);
@@ -203,12 +205,13 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         window.setVisible(true);
         setVisible(true);    }//GEN-LAST:event_jButtonEditarInscripcióActionPerformed
 
+    //abre un JDialog de rankingInscripcionsMarxa
     private void jButtonStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatsActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         RankingInscripcionsMarxa rankingInscripcionsMarxa;
         try {
-            rankingInscripcionsMarxa = new RankingInscripcionsMarxa(null,true,edicio);
+            rankingInscripcionsMarxa = new RankingInscripcionsMarxa(null, true, edicio);
             rankingInscripcionsMarxa.setLocationRelativeTo(this);
             rankingInscripcionsMarxa.setVisible(true);
         } catch (SQLException ex) {
@@ -217,19 +220,21 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         this.setVisible(true);
     }//GEN-LAST:event_jButtonStatsActionPerformed
 
+    // abre un JDialog de PosarTEmps
     private void jButtonSortidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortidaActionPerformed
-        PosarTemps ps = new PosarTemps(null, true,true, edicio);
+        PosarTemps ps = new PosarTemps(null, true, true, edicio);
         setVisible(false);
         ps.setLocationRelativeTo(this);
-        ps.setVisible(true); 
+        ps.setVisible(true);
         setVisible(true);
     }//GEN-LAST:event_jButtonSortidaActionPerformed
 
+    // abre un JDialog de PosarTEmps
     private void jButtonArribadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArribadaActionPerformed
-        PosarTemps ps = new PosarTemps(null, true,false, edicio);
+        PosarTemps ps = new PosarTemps(null, true, false, edicio);
         setVisible(false);
         ps.setLocationRelativeTo(this);
-        ps.setVisible(true); 
+        ps.setVisible(true);
         setVisible(true);
     }//GEN-LAST:event_jButtonArribadaActionPerformed
 

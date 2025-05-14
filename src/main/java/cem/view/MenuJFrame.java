@@ -20,6 +20,7 @@ import cem.view.dialogsMenu2.EstadistiquesMarxaDialog1;
  */
 public class MenuJFrame extends javax.swing.JFrame {
 
+    //atributos
     private ShowMarxes1 showMarxes;
     private CreateMarxaDialog1 createMarxaDialog;
     private RegisterParticipantDialog1 registerParticipantDialog;
@@ -225,11 +226,13 @@ public class MenuJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton que sirve para saler del jframe
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    //abre el jdialog RegisterPArticipant
     private void createRunnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRunnerButtonActionPerformed
         // TODO add your handling code here:
         registerParticipantDialog = new RegisterParticipantDialog1(this, true, null);
@@ -238,12 +241,14 @@ public class MenuJFrame extends javax.swing.JFrame {
         setVisible(true);
     }//GEN-LAST:event_createRunnerButtonActionPerformed
 
+    //abre el jdialog CreateMarxw
     private void createMarxaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMarxaButtonActionPerformed
         createMarxaDialog = new CreateMarxaDialog1(this, true);
         setVisible(false);
         createMarxaDialog.setVisible(true);
         setVisible(true);    }//GEN-LAST:event_createMarxaButtonActionPerformed
 
+    //abre el jdialog ShowMarxes
     private void marxesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marxesButtonActionPerformed
         // TODO add your handling code here:
         showMarxes = new ShowMarxes1(this, true);
@@ -252,6 +257,7 @@ public class MenuJFrame extends javax.swing.JFrame {
         setVisible(true);
     }//GEN-LAST:event_marxesButtonActionPerformed
 
+    //abre el jdialog ChoseParticipant
     private void modifyRunnerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyRunnerButtonActionPerformed
         choseParticipantDialog = new ChoseParticipant(this, true);
         setVisible(false);
@@ -260,6 +266,7 @@ public class MenuJFrame extends javax.swing.JFrame {
         setVisible(true);
     }//GEN-LAST:event_modifyRunnerButtonActionPerformed
 
+    //abre el jdialog EstadistiquesMarxa
     private void ParticipantsMarxajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParticipantsMarxajButtonActionPerformed
         // TODO add your handling code here:
         estadistiquesMarxaDialog = new EstadistiquesMarxaDialog1(this, true);

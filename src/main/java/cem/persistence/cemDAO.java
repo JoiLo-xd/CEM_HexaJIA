@@ -29,6 +29,7 @@ import java.util.ArrayList;
  */
 public class cemDAO {
 
+    //conecta con nuestra base de datos a tarves de una url, un usuario y una contraseña
     private Connection conectar() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/cem";
         String user = "user1";
@@ -37,47 +38,52 @@ public class cemDAO {
         return c;
     }
 
+    // sirve para apagar el Connection
     private void desconectar(Connection c) throws SQLException {
         c.close();
     }
-    
+
+    //devuelve un LocalTime a tarves de un dorsal y una edicion a tarves de una consulta sql
     public LocalTime getTimebyDorsal(int Dorsal, int edicio) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
         PreparedStatement ps = c.prepareStatement("SELECT hora_sortida from inscripcio where dorsal = ? and edicio = ?");
         ps.setInt(1, Dorsal);
-        ps.setInt(2,edicio);
+        ps.setInt(2, edicio);
         ResultSet rs = ps.executeQuery();
-        if (rs.next()){
+        if (rs.next()) {
             Time a = rs.getTime(1);
             return a.toLocalTime();
         }
-        return null; 
+        return null;
     }
-    
-    public void setTimesInscripcio(int Dorsal, int edicio, LocalTime valor_imp)throws SQLException{
+
+    //mwrodo que sirve para marcar la hora de salida de una inscripcion
+    public void setTimesInscripcio(int Dorsal, int edicio, LocalTime valor_imp) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_sortida = ?,asistencia = 'en cursa' WHERE dorsal = ? and edicio = ? ");
-        ps.setTime(1,Time.valueOf(valor_imp));
+        ps.setTime(1, Time.valueOf(valor_imp));
         ps.setInt(2, Dorsal);
         ps.setInt(3, edicio);
         ps.executeUpdate();
         ps.close();
         desconectar(c);
-        
+
     }
-    
-    public void setTimeaIncripcio(int Dorsal, int edicio, LocalTime valor_imp) throws SQLException{
+
+    //mwrodo que sirve para marcar la hora de llegada de una inscripcion
+    public void setTimeaIncripcio(int Dorsal, int edicio, LocalTime valor_imp) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_arribada = ?,asistencia = 'finalitzat' WHERE dorsal = ? and edicio = ? ");
-        ps.setTime(1,Time.valueOf(valor_imp));
+        ps.setTime(1, Time.valueOf(valor_imp));
         ps.setInt(2, Dorsal);
         ps.setInt(3, edicio);
-        ps.executeUpdate();       
-        ps.close();        
+        ps.executeUpdate();
+        ps.close();
         desconectar(c);
     }
 
+    //metodo que hace una consulta de las marxas que hay, por cada marxa pone la edicio y el numero de particiantes que tiene
     public ArrayList<ParticipantEditionTO> getMarxes() throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
@@ -100,12 +106,13 @@ public class cemDAO {
         desconectar(c);
         return marxes;
     }
-    
+
+    //devuelve una array usando dos consultas para saber los datos de los participantes de las incripciones
     public ArrayList<InscripcionsRanking> getInscripcions(int edicio, int opcio) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
         ArrayList<InscripcionsRanking> inscripcions = new ArrayList<>();
-        switch(opcio) {
+        switch (opcio) {
             case 0:
                 ResultSet rs0 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
                 while (rs0.next()) {
@@ -117,7 +124,7 @@ public class cemDAO {
                     ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
                     String assistencia = "";
-                    int dorsal = 0; 
+                    int dorsal = 0;
                     if (rs2.next()) {
                         long segons = rs2.getLong(1);
                         if (!rs2.wasNull()) {
@@ -131,8 +138,9 @@ public class cemDAO {
                     }
                     rs2.close();
                     st2.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
-                }rs0.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs0.close();
                 break;
             case 1:
                 ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, dorsal, p.sexe  FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.asistencia = 'No ha vingut'");
@@ -144,8 +152,9 @@ public class cemDAO {
                     String assistencia = rs1.getString(4);
                     int dorsal = rs1.getInt(5);
                     String sexe = rs1.getBoolean(6) ? "Home" : "Dona";
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
-                }rs1.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs1.close();
                 break;
             case 2:
                 ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, i.dorsal, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
@@ -157,8 +166,9 @@ public class cemDAO {
                     String assistencia = rs2.getString(4);
                     int dorsal = rs2.getInt(5);
                     String sexe = rs2.getBoolean(6) ? "Home" : "Dona";
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
-                }rs2.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs2.close();
                 break;
             case 3:
                 ResultSet rs4 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and p.sexe = 1 order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
@@ -185,8 +195,9 @@ public class cemDAO {
                     }
                     rs42.close();
                     st42.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
-                }rs4.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs4.close();
                 break;
             case 4:
                 ResultSet rs5 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and p.sexe = 0 order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
@@ -213,8 +224,9 @@ public class cemDAO {
                     }
                     rs52.close();
                     st52.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
-                }rs5.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs5.close();
                 break;
             case 5:
                 ResultSet rs3 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida) desc");
@@ -241,15 +253,17 @@ public class cemDAO {
                     }
                     rs32.close();
                     st32.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal, sexe));
-                }rs3.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs3.close();
                 break;
         }
         st.close();
         desconectar(c);
         return inscripcions;
     }
-    
+
+    //mettodo que sirve para saber las estadisticas de las marxas a traves de consultas sql usando el count
     public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException {
         //hacer codigo bien
         Connection c = conectar();
@@ -279,7 +293,7 @@ public class cemDAO {
             if (rs2.next()) {
                 absents = rs2.getInt(1);
             }
-            
+
             rs2 = st2.executeQuery("SELECT MAX(TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada)), MIN(TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada)) FROM inscripcio WHERE edicio = " + edicio + " AND hora_arribada IS NOT NULL AND hora_sortida IS NOT NULL");
             String mesLent = null;
             String mesRapid = null;
@@ -311,7 +325,8 @@ public class cemDAO {
         desconectar(c);
         return statsMarxes;
     }
-    
+
+    //metodo que devuelve un String y ds formsto al timepo
     private String formatDuration(Duration duration) {
         long seconds = duration.getSeconds();
         long hours = seconds / 3600;
@@ -320,6 +335,7 @@ public class cemDAO {
         return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
     }
 
+    //metodo que añade una marxa a la base de datos
     public void insertMarxa(Marxa marxa) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("insert into marxa values (?);");
@@ -329,6 +345,7 @@ public class cemDAO {
         desconectar(c);
     }
 
+    //metodo que valida que no se cree una marxa si ya existe
     public boolean existMarxa(Marxa marxa) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
@@ -340,6 +357,7 @@ public class cemDAO {
         return existe;
     }
 
+    //metodo que añade un participante a la base de datos
     public void insertParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("insert into participant values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
@@ -368,6 +386,7 @@ public class cemDAO {
         desconectar(c);
     }
 
+    //metodo que devuelve un participante a traves de un STring dni
     public Participant getParticipant(String dni) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
@@ -376,10 +395,11 @@ public class cemDAO {
         rs.next();
         return new Participant(rs.getString(1), rs.getString(2), rs.getString(3),
                 rs.getDate(4).toLocalDate(), rs.getBoolean(5), rs.getString(6),
-                rs.getString(7), rs.getString(8), rs.getString(10), rs.getBoolean(9),rs.getString(10));
+                rs.getString(7), rs.getString(8), rs.getString(10), rs.getBoolean(9), rs.getString(10));
 
     }
 
+    //metodo que devuelve una unscripcion a tarves de dos string (un dni y una edicion)
     public Inscripcio getInscripcio(String dni, String edicio) throws SQLException {
         Connection c = conectar();
         String query = ("SELECT nif, edicio FROM inscripcio WHERE nif = ? AND edicio = ?");
@@ -398,6 +418,7 @@ public class cemDAO {
         return inscripcio;
     }
 
+    //metodo que valida que no se pueda registrar un paerticipante si ya esta registrado
     public boolean existParticipant(Participant corredor) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
@@ -409,6 +430,7 @@ public class cemDAO {
         return existe;
     }
 
+    //metodo que añade una iscripcion a la base de datos
     public void insertInscripcio(Inscripcio inscripcio) throws SQLException {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement(" INSERT INTO inscripcio (dorsal, modalitat, asistencia, nif, edicio) VALUES (?, ?, ?, ?, ?);");
@@ -422,6 +444,7 @@ public class cemDAO {
         desconectar(c);
     }
 
+    //metodo que valida que no se pueda crear una inscripcion si ya esta creada
     public boolean existInscripcio(Inscripcio inscricpio) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
@@ -433,6 +456,7 @@ public class cemDAO {
         return existe;
     }
 
+    //metodo para saber si existe un articipante en una edicion en oncreto
     public boolean existParticipantinInscripcio(String dni, int edicio) throws SQLException {
         Connection c = conectar();
         String query = ("SELECT * FROM inscripcio WHERE nif = ? AND edicio = ?");
@@ -447,6 +471,7 @@ public class cemDAO {
         return existe;
     }
 
+    //metodo para saber si existe un participante a tarves de un dni
     public boolean existParticipantforDNI(String dni) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
@@ -458,6 +483,7 @@ public class cemDAO {
         return existe;
     }
 
+    //metodo àra modificar un participante
     public void modifiParticipant(Participant pa) throws SQLException {
         Connection c = conectar();
         String query = "UPDATE participant set nom = ?, cognom = ?, sexe = ?, poblacio = ?, num_telf = ?, gmail = ?, federat = ?, entitat = ? where nif = '" + pa.getNif() + "';";
@@ -475,10 +501,11 @@ public class cemDAO {
         ps.close();
         desconectar(c);
     }
-    
+
+    //metodo àra modificar una inscripcion
     public void modifiInscripcio(Inscripcio in) throws SQLException {
         Connection c = conectar();
-        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ?, asistencia = ? where nif = '" + in.getDni()+ "';";
+        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ?, asistencia = ? where nif = '" + in.getDni() + "';";
         PreparedStatement ps = c.prepareStatement(query);
         ps.setString(1, in.getDni());
         ps.setBoolean(2, in.isModalitat());
@@ -489,6 +516,7 @@ public class cemDAO {
         desconectar(c);
     }
 
+    //metpdo para saber si existe un dorsal en una edicion en concreto
     public boolean existDorsal(int dorsal, int edicio) throws SQLException {
         Connection c = conectar();
         String query = "SELECT * FROM inscripcio WHERE dorsal = ? AND edicio = ?";
@@ -502,11 +530,12 @@ public class cemDAO {
         desconectar(c);
         return existe;
     }
-    
-    public String getDNIIns(int dorsal, int edicio) throws SQLException{
+
+    //metodo que devuelve un STring (dni) a traves de recivir un dorsal y una inscripcion
+    public String getDNIIns(int dorsal, int edicio) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("select nif from inscripcio where dorsal = '" + dorsal + "' and edicio = '" + edicio +"';");
+        ResultSet rs = st.executeQuery("select nif from inscripcio where dorsal = '" + dorsal + "' and edicio = '" + edicio + "';");
         rs.next();
         String nif = rs.getString(1);
         rs.close();

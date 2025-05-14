@@ -23,12 +23,14 @@ import cem.view.dialogsMenu2.subMenuMarxes.*;
 import cem.view.dialogsMenu2.subMenuMarxes.MarxesDialog1;
 public class ShowMarxes1 extends javax.swing.JDialog {
 
+    //atributos
     private Controller controller;
     private java.awt.Frame parent;
 
     /**
      * Creates new form ShowMarxes1
      */
+    //contrcutor
     public ShowMarxes1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.parent = parent;
@@ -133,11 +135,13 @@ public class ShowMarxes1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton cancelar
     private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceljButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_canceljButtonActionPerformed
 
+    //añade las marzas si no existe
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // TODO add your handling code here:
         JTable source = (JTable)evt.getSource();
@@ -158,6 +162,8 @@ public class ShowMarxes1 extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
+    //añade a la tabla las marxas con el numero de participantes
     private void listMarxes() {
         try {
             ArrayList<ParticipantEditionTO> marxes = controller.getMarxes();

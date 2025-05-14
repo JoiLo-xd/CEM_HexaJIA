@@ -19,11 +19,13 @@ import javax.swing.JOptionPane;
  */
 public class CreateMarxaDialog1 extends javax.swing.JDialog {
 
+    //atributos
     private Controller controller;
 
     /**
      * Creates new form CreateMarxaDialog1
      */
+    //contructor
     public CreateMarxaDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -155,10 +157,13 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton salir
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    
+    //añade marxa si no esta creada
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         try {
             controller.addMarxa(new Marxa((int) jSpinnerEdicio.getValue()));
@@ -171,9 +176,9 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
+    //metodo en el que si spinner tiene una edicion que ya existe sale mensaje de error y no deja dar al boton registrar
     private void jSpinnerEdicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerEdicioStateChanged
 
-            // TODO hay que hacer que si la marxa ya existe se muestre el mensage de error que hay oculto al iniciar, errorMessage
             if (controller.existMarxa(new Marxa((int) jSpinnerEdicio.getValue()))) {
                 errorMessagejLabel.setVisible(true);
                 jButtonAceptar.setEnabled(false);

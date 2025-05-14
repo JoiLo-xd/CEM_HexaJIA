@@ -18,10 +18,13 @@ public class PosarTemps extends javax.swing.JDialog {
     /**
      * Creates new form PosarTemps
      */
+    //atributos
     private String edicio; 
     private Controller controller; 
     
+    
     // false es que aquesta finestra s'utilitza per la iniciada de començar a correr
+    //contructor
     private boolean func = false;
     public PosarTemps(java.awt.Frame parent, boolean modal,boolean func,String edicio) {
         super(parent, modal);
@@ -170,10 +173,12 @@ public class PosarTemps extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton salir
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //valida que los datos coincidan con alguna inscripcion y añade la hora de salida/llegada
     private void posarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posarBotonActionPerformed
         try {
             if (dorsalTextField.getText().matches("[0-9]+")){
@@ -207,6 +212,7 @@ public class PosarTemps extends javax.swing.JDialog {
         //Nothing
     }//GEN-LAST:event_dorsalTextFieldKeyReleased
 
+    //mira el valor del dorsalTextField
     private void dorsalTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dorsalTextFieldFocusGained
         if (dorsalTextField.getText().equals("Dorsal")){
             dorsalTextField.setText("");

@@ -20,7 +20,7 @@ public class Participant {
     private String observacions;
     private ArrayList<Inscripcio> inscripcions = new ArrayList<>(); //Preguntar realmente esta para ver si es simplemente un HasMap para no tener objetos repetidos
 
-    // constructor de corredor, se valida que no deje un campo vacio
+    // constructores
     public Participant(String nif, String nom, String cognoms, LocalDate dataNaixement, boolean sexe, String poblacio, String numTelefon, String email, String entitat, boolean federat, String observacions){
             this.nif = nif;
             this.nom = nom;
@@ -40,6 +40,7 @@ public class Participant {
         this.nif = nif;
     }
 
+    //getters y setters
     public ArrayList<Inscripcio> getInscr(){
         return new ArrayList<Inscripcio>(inscripcions);
     }

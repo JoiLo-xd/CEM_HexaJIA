@@ -8,7 +8,7 @@ public class Marxa {
     private int edicio;
     private ArrayList<Inscripcio> inscripcionsMarxa;
 
-    //constructor
+    //constructores
     public Marxa(int edicio) {
         this.edicio = edicio;
         inscripcionsMarxa = new ArrayList<>();
@@ -28,9 +28,9 @@ public class Marxa {
     }
 
     //añade un corredor al arrayList
-    public void addCorrInsc(Inscripcio insc){
-        inscripcionsMarxa.add(insc);
-    }
+//    ublic void addCorrInsc(Inscripcio insc){
+//        inscripcionsMarxa.add(insc);
+//    }p
 
     //GETTERS
     public int getEdicio() {

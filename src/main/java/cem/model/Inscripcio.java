@@ -22,7 +22,7 @@ public class Inscripcio {
     private int edicio;
     private String dni;
 
-    //constructor
+    //constructores
     public Inscripcio(int dorsal, boolean modalitat, Participant corredor, int edicio) {
         this.dorsal = dorsal;
         this.modalitat = modalitat;
@@ -34,8 +34,6 @@ public class Inscripcio {
         this.edicio = edicio;
         this.dni = dni;
     }
-    
-    
 
     public Inscripcio(int dorsal, boolean modalitat, String asistencia, String dni, int edicio) {
         this.dorsal = dorsal;
@@ -45,14 +43,10 @@ public class Inscripcio {
         this.edicio = edicio;
     }
     
-    
-
-    //constructor
     public Inscripcio(int dorsal){
         this.dorsal = dorsal;
     }
 
-    //constructor
     public Inscripcio(int dorsal, boolean modalitat, LocalTime horaSortida, LocalTime horaArribada,Participant corredor, int edicio){
         this.dorsal = dorsal;
         this.modalitat = modalitat;

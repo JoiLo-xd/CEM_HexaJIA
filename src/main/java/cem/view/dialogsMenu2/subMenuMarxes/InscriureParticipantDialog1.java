@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class InscriureParticipantDialog1 extends javax.swing.JDialog {
 
+    //atributos
     private Controller controller;
     private String edicio;
     private boolean modifier = false;
@@ -24,12 +25,16 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
     /**
      * Creates new form InscriureParticipantDialog1
      */
+    
+    //contrucor
     public InscriureParticipantDialog1(java.awt.Frame parent, boolean modal, String dni, String edicio) {
         super(parent, modal);
         initComponents();
         controller = Controller.getInstance();
         this.edicio = edicio;
         jLabelAny.setText(edicio);
+        
+        //si el dni no es null hace las siguientes cosas
         if (dni != null) {
             try {
                 Inscripcio chosen = controller.getInscripcio(dni, edicio);
@@ -273,10 +278,13 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         //  NADA
     }//GEN-LAST:event_jTextFieldDNIActionPerformed
 
+    //boton salir
     private void jButtonSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSortirActionPerformed
         dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSortirActionPerformed
-//b
+
+    
+    //boton que coge los datos que pone el usuario para añadirlo a la base de datos (inscripcion)
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         try {
             int dorsal = (int) jSpinnerDorsal.getValue();
@@ -309,6 +317,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
+    //valida que las cosas esten bien
     private void jTextFieldDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDNIKeyReleased
         if (jTextFieldDNI.getText().isEmpty()) {
             jTextFieldDNI.setForeground(Color.GRAY);
@@ -326,6 +335,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTextFieldDNIKeyReleased
 
+    //boton que sirve para modificar los datos de la inscripcion siemre que esten los datos bien
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         try {
             int dorsal = (int) jSpinnerDorsal.getValue();

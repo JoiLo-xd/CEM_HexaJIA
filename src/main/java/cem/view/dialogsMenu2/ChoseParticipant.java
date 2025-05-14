@@ -17,8 +17,10 @@ public class ChoseParticipant extends javax.swing.JDialog {
     /**
      * Creates new form ChoseParticipant
      */
+    //atributos
     java.awt.Frame parent;
     Controller controller;
+    //contructor
     public ChoseParticipant(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -165,6 +167,8 @@ public class ChoseParticipant extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //boton salir
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -173,6 +177,7 @@ public class ChoseParticipant extends javax.swing.JDialog {
        //nothing        
     }//GEN-LAST:event_jTextField1KeyPressed
 
+    //Pide un dni y si es valido abre un RegisterParticipantDialog
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
         if ( controller.existParticipantforDNI(jTextField1.getText())){
@@ -197,6 +202,7 @@ public class ChoseParticipant extends javax.swing.JDialog {
         //nothing 
     }//GEN-LAST:event_jTextField1PropertyChange
 
+    //sirve para poner el color de fondo del TextField en verde o en rojo
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         if (controller.validateNif(jTextField1.getText())){
             jTextField1.setBackground(Color.green);

@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
+    //atributos
     private Controller controller;
     private boolean modifier = false;
     private String dni_res;
@@ -33,6 +34,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     /**
      * Creates new form RegisterParticipantDialog
      */
+    
+    //constructor
     public RegisterParticipantDialog1(java.awt.Frame parent, boolean modal, String dni) {
         super(parent, modal);
         setTitle("Registrar participant");
@@ -41,6 +44,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         controller = Controller.getInstance();
+        //si no se le pasa un dni hace lo siguiente:
         if (dni != null){
             try{
             Participant chosen = controller.getParticipant(dni);
@@ -384,6 +388,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //mira los datos que pone el usuario y crea un particpante ylo añade a la base de datos (siempre que este todo bien)
     private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
        boolean bien = false;
         try {
@@ -475,11 +480,13 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
          */
     }//GEN-LAST:event_acceptjButtonActionPerformed
 
+    //boton salir
     private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceljButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_canceljButtonActionPerformed
 
+    //metodo mira el combobox
     private void fedejCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_fedejCheckBoxStateChanged
         // TODO add your handling code here:
         if (fedejCheckBox.isSelected()) {
@@ -489,6 +496,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_fedejCheckBoxStateChanged
 
+    //metodo que revisa el dni
     private void DNIjTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DNIjTextFieldMouseClicked
         // TODO add your handling code here:
         if (DNIjTextField.getText().equals("00000000A") && !modifier) {
@@ -558,6 +566,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_DNIjTextFieldFocusLost
 */
+    //metodo que se activa al perder el foco
     private void DNIjTextFieldFocusLost(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
         if (modifier) {
@@ -570,6 +579,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
     }
 
+    //valida los botones para que se puedan clicar cuando este todo validado
     private void checkbotones() {
         boolean aprobate;
         if (!modifier) {
@@ -608,6 +618,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_fedejTextFieldMouseClicked
 
+    //valida que haya texto en fedejTextField
     private void fedejTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusGained
         // TODO add your handling code here:
         if (fedejTextField.getText().equals("Entitat") && fedejCheckBox.isSelected()) {
@@ -616,6 +627,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_fedejTextFieldFocusGained
 
+    
+    //valida si esta vacio el fedehTextField
     private void fedejTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fedejTextFieldFocusLost
         // TODO add your handling code here:
 
@@ -633,6 +646,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         //nothing
     }//GEN-LAST:event_mailjTextFieldFocusLost
 
+    //valida si el nif es valido
     private void DNIjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DNIjTextFieldKeyReleased
 
         String texto = DNIjTextField.getText();
@@ -642,6 +656,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
     }//GEN-LAST:event_DNIjTextFieldKeyReleased
 
+    //valida si el telefono es valido
     private void telfjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telfjTextFieldKeyReleased
         if (!controller.validateTlf(telfjTextField.getText())) {
             telfjTextField.setBackground(Color.PINK);
@@ -651,6 +666,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_telfjTextFieldKeyReleased
 
+    // valida si el amil es valido
     private void mailjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mailjTextFieldKeyReleased
         if (!controller.validateEmail(mailjTextField.getText())) {
             mailjTextField.setBackground(Color.PINK);

@@ -10,6 +10,8 @@ import java.time.LocalTime;
  *
  * @author admin
  */
+
+//atributos
 public class StatsMarxesTO {
     private int edicio;
     private int inscrits;
@@ -20,6 +22,8 @@ public class StatsMarxesTO {
     private String tempsMesRapid;
     private String tempsMesLent;
 
+    
+    //contructor
     public StatsMarxesTO(int edicio, int inscrits, int enCursa, int arribats, int absents, int abandonat, String tempsMesRapid, String tempsMesLent) {
         this.edicio = edicio;
         this.inscrits = inscrits;
@@ -31,6 +35,8 @@ public class StatsMarxesTO {
         this.tempsMesLent = tempsMesLent;
     }
 
+    
+    //GETTERS Y SETTERS
     public String getEdicio() {
         return edicio + "";
     }

@@ -10,6 +10,8 @@ import java.time.LocalTime;
  *
  * @author admin
  */
+
+//atributos
 public class InscripcionsRanking {
     private String nom;
     private String temps;
@@ -17,6 +19,7 @@ public class InscripcionsRanking {
     private int dorsal;
     private String sexe;
 
+    //constructor
     public InscripcionsRanking(String nom, String temps, String assistencia, int dorsal, String sexe) {
         this.nom = nom;  
         this.temps = temps;
@@ -25,6 +28,8 @@ public class InscripcionsRanking {
         this.sexe = sexe;
     }
 
+    
+    //GETTERS Y SETTERS
     public String getNom() {
         return nom;
     }

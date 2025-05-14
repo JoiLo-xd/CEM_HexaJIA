@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
  * @author joellopez
  */
 public class ChoseParticipants extends javax.swing.JDialog {
-        private String edicio;
+    //atributos    
+    private String edicio;
 
 
     /**
@@ -22,6 +23,8 @@ public class ChoseParticipants extends javax.swing.JDialog {
      */
     java.awt.Frame parent;
     Controller controller;
+    
+    //constructor
     public ChoseParticipants(java.awt.Frame parent, boolean modal, String edicio) {
         super(parent, modal);
         initComponents();
@@ -169,6 +172,7 @@ public class ChoseParticipants extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton salir
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -177,6 +181,8 @@ public class ChoseParticipants extends javax.swing.JDialog {
        //nothing        
     }//GEN-LAST:event_jTextField1KeyPressed
 
+    
+    // si pone un dni valido se abre un INscriureParticipantDialog, sino sale un JOptionPane de rror
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         try {
             
@@ -203,6 +209,7 @@ public class ChoseParticipants extends javax.swing.JDialog {
         //nothing 
     }//GEN-LAST:event_jTextField1PropertyChange
 
+    //si el dni es valido se pone el fondo verde, sino rojo
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         if (controller.validateNif(jTextField1.getText())){
             jTextField1.setBackground(Color.green);
@@ -211,6 +218,7 @@ public class ChoseParticipants extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTextField1KeyReleased
 
+    //mira el dni al perder el foco
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         jTextField1.setText("");
         jTextField1.setForeground(Color.black);

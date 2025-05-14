@@ -18,9 +18,11 @@ public class ThingsParticipant extends javax.swing.JDialog {
      * Creates new form ThingsParticipant
      */
     
+    //atributos
     private Participant pa;
     private Controller controller;
     
+    //contructor
     public ThingsParticipant(java.awt.Frame parent, boolean modal, String nif) {
         super(parent, modal);
         initComponents();
@@ -33,6 +35,7 @@ public class ThingsParticipant extends javax.swing.JDialog {
         }
     }
     
+    //le da valor a los textos con el setText
     private void putThings(){
         nif_i.setText(pa.getNif());
         nom_i.setText(pa.getNom());

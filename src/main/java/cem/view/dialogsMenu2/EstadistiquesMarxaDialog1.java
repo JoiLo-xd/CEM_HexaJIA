@@ -21,13 +21,14 @@ import javax.swing.table.DefaultTableModel;
  * @author admin
  */
 public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
-    
+    //atributos
     private Controller controller;
     private java.awt.Frame parent;
 
     /**
      * Creates new form EstadistiquesMarxaDialog1
      */
+    //constructor
     public EstadistiquesMarxaDialog1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.parent = parent;
@@ -152,6 +153,7 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //crea una rankingInscripcionMarxa cuando das clic en la marxa
     private void statsjTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statsjTableMouseClicked
         // TODO add your handling code here:
         JTable source = (JTable)evt.getSource();
@@ -170,12 +172,13 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         this.setVisible(true);
     }//GEN-LAST:event_statsjTableMouseClicked
 
+    //boton salir
     private void exitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitjButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitjButtonActionPerformed
 
-    
+    //muestra la tabla con los nombres de los titulos y se va modificando cuando se añade alguna Marxa
     private void listStatsMarxes() {
         try {
             ArrayList<StatsMarxesTO> stats = controller.getStatsMarxes();

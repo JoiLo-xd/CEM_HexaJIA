@@ -8,15 +8,20 @@ package cem.model.TO;
  *
  * @author admin
  */
+
+    //atributos
 public class ParticipantEditionTO {
     private int edicio;
     private int numParticipants;
 
+    //constructor
     public ParticipantEditionTO(int edicio, int numParticipants) {
         this.edicio = edicio;
         this.numParticipants = numParticipants;
     }
 
+    
+    //GETTERS Y SETTERS
     public int getEdicio() {
         return edicio;
     }
