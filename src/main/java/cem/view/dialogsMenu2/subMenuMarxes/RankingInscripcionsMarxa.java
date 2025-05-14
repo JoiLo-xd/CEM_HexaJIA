@@ -23,12 +23,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RankingInscripcionsMarxa extends javax.swing.JDialog {
     
+    //atributos
     private Controller controller;
     private String edicio;
 
     /**
      * Creates new form RankingInscripcionsMarxa
      */
+    //contructor
     public RankingInscripcionsMarxa(java.awt.Frame parent, boolean modal, String edicio) throws SQLException {
         super(parent, modal);
         setTitle("Ranking de les inscripcions");
@@ -176,6 +178,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //valida wue los campos esten bien
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
         try {
@@ -192,6 +195,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    //mira el indice del box1 y llama al getInscripcio del controller
     private void optionsjComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optionsjComboBoxItemStateChanged
         try {
             if (optionsjComboBox.getSelectedIndex() == 0) {
@@ -206,11 +210,14 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_optionsjComboBoxItemStateChanged
 
+    
+    //boton salir 
     private void exitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitjButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitjButtonActionPerformed
 
+    //mostrar la tabla
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         JTable source = (JTable)evt.getSource();
         int row = source.rowAtPoint( evt.getPoint() );
@@ -226,7 +233,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jTable1MouseClicked
 
-    
+    //añade a la tabla las filas y columnas de las incripciones
     private void listInscripcions(ArrayList<InscripcionsRanking> inscripcions) {
         DefaultTableModel dtm = new DefaultTableModel(new String[]{"Dorsal","Nom", "Sexe", "Temps", "Assistencia"}, 0) {
             @Override
