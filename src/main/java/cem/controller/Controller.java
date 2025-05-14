@@ -243,4 +243,13 @@ public class Controller {
         }    
     }
     
+    //elminar Participant i les seves incripcions
+    public void eleminarParticipant(String nif){
+        try{
+            dao.deleteParticipant(nif);
+        }catch (SQLException e){
+            System.out.println("Este error no deberia ocurrir" + e.getMessage());
+        }
+    }
+    
 }

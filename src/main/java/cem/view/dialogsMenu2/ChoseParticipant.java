@@ -20,12 +20,17 @@ public class ChoseParticipant extends javax.swing.JDialog {
     //atributos
     java.awt.Frame parent;
     Controller controller;
+    boolean valor;
     //contructor
-    public ChoseParticipant(java.awt.Frame parent, boolean modal) {
+    public ChoseParticipant(java.awt.Frame parent, boolean modal, boolean valor) {
         super(parent, modal);
         initComponents();
         controller = Controller.getInstance();
-        this.parent = parent; 
+        this.parent = parent;
+        this.valor = valor;
+        if (valor){
+            jLabel1.setText("Posa el DNI del participant que vols eliminar");
+        }
     }
 
     /**
@@ -181,9 +186,24 @@ public class ChoseParticipant extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
         if ( controller.existParticipantforDNI(jTextField1.getText())){
-            RegisterParticipantDialog1 window  = new RegisterParticipantDialog1(parent,true, jTextField1.getText());
-            setVisible(false);
-            window.setVisible(true);
+            if (!valor) {
+                RegisterParticipantDialog1 window = new RegisterParticipantDialog1(parent, true, jTextField1.getText());
+                setVisible(false);
+                window.setVisible(true);
+            } else {
+                int know = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Estás seguro de que deseas continuar?",
+                        "Confirmación",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if (know == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(this, "S'ha elmininat el participant", "Informació", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } else {
+                    dispose();
+                }
+            }
             
             
         }else{

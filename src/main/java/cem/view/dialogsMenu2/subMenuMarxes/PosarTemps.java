@@ -71,7 +71,7 @@ public class PosarTemps extends javax.swing.JDialog {
         });
 
         textLabel.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
-        textLabel.setText("Introdueix el DNI de la persona que ha ");
+        textLabel.setText("Introdueix el Dorsal de la persona que ha ");
 
         jLabel2.setText("(aquest temps ve donat per el sistema)");
 
@@ -88,7 +88,7 @@ public class PosarTemps extends javax.swing.JDialog {
                         .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)))
+                        .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,21 +136,20 @@ public class PosarTemps extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(303, 303, 303)
+                .addComponent(posarBoton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(posarBoton)
-                        .addGap(237, 237, 237))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(dorsalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(221, 221, 221))))
+                .addComponent(dorsalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(277, 277, 277))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(39, 39, 39)
                 .addComponent(dorsalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(posarBoton)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -185,9 +184,11 @@ public class PosarTemps extends javax.swing.JDialog {
             if (controller.existDorsal(Integer.parseInt(dorsalTextField.getText()), Integer.parseInt(edicio))) {
                 if (func) {
                     controller.putTimes(dorsalTextField.getText(), edicio);
+                    JOptionPane.showMessageDialog(this, "S'ha posat el temps de tornada del participant", "Informació", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     if (controller.gettimesbyDorsal(dorsalTextField.getText(), edicio) != null) {
                         controller.putTimesa(dorsalTextField.getText(), edicio);
+                        JOptionPane.showMessageDialog(this, "S'ha posat el temps de arribada del participant", "Informació", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(this, "Aquest concursant encara no ha sortit", "Error", JOptionPane.ERROR_MESSAGE);
                     }

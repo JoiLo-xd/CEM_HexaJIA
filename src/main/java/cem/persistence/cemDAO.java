@@ -321,11 +321,16 @@ public class cemDAO {
         return inscripcions;
     }
     
-    public void deleteInscripcio(int edicio, int dorsal, String modalitat) throws SQLException {
+    public void deleteParticipant(String nif ) throws SQLException {
         Connection c = conectar();
         Statement st = c.createStatement();
-        st.executeUpdate("Delete from inscripcio where edicio = " + edicio + " and dorsal = " + dorsal);
+        st.executeUpdate("Delete from inscripcio where nif = '"+nif +"';");
+        st.executeUpdate("Delete from participant where nif = '" + nif + "';");
+        st.close();
+        desconectar(c);
     }
+    
+    
 
     //metodo que sirve para saber las estadisticas de las marxas a traves de consultas sql usando el count
     public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException {
