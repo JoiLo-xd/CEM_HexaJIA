@@ -172,7 +172,7 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jSpinnerEdicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerEdicioStateChanged
-        try {
+
             // TODO hay que hacer que si la marxa ya existe se muestre el mensage de error que hay oculto al iniciar, errorMessage
             if (controller.existMarxa(new Marxa((int) jSpinnerEdicio.getValue()))) {
                 errorMessagejLabel.setVisible(true);
@@ -181,9 +181,7 @@ public class CreateMarxaDialog1 extends javax.swing.JDialog {
                 errorMessagejLabel.setVisible(false);
                 jButtonAceptar.setEnabled(true);
             }
-        } catch (SQLException ex) {
-            System.out.println("ERROR SQL (no debería darse): " + ex.getMessage());
-        }
+        
     }//GEN-LAST:event_jSpinnerEdicioStateChanged
 
     /**

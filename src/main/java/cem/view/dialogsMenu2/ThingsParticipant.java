@@ -37,14 +37,14 @@ public class ThingsParticipant extends javax.swing.JDialog {
         nif_i.setText(pa.getNif());
         nom_i.setText(pa.getNom());
         cog_i.setText(pa.getCognoms());
-        se_i.setText(pa.isSexe() ?  "Dona": "Home");
+        se_i.setText(pa.isSexe() ?  "Home": "Dona");
         te_i.setText(pa.getNumTelefon());
         po_i.setText(pa.getPoblacio());
         ge_i.setText(pa.getEmail());
         if (pa.getEntitat() != null) ent_i.setText(pa.getEntitat());
         else ent_i.setText("X");
-        if (pa.getObservacions() != null) obs_i.setText(pa.getObservacions());
-        else obs_i.setText("X");
+        if (pa.getObservacions() != null) jLabel23.setText(pa.getObservacions());
+        else jLabel23.setText("X");
         nif.setText(pa.getNif());
     }
 
@@ -83,7 +83,7 @@ public class ThingsParticipant extends javax.swing.JDialog {
         po_i = new javax.swing.JLabel();
         ge_i = new javax.swing.JLabel();
         ent_i = new javax.swing.JLabel();
-        obs_i = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -115,11 +115,11 @@ public class ThingsParticipant extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nif, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textprinc1))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(textprinc1)
+                    .addComponent(nif, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,10 +217,10 @@ public class ThingsParticipant extends javax.swing.JDialog {
         ent_i.setForeground(new java.awt.Color(0, 0, 0));
         ent_i.setText("jLabel1");
 
-        obs_i.setBackground(new java.awt.Color(102, 102, 102));
-        obs_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        obs_i.setForeground(new java.awt.Color(0, 0, 0));
-        obs_i.setText("jLabel1");
+        jLabel23.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel23.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel23.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -230,7 +230,7 @@ public class ThingsParticipant extends javax.swing.JDialog {
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(obs_i, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +311,7 @@ public class ThingsParticipant extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(obs_i, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -349,6 +349,7 @@ public class ThingsParticipant extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -361,7 +362,6 @@ public class ThingsParticipant extends javax.swing.JDialog {
     private javax.swing.JLabel nif;
     private javax.swing.JLabel nif_i;
     private javax.swing.JLabel nom_i;
-    private javax.swing.JLabel obs_i;
     private javax.swing.JLabel po_i;
     private javax.swing.JLabel se_i;
     private javax.swing.JLabel te_i;

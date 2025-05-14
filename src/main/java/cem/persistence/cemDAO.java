@@ -116,6 +116,7 @@ public class cemDAO {
                     ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
                     String assistencia = "";
+                    int dorsal = 0; 
                     if (rs2.next()) {
                         long segons = rs2.getLong(1);
                         if (!rs2.wasNull()) {
@@ -125,10 +126,11 @@ public class cemDAO {
                             temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
                         }
                         assistencia = rs2.getString(2);
+                        dorsal = rs2.getInt(3);
                     }
                     rs2.close();
                     st2.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
                     
                 }rs0.close();
                 break;
@@ -140,19 +142,21 @@ public class cemDAO {
                     String nif = rs1.getString(3);
                     String temps = "--:--:--";
                     String assistencia = rs1.getString(4);
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    int dorsal = rs1.getInt(5);
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
                     
                 }rs1.close();
                 break;
             case 2:
-                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, dorsal  FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
+                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, i.dorsal  FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
                 while (rs2.next()) {
                     String nom = rs2.getString(1);
                     nom = nom.concat(" " + rs2.getString(2));
                     String nif = rs2.getString(3);
                     String temps = "--:--:--";
                     String assistencia = rs2.getString(4);
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    int dorsal = rs2.getInt(5);
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
                     
                 }rs2.close();
                 break;
@@ -163,9 +167,10 @@ public class cemDAO {
                     nom = nom.concat(" " + rs3.getString(2));
                     String nif = rs3.getString(3);
                     Statement st32 = c.createStatement();
-                    ResultSet rs32 = st32.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    ResultSet rs32 = st32.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
                     String assistencia = "";
+                    int dorsal = 0;
                     if (rs32.next()) {
                         long segons = rs32.getLong(1);
                         if (!rs32.wasNull()) {
@@ -175,10 +180,11 @@ public class cemDAO {
                             temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
                         }
                         assistencia = rs32.getString(2);
+                        dorsal = rs32.getInt(3);
                     }
                     rs32.close();
                     st32.close();
-                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia));
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia,dorsal));
                     
                 }rs3.close();
                 break;
@@ -439,6 +445,18 @@ public class cemDAO {
         ps.close();
         desconectar(c);
         return existe;
+    }
+    
+    public String getDNIIns(int dorsal, int edicio) throws SQLException{
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery("select nif from inscripcio where dorsal = '" + dorsal + "' and edicio = '" + edicio +"';");
+        rs.next();
+        String nif = rs.getString(1);
+        rs.close();
+        st.close();
+        desconectar(c);
+        return nif;
     }
 
 }

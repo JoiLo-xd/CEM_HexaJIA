@@ -7,6 +7,7 @@ package cem.view.dialogsMenu2.subMenuMarxes;
 import cem.controller.Controller;
 import cem.model.TO.InscripcionsRanking;
 import cem.model.TO.ParticipantEditionTO;
+import cem.view.dialogsMenu2.ThingsParticipant;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -214,7 +215,13 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         int row = source.rowAtPoint( evt.getPoint() );
         int column = source.columnAtPoint( evt.getPoint() );
         String s=source.getModel().getValueAt(row, column)+"";
-        
+        if (s.matches("[0-9]+")){
+        if (controller.isInscripcio(s,edicio)){
+            String dni = controller.getDNIInscripcioByDorsal(s, edicio);
+            ThingsParticipant window = new ThingsParticipant(null, true, dni);
+            window.setLocationRelativeTo(this);
+            window.setVisible(true);
+        }}
         
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -227,7 +234,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
             }
         };
         for (InscripcionsRanking p : inscripcions) {
-            dtm.addRow(new String[]{ p.getNom(), p.getTemps(), p.getAssistencia()});
+            dtm.addRow(new String[]{p.getDorsal() + "", p.getNom(), p.getTemps(), p.getAssistencia()});
         }
         jTable1.setModel(dtm);
     }

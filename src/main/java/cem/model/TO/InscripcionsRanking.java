@@ -14,12 +14,14 @@ public class InscripcionsRanking {
     private String nom;
     private String temps;
     private String assistencia;
-    private int Dorsal
+    private int dorsal;
 
-    public InscripcionsRanking(String nom, String temps, String assistencia) {
+    public InscripcionsRanking(String nom, String temps, String assistencia, int dorsal) {
         this.nom = nom;  
         this.temps = temps;
         this.assistencia = assistencia;
+        this.dorsal = dorsal;
+        
     }
 
     public String getNom() {

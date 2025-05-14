@@ -116,11 +116,37 @@ public class Controller {
         dao.insertMarxa(m);
     }
     
-    public boolean existMarxa(Marxa m) throws SQLException{
+    public boolean existMarxa(Marxa m){
+        try{
+            
+        
         if (dao.existMarxa(m)) {
             return true;
         }
         return false;
+        }catch (SQLException e){
+            System.out.println("Este error no se deberia dar: " + e.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean isInscripcio(String dorsal,String edicio){
+        try{
+        
+        return dao.existDorsal(Integer.parseInt(dorsal), Integer.parseInt(edicio));
+        }catch (SQLException e){
+            System.out.println("Este error no deberia ocurrir: " + e.getMessage());
+        }
+        return false; 
+    }
+    
+    public String getDNIInscripcioByDorsal(String dorsal, String edicio){
+        try{
+            return dao.getDNIIns(Integer.parseInt(dorsal), Integer.parseInt(edicio));
+        }catch (SQLException e){
+            System.out.println("Este error no deberia ocurrir " + e.getMessage());
+        }
+        return ""; 
     }
 
 
