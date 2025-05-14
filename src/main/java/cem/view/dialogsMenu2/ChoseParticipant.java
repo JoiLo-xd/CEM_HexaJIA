@@ -30,6 +30,7 @@ public class ChoseParticipant extends javax.swing.JDialog {
         this.valor = valor;
         if (valor){
             jLabel1.setText("Posa el DNI del participant que vols eliminar");
+            jButton2.setText("Eliminar");
         }
     }
 
