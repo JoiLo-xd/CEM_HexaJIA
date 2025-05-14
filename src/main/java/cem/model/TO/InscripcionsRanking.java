@@ -14,9 +14,10 @@ public class InscripcionsRanking {
     private String nom;
     private String temps;
     private String assistencia;
+    private int Dorsal
 
     public InscripcionsRanking(String nom, String temps, String assistencia) {
-        this.nom = nom;
+        this.nom = nom;  
         this.temps = temps;
         this.assistencia = assistencia;
     }
@@ -31,5 +32,12 @@ public class InscripcionsRanking {
 
     public String getAssistencia() {
         return assistencia;
+    }
+    public void setDorsal(int dorsal){
+        this.dorsal = dorsal;
+    }
+    
+    public int getDorsal(){
+        return dorsal;
     }
 }
