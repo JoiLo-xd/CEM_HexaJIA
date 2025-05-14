@@ -49,6 +49,8 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         } else {
             jButtonModificar.setVisible(false);
             jButtonModificar.setEnabled(false);
+            jLabelAsistencia.setVisible(false);
+            jComboBoxAsistencia.setVisible(false);
         }
     }
 
@@ -63,8 +65,9 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabelModalitat = new javax.swing.JLabel();
-        jLabelDorsal = new javax.swing.JLabel();
+        jLabelAsistencia = new javax.swing.JLabel();
         jLabelNif = new javax.swing.JLabel();
+        jLabelDorsal1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jSpinnerDorsal = new javax.swing.JSpinner();
         jComboBoxModalitat = new javax.swing.JComboBox<>();
@@ -72,6 +75,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         jButtonSortir = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
+        jComboBoxAsistencia = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabelEdicio = new javax.swing.JLabel();
         jLabelAny = new javax.swing.JLabel();
@@ -83,39 +87,53 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         jLabelModalitat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelModalitat.setText("MODALITAT");
 
-        jLabelDorsal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelDorsal.setText("DORSAL");
+        jLabelAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelAsistencia.setText("ASISTÈNCIA");
 
         jLabelNif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelNif.setText("DNI / NIF PARTICIPANT");
+
+        jLabelDorsal1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelDorsal1.setText("DORSAL");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNif)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabelDorsal)))
-                .addGap(55, 55, 55))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(109, 109, 109)
                 .addComponent(jLabelModalitat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(95, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelNif)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelAsistencia)
+                        .addGap(106, 106, 106))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(134, Short.MAX_VALUE)
+                    .addComponent(jLabelDorsal1)
+                    .addGap(120, 120, 120)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(jLabelDorsal)
-                .addGap(73, 73, 73)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelModalitat)
-                .addGap(84, 84, 84)
+                .addGap(45, 45, 45)
                 .addComponent(jLabelNif)
-                .addGap(105, 105, 105))
+                .addGap(36, 36, 36)
+                .addComponent(jLabelAsistencia)
+                .addGap(116, 116, 116))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(69, 69, 69)
+                    .addComponent(jLabelDorsal1)
+                    .addContainerGap(292, Short.MAX_VALUE)))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
@@ -156,12 +174,14 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
             }
         });
 
+        jComboBoxAsistencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ha abandonat", "Desqualificat" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jButtonModificar)
                 .addGap(34, 34, 34)
                 .addComponent(jButtonRegistrar)
@@ -170,22 +190,25 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 .addGap(56, 56, 56))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinnerDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxModalitat, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSpinnerDorsal, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(jComboBoxModalitat, 0, 270, Short.MAX_VALUE)
+                    .addComponent(jComboBoxAsistencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jSpinnerDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(39, 39, 39)
                 .addComponent(jComboBoxModalitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(42, 42, 42)
                 .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(40, 40, 40)
+                .addComponent(jComboBoxAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSortir)
                     .addComponent(jButtonRegistrar)
@@ -276,6 +299,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
                 if (!modifier) {
                     controller.addInscripcio(i);
                 }
+                JOptionPane.showMessageDialog(this, "S'ha afegit correctament aquesta inscripcio", "Afegit", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
         } catch (AdditionException e) {
@@ -311,13 +335,19 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
             } else {
                 modalitat = false;
             }
-            String asistencia = "No ha vingut";
+            String asistencia;
+            if (jComboBoxAsistencia.getSelectedIndex() == 0) {
+                asistencia = "No ha vingut";
+            } else {
+                asistencia = (String) jComboBoxAsistencia.getSelectedItem();
+            }
             String dni = jTextFieldDNI.getText();
             Inscripcio i = new Inscripcio(dorsal, modalitat, asistencia, dni, Integer.parseInt(edicio));
             if (controller.existDorsal(dorsal, Integer.parseInt(edicio))) {
                 JOptionPane.showMessageDialog(this, "Aquest dorsal ja està utilitzat en aquesta cursa", "Dorsa Repetit", JOptionPane.ERROR_MESSAGE);
             } else {
                 controller.modifiInscripcio(i);
+                JOptionPane.showMessageDialog(this, "S'ha modificat correctament aquesta inscripcio", "Modificat", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
         } catch (SQLException e) {
@@ -332,9 +362,11 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonSortir;
+    private javax.swing.JComboBox<String> jComboBoxAsistencia;
     private javax.swing.JComboBox<String> jComboBoxModalitat;
     private javax.swing.JLabel jLabelAny;
-    private javax.swing.JLabel jLabelDorsal;
+    private javax.swing.JLabel jLabelAsistencia;
+    private javax.swing.JLabel jLabelDorsal1;
     private javax.swing.JLabel jLabelEdicio;
     private javax.swing.JLabel jLabelModalitat;
     private javax.swing.JLabel jLabelNif;

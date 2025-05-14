@@ -59,8 +59,8 @@ public class cemDAO {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_sortida = ?,asistencia = 'en cursa' WHERE dorsal = ? and edicio = ? ");
         ps.setTime(1,Time.valueOf(valor_imp));
-        ps.setInt(3, Dorsal);
-        ps.setInt(4, edicio);
+        ps.setInt(2, Dorsal);
+        ps.setInt(3, edicio);
         ps.executeUpdate();
         ps.close();
         desconectar(c);
@@ -71,8 +71,8 @@ public class cemDAO {
         Connection c = conectar();
         PreparedStatement ps = c.prepareStatement("UPDATE inscripcio set hora_arribada = ?,asistencia = 'finalitzat' WHERE dorsal = ? and edicio = ? ");
         ps.setTime(1,Time.valueOf(valor_imp));
-        ps.setInt(3, Dorsal);
-        ps.setInt(4, edicio);
+        ps.setInt(2, Dorsal);
+        ps.setInt(3, edicio);
         ps.executeUpdate();       
         ps.close();        
         desconectar(c);
@@ -113,7 +113,7 @@ public class cemDAO {
                     nom = nom.concat(" " + rs0.getString(2));
                     String nif = rs0.getString(3);
                     Statement st2 = c.createStatement();
-                    ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    ResultSet rs2 = st2.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
                     String temps = "--:--:--";
                     String assistencia = "";
                     if (rs2.next()) {
@@ -133,7 +133,7 @@ public class cemDAO {
                 }rs0.close();
                 break;
             case 1:
-                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.asistencia = 'No ha vingut'");
+                ResultSet rs1 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, dorsal  FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.asistencia = 'No ha vingut'");
                 while (rs1.next()) {
                     String nom = rs1.getString(1);
                     nom = nom.concat(" " + rs1.getString(2));
@@ -145,7 +145,7 @@ public class cemDAO {
                 }rs1.close();
                 break;
             case 2:
-                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
+                ResultSet rs2 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, i.asistencia, dorsal  FROM inscripcio as i join participant as p on p.nif = i.nif where i.edicio = " + edicio + " and i.asistencia = 'Ha abandonat'");
                 while (rs2.next()) {
                     String nom = rs2.getString(1);
                     nom = nom.concat(" " + rs2.getString(2));
@@ -416,11 +416,12 @@ public class cemDAO {
     
     public void modifiInscripcio(Inscripcio in) throws SQLException {
         Connection c = conectar();
-        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ? where nif = '" + in.getDni()+ "';";
+        String query = "UPDATE inscripcio set nif = ?, modalitat = ?, dorsal = ?, asistencia = ? where nif = '" + in.getDni()+ "';";
         PreparedStatement ps = c.prepareStatement(query);
         ps.setString(1, in.getDni());
         ps.setBoolean(2, in.isModalitat());
         ps.setInt(3, in.getDorsal());
+        ps.setString(4, in.getAsistencia());
         ps.executeUpdate();
         ps.close();
         desconectar(c);

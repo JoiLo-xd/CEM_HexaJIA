@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -149,6 +150,11 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
                 return types [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,16 +209,25 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_exitjButtonActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        int column = source.columnAtPoint( evt.getPoint() );
+        String s=source.getModel().getValueAt(row, column)+"";
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
     
     private void listInscripcions(ArrayList<InscripcionsRanking> inscripcions) {
-        DefaultTableModel dtm = new DefaultTableModel(new String[]{"Nom", "Temps", "Assistencia"}, 0) {
+        DefaultTableModel dtm = new DefaultTableModel(new String[]{"Dorsal","Nom", "Temps", "Assistencia"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // ninguna celda editable
             }
         };
         for (InscripcionsRanking p : inscripcions) {
-            dtm.addRow(new String[]{p.getNom(), p.getTemps(), p.getAssistencia()});
+            dtm.addRow(new String[]{ p.getNom(), p.getTemps(), p.getAssistencia()});
         }
         jTable1.setModel(dtm);
     }

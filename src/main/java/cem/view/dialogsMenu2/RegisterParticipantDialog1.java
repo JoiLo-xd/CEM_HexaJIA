@@ -29,6 +29,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     private Controller controller;
     private boolean modifier = false;
     private String dni_res;
+
     /**
      * Creates new form RegisterParticipantDialog
      */
@@ -56,7 +57,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             }catch(AdditionException e){
                 System.out.println("Este error no se debe dar en esta circunstancia " + e.getMessage());
             }
-            
+
         }
     }
 
@@ -384,7 +385,8 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
-        try{
+       boolean bien = false;
+        try {
             String dni = DNIjTextField.getText();
             String nom = namejTextField.getText();
             String cognom = cognomsjTextField.getText();
@@ -393,27 +395,39 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             String tlf = telfjTextField.getText();
             String email = mailjTextField.getText();
             boolean sex;
-            if (sexejComboBox.getSelectedIndex() == 0) sex = true;
-            else sex = false;
+            if (sexejComboBox.getSelectedIndex() == 0) {
+                sex = true;
+            } else {
+                sex = false;
+            }
             String entitat = null;
-            if (fedejCheckBox.isEnabled()){
+            if (fedejCheckBox.isEnabled()) {
                 entitat = fedejTextField.getText();
             }
             String observacio = observacioojTextField1.getText();
-            Participant pr = new Participant(dni,nom,cognom,neix,sex,town,tlf,email,entitat,fedejCheckBox.isEnabled(), observacio); 
-            if (!modifier){
-            controller.addParticipant(pr);
-            }else{
+            Participant pr = new Participant(dni, nom, cognom, neix, sex, town, tlf, email, entitat, fedejCheckBox.isEnabled(), observacio);
+            if (!modifier) {
+                controller.addParticipant(pr);
+            } else {
                 controller.modifiParticipant(pr);
             }
-        }catch(AdditionException e){
+            bien = true;
+        } catch (AdditionException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Este error no se deberia dar: " + e.getMessage());
-            
+
         }
+        if (bien) {
+            if (!DNIjLabel.isEnabled()) {
+            JOptionPane.showMessageDialog(this, "S'ha modificat correctament aquest participant", "Modificat", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "S'ha afegit correctament aquest participant", "Afegit", JOptionPane.INFORMATION_MESSAGE);
+        }
+        }
+            
         dispose();
-        
+
         /*
         
         boolean ok = true;
@@ -458,7 +472,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         }
 
         //dispose();
-*/
+         */
     }//GEN-LAST:event_acceptjButtonActionPerformed
 
     private void canceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceljButtonActionPerformed
@@ -550,13 +564,13 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             DNIjTextField.setText(dni_res);
         }
         if (DNIjTextField.getText().isEmpty() && !modifier) {
-                DNIjTextField.setForeground(Color.GRAY);
-                DNIjTextField.setBackground(Color.WHITE);
-                DNIjTextField.setText("00000000A");
+            DNIjTextField.setForeground(Color.GRAY);
+            DNIjTextField.setBackground(Color.WHITE);
+            DNIjTextField.setText("00000000A");
         }
     }
-    
-    private void checkbotones(){
+
+    private void checkbotones() {
         boolean aprobate;
         if (!modifier) {
             if (controller.validateNif(DNIjTextField.getText()) && controller.validateEmail(mailjTextField.getText()) && controller.validateTlf(telfjTextField.getText())
@@ -565,21 +579,17 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             } else {
                 acceptjButton.setEnabled(false);
             }
-        }else{
+        } else {
             if (controller.validateEmail(mailjTextField.getText()) && controller.validateTlf(telfjTextField.getText())
-                    && !namejTextField.getText().isEmpty() && !cognomsjTextField.getText().isEmpty() && !townjTextField.getText().isEmpty()){
+                    && !namejTextField.getText().isEmpty() && !cognomsjTextField.getText().isEmpty() && !townjTextField.getText().isEmpty()) {
                 acceptjButton.setEnabled(true);
             } else {
                 acceptjButton.setEnabled(false);
             }
-            
-            
+
         }
-        
+
     }
-    
-    
-    
 
 
     private void DNIjTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNIjTextFieldFocusGained
@@ -625,26 +635,26 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
 
     private void DNIjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DNIjTextFieldKeyReleased
 
-            String texto = DNIjTextField.getText();
-            boolean esValido = controller.validateNif(texto);
-            DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
-            checkbotones();
-        
+        String texto = DNIjTextField.getText();
+        boolean esValido = controller.validateNif(texto);
+        DNIjTextField.setBackground(esValido ? Color.GREEN : Color.PINK);
+        checkbotones();
+
     }//GEN-LAST:event_DNIjTextFieldKeyReleased
 
     private void telfjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telfjTextFieldKeyReleased
-        if (!controller.validateTlf(telfjTextField.getText())){
+        if (!controller.validateTlf(telfjTextField.getText())) {
             telfjTextField.setBackground(Color.PINK);
-        }else{
+        } else {
             telfjTextField.setBackground(Color.GREEN);
             checkbotones();
         }
     }//GEN-LAST:event_telfjTextFieldKeyReleased
 
     private void mailjTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mailjTextFieldKeyReleased
-        if (!controller.validateEmail(mailjTextField.getText())){
+        if (!controller.validateEmail(mailjTextField.getText())) {
             mailjTextField.setBackground(Color.PINK);
-        }else{
+        } else {
             mailjTextField.setBackground(Color.GREEN);
             checkbotones();
         }

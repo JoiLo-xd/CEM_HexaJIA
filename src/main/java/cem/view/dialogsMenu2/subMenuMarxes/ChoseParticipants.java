@@ -178,16 +178,19 @@ public class ChoseParticipants extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        try{
-        if ( controller.existParticipantinInscripcio(jTextField1.getText(), Integer.parseInt(edicio))){
-            InscriureParticipantDialog1 window  = new InscriureParticipantDialog1(parent,true, jTextField1.getText(), edicio);
-            setVisible(false);
-            window.setVisible(true);
-                       
-        }else{
-            JOptionPane.showMessageDialog(this, "Este DNI no esta registrado en aquesta cursa", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        }catch (SQLException e){
+        try {
+            
+            
+            if (controller.existParticipantinInscripcio(jTextField1.getText(), Integer.parseInt(edicio))) {
+                InscriureParticipantDialog1 window = new InscriureParticipantDialog1(parent, true, jTextField1.getText(), edicio);
+                setVisible(false);
+                window.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Este Dorsal no esta registrado en aquesta cursa", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (SQLException e) {
             System.out.println("Este error no se deberia dar: " + e.getMessage());
         }
     }//GEN-LAST:event_jButtonModificarActionPerformed

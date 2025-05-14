@@ -175,20 +175,25 @@ public class PosarTemps extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void posarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posarBotonActionPerformed
-        try{
-        if (controller.existDorsal(Integer.parseInt(dorsalTextField.getText()), Integer.parseInt(edicio))){
-            if (func) {controller.putTimes(dorsalTextField.getText(),edicio);}
-            else{
-                if (controller.gettimesbyDorsal(dorsalTextField.getText(), edicio) != null){
-                    controller.putTimesa(dorsalTextField.getText(), edicio);
-                }else{
-                    JOptionPane.showMessageDialog(this, "Aquest concursant encara no ha sortit", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            if (dorsalTextField.getText().matches("[0-9]+")){
+            if (controller.existDorsal(Integer.parseInt(dorsalTextField.getText()), Integer.parseInt(edicio))) {
+                if (func) {
+                    controller.putTimes(dorsalTextField.getText(), edicio);
+                } else {
+                    if (controller.gettimesbyDorsal(dorsalTextField.getText(), edicio) != null) {
+                        controller.putTimesa(dorsalTextField.getText(), edicio);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Aquest concursant encara no ha sortit", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Aquest dorsal no existeix en aquesta marxa", "Error", JOptionPane.ERROR_MESSAGE);
+            }}
+            else{
+                JOptionPane.showMessageDialog(this, "Aquest dorsal no es posible (nomes valors numerics)", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Aquest dorsal no existeix en aquesta marxa", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Este error no se deberia dar " + e.getMessage());
         }
         dispose();

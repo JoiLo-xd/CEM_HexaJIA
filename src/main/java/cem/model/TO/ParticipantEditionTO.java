@@ -32,5 +32,7 @@ public class ParticipantEditionTO {
     public void setNumParticipants(int numParticipants) {
         this.numParticipants = numParticipants;
     }
+    
+    
 
 }
