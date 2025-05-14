@@ -240,7 +240,7 @@ public class Controller {
             dao.modifiInscripcio(in);
         } catch (SQLException e) {
             System.out.println("No se deberia dar este error" + e.getMessage());
-        }
+        }    
     }
-
+    
 }

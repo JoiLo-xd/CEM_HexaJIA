@@ -199,7 +199,7 @@ public class MarxesDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonInscriureParticipantActionPerformed
     //abre un JDialog de CoseParticiànt
     private void jButtonEditarInscripcióActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarInscripcióActionPerformed
-        ChoseParticipants window = new ChoseParticipants(null, true, edicio);
+        ChoseParticipants window = new ChoseParticipants(null, true, edicio,false);
         setVisible(false);
         window.setLocationRelativeTo(this);
         window.setVisible(true);

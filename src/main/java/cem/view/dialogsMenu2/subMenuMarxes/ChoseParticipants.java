@@ -23,14 +23,16 @@ public class ChoseParticipants extends javax.swing.JDialog {
      */
     java.awt.Frame parent;
     Controller controller;
+    boolean valor;
     
     //constructor
-    public ChoseParticipants(java.awt.Frame parent, boolean modal, String edicio) {
+    public ChoseParticipants(java.awt.Frame parent, boolean modal, String edicio, boolean valor) {
         super(parent, modal);
         initComponents();
         controller = Controller.getInstance();
         this.parent = parent; 
         this.edicio = edicio;
+        this.valor = valor;
     }
 
     /**
@@ -188,9 +190,13 @@ public class ChoseParticipants extends javax.swing.JDialog {
             
             
             if (controller.existParticipantinInscripcio(jTextField1.getText(), Integer.parseInt(edicio))) {
+                if (!valor){
                 InscriureParticipantDialog1 window = new InscriureParticipantDialog1(parent, true, jTextField1.getText(), edicio);
                 setVisible(false);
                 window.setVisible(true);
+                }else{
+                    
+                }
 
             } else {
                 JOptionPane.showMessageDialog(this, "Este Dorsal no esta registrado en aquesta cursa", "Error", JOptionPane.ERROR_MESSAGE);
