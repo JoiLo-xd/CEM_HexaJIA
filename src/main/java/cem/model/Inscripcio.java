@@ -11,8 +11,8 @@ import java.util.Objects;
 public class Inscripcio {
 
     //atributos
-    private int dorsal; //Creo que esto tendria que ser codi de barres no voy NGL
-    private boolean modalitat; // pongo boolean porque solo hay dos opciones, se puedde canmbiar a String -> Nota: Entoces deberiamos poner una constante para la simpleza del codigo
+    private int dorsal;
+    private boolean modalitat;
     private LocalTime horaSortida;
     private LocalTime horaArribada;
     private Duration tempsTotal;
@@ -65,10 +65,10 @@ public class Inscripcio {
         this.horaSortida = horaSortida;
     }
 
-    public void setHoraArribada(LocalTime horaArribada) { // Aqui lo tendremos que hacer con excepciones y tal no con cosas cutres
+    public void setHoraArribada(LocalTime horaArribada) { 
         if (horaSortida != null) {
             this.horaArribada = horaArribada;
-        } // Aqui en un futuro lanzara una excepcion jeje
+        }
     }
 
     public void setTempsTotal() {

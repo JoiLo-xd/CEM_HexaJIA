@@ -71,6 +71,7 @@ public class PosarTemps extends javax.swing.JDialog {
         });
 
         textLabel.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
+        textLabel.setForeground(new java.awt.Color(255, 255, 255));
         textLabel.setText("Introdueix el Dorsal de la persona que ha ");
 
         jLabel2.setText("(aquest temps ve donat per el sistema)");
@@ -165,7 +166,7 @@ public class PosarTemps extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

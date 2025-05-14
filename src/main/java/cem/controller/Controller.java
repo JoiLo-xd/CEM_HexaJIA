@@ -49,7 +49,7 @@ public class Controller {
         } catch (SQLException e) {
             System.out.println("Este error no se deberia dar");
         }
-        return null; //nunca llega aqui btw
+        return null;
     }
 
     //metodo que recive dos stringpara pasarlos a un metodo del DAO
@@ -95,7 +95,7 @@ public class Controller {
         } catch (SQLException e) {
             System.out.println("Este error no se deberia dar");
         }
-        return null; //nunca llega aqui btw
+        return null;
     }
 
     //devuelve el getMarxes del cemDAO

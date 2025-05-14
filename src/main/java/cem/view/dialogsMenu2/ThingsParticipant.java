@@ -89,16 +89,13 @@ public class ThingsParticipant extends javax.swing.JDialog {
         jLabel23 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("jLabel1");
 
         jLabel9.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("jLabel1");
 
         jLabel20.setBackground(new java.awt.Color(102, 102, 102));
         jLabel20.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,10 +104,12 @@ public class ThingsParticipant extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
         nif.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
+        nif.setForeground(new java.awt.Color(255, 255, 255));
         nif.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nif.setText("nif");
 
         textprinc1.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
+        textprinc1.setForeground(new java.awt.Color(255, 255, 255));
         textprinc1.setText("Dades Participant:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -137,92 +136,72 @@ public class ThingsParticipant extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("NIF:");
 
         jLabel3.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nom:");
 
         jLabel4.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Cognom:");
 
         jLabel5.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Neixement:");
 
         jLabel6.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Sexe:");
 
         jLabel7.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Poblacio:");
 
         nif_i.setBackground(new java.awt.Color(102, 102, 102));
         nif_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        nif_i.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel10.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Telefon:");
 
         jLabel11.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Gmail:");
 
         jLabel12.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("observacions:");
 
         jLabel13.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Entitat:");
 
         cog_i.setBackground(new java.awt.Color(102, 102, 102));
         cog_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        cog_i.setForeground(new java.awt.Color(0, 0, 0));
         cog_i.setText("jLabel1");
 
         nei_i.setBackground(new java.awt.Color(102, 102, 102));
         nei_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        nei_i.setForeground(new java.awt.Color(0, 0, 0));
         nei_i.setText("jLabel1");
 
         se_i.setBackground(new java.awt.Color(102, 102, 102));
         se_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        se_i.setForeground(new java.awt.Color(0, 0, 0));
         se_i.setText("jLabel1");
 
         nom_i.setBackground(new java.awt.Color(102, 102, 102));
         nom_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        nom_i.setForeground(new java.awt.Color(0, 0, 0));
         nom_i.setText("jLabel1");
 
         te_i.setBackground(new java.awt.Color(102, 102, 102));
         te_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        te_i.setForeground(new java.awt.Color(0, 0, 0));
         te_i.setText("jLabel1");
 
         po_i.setBackground(new java.awt.Color(102, 102, 102));
         po_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        po_i.setForeground(new java.awt.Color(0, 0, 0));
         po_i.setText("jLabel1");
 
         ge_i.setBackground(new java.awt.Color(102, 102, 102));
         ge_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        ge_i.setForeground(new java.awt.Color(0, 0, 0));
         ge_i.setText("jLabel1");
 
         ent_i.setBackground(new java.awt.Color(102, 102, 102));
         ent_i.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        ent_i.setForeground(new java.awt.Color(0, 0, 0));
         ent_i.setText("jLabel1");
 
         jLabel23.setBackground(new java.awt.Color(102, 102, 102));
         jLabel23.setFont(new java.awt.Font("Fira Sans", 1, 15)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

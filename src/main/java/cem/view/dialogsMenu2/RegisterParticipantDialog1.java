@@ -100,6 +100,7 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
         observacioojTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 255));
 
         titlesjPanel.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -156,10 +157,10 @@ public class RegisterParticipantDialog1 extends javax.swing.JDialog {
             }
         });
 
-        ObservacionsjLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ObservacionsjLabel1.setForeground(new java.awt.Color(255, 255, 255));
         ObservacionsjLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ObservacionsjLabel1.setText("Observacions");
+        ObservacionsjLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ObservacionsjLabel1.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout titlesjPanelLayout = new javax.swing.GroupLayout(titlesjPanel);
         titlesjPanel.setLayout(titlesjPanelLayout);

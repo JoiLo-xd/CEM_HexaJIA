@@ -51,9 +51,11 @@ public class MarxesDialog1 extends javax.swing.JDialog {
         ediciojPanel.setBackground(new java.awt.Color(0, 153, 204));
 
         textEdiciojLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        textEdiciojLabel.setForeground(new java.awt.Color(255, 255, 255));
         textEdiciojLabel.setText("EDICIÓ");
 
         ediciojLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        ediciojLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout ediciojPanelLayout = new javax.swing.GroupLayout(ediciojPanel);
         ediciojPanel.setLayout(ediciojPanelLayout);

@@ -27,11 +27,6 @@ public class Marxa {
         return this.edicio==(m.getEdicio());
     }
 
-    //añade un corredor al arrayList
-//    ublic void addCorrInsc(Inscripcio insc){
-//        inscripcionsMarxa.add(insc);
-//    }p
-
     //GETTERS
     public int getEdicio() {
         return edicio;

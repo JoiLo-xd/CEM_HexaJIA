@@ -65,6 +65,7 @@ public class EstadistiquesMarxaDialog1 extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ESTADÍSTIQUES DE LES MARXES");
 
         exitjButton.setText("sortir");

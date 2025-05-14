@@ -136,7 +136,6 @@ public class Participant {
                 + "   Data naixement: " + getDataNaixement() + "   Sexe: " + isSexe()+"\n"
                 + "    Poblacio: " + getPoblacio() + "    NumTelèfon: " + getNumTelefon() + "   Email: " + getEmail() +"\n"
                 + "    Entitat: " + getEntitat() + "    Federat: " + esfederat;
-         // ESTO SOLO INDICA SI ES FEDERADO FALTAN LOS OTROS DATOS
         return returned;
     }
 

@@ -43,7 +43,7 @@ public class RankingInscripcionsMarxa extends javax.swing.JDialog {
         this.edicio = edicio;
         editionjLabel.setText(edicio);
         editionjLabel.setForeground(Color.white);
-        jCheckBox1.setForeground(Color.black);
+        jCheckBox1.setForeground(Color.white);
         jCheckBox1.setSelected(true);
         jCheckBox1.setBackground(jPanel1.getBackground());
         listInscripcions(controller.getInscripcions(Integer.parseInt(edicio), (optionsjComboBox.getSelectedIndex()+3)));
