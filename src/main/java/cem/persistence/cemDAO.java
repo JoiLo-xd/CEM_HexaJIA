@@ -229,6 +229,64 @@ public class cemDAO {
                 rs5.close();
                 break;
             case 5:
+                ResultSet rs6 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.modalitat = 0 order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+                while (rs6.next()) {
+                    String nom = rs6.getString(1);
+                    nom = nom.concat(" " + rs6.getString(2));
+                    String nif = rs6.getString(3);
+                    String sexe = rs6.getBoolean(4) ? "Home" : "Dona";
+                    Statement st62 = c.createStatement();
+                    ResultSet rs62 = st62.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    String temps = "--:--:--";
+                    String assistencia = "";
+                    int dorsal = 0;
+                    if (rs62.next()) {
+                        long segons = rs62.getLong(1);
+                        if (!rs62.wasNull()) {
+                            long hores = segons / 3600;
+                            long minuts = (segons % 3600) / 60;
+                            long restants = segons % 60;
+                            temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
+                        }
+                        assistencia = rs62.getString(2);
+                        dorsal = rs62.getInt(3);
+                    }
+                    rs62.close();
+                    st62.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs6.close();
+                break;
+            case 6:
+                ResultSet rs7 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " and i.modalitat = 1 order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida)");
+                while (rs7.next()) {
+                    String nom = rs7.getString(1);
+                    nom = nom.concat(" " + rs7.getString(2));
+                    String nif = rs7.getString(3);
+                    String sexe = rs7.getBoolean(4) ? "Home" : "Dona";
+                    Statement st72 = c.createStatement();
+                    ResultSet rs72 = st72.executeQuery("SELECT TIMESTAMPDIFF(SECOND, hora_sortida, hora_arribada), asistencia, dorsal FROM inscripcio WHERE edicio = " + edicio + " and nif = '" + nif + "'");
+                    String temps = "--:--:--";
+                    String assistencia = "";
+                    int dorsal = 0;
+                    if (rs72.next()) {
+                        long segons = rs72.getLong(1);
+                        if (!rs72.wasNull()) {
+                            long hores = segons / 3600;
+                            long minuts = (segons % 3600) / 60;
+                            long restants = segons % 60;
+                            temps = String.format("%02d:%02d:%02d", hores, minuts, restants);
+                        }
+                        assistencia = rs72.getString(2);
+                        dorsal = rs72.getInt(3);
+                    }
+                    rs72.close();
+                    st72.close();
+                    inscripcions.add(new InscripcionsRanking(nom, temps, assistencia, dorsal, sexe));
+                }
+                rs7.close();
+                break;
+            case 7:
                 ResultSet rs3 = st.executeQuery("SELECT p.nom, p.cognom, p.nif, p.sexe FROM inscripcio as i join participant as p on p.nif = i.nif where edicio = " + edicio + " order by TIMESTAMPDIFF(SECOND, hora_arribada, hora_sortida) desc");
                 while (rs3.next()) {
                     String nom = rs3.getString(1);
@@ -262,10 +320,15 @@ public class cemDAO {
         desconectar(c);
         return inscripcions;
     }
+    
+    public void deleteInscripcio(int edicio, int dorsal, String modalitat) throws SQLException {
+        Connection c = conectar();
+        Statement st = c.createStatement();
+        st.executeUpdate("Delete from inscripcio where edicio = " + edicio + " and dorsal = " + dorsal);
+    }
 
-    //mettodo que sirve para saber las estadisticas de las marxas a traves de consultas sql usando el count
+    //metodo que sirve para saber las estadisticas de las marxas a traves de consultas sql usando el count
     public ArrayList<StatsMarxesTO> getStatsMarxes() throws SQLException {
-        //hacer codigo bien
         Connection c = conectar();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("SELECT edicio FROM marxa");
