@@ -29,7 +29,9 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
     //contrucor
     public InscriureParticipantDialog1(java.awt.Frame parent, boolean modal, String dni, String edicio) {
         super(parent, modal);
+        
         initComponents();
+        
         controller = Controller.getInstance();
         this.edicio = edicio;
         jLabelAny.setText(edicio);
@@ -86,6 +88,7 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         jLabelAny = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -228,26 +231,27 @@ public class InscriureParticipantDialog1 extends javax.swing.JDialog {
         jLabelEdicio.setText("EDICIO");
 
         jLabelAny.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabelAny.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addComponent(jLabelAny)
-                .addGap(0, 0, 0)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelEdicio)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addComponent(jLabelAny, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(249, 249, 249))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEdicio)
-                    .addComponent(jLabelAny))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelAny, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelEdicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
